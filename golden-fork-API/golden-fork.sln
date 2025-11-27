@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden-fork.Domain", "golden-fork.Domain\golden-fork.Domain.csproj", "{C83F1A4D-0877-4868-822B-407C243FC8E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden-fork.Infrastructure", "golden-fork.Infrastructure\golden-fork.Infrastructure.csproj", "{A7937C53-B956-4653-A0A7-EE557C52C9B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden-fork.API", "golden-fork.API\golden-fork.API.csproj", "{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C83F1A4D-0877-4868-822B-407C243FC8E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C83F1A4D-0877-4868-822B-407C243FC8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C83F1A4D-0877-4868-822B-407C243FC8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C83F1A4D-0877-4868-822B-407C243FC8E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7937C53-B956-4653-A0A7-EE557C52C9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7937C53-B956-4653-A0A7-EE557C52C9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7937C53-B956-4653-A0A7-EE557C52C9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7937C53-B956-4653-A0A7-EE557C52C9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C83F1A4D-0877-4868-822B-407C243FC8E4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A7937C53-B956-4653-A0A7-EE557C52C9B9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {413E8FA3-47A9-4F52-A98B-94A22CF63FA2}
+	EndGlobalSection
+EndGlobal

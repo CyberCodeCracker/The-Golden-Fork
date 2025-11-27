@@ -1,0 +1,15 @@
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\bin\Debug\net8.0\golden-fork.Infrastructure.deps.json
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\bin\Debug\net8.0\golden-fork.Infrastructure.dll
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\bin\Debug\net8.0\golden-fork.Infrastructure.pdb
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\bin\Debug\net8.0\golden-fork.Domain.dll
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\bin\Debug\net8.0\golden-fork.Domain.pdb
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.AssemblyInfo.cs
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-f.5C93F399.Up2Date
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.dll
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\refint\golden-fork.Infrastructure.dll
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\golden-fork.Infrastructure.pdb
+C:\Users\souha\source\repos\golden-fork\golden-fork.Infrastructure\obj\Debug\net8.0\ref\golden-fork.Infrastructure.dll
