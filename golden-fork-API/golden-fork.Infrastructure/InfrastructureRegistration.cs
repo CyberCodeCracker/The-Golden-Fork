@@ -1,4 +1,5 @@
 ﻿using golden_fork.Infrastructure.IRepositorie;
+using golden_fork.Infrastructure.IRepositories;
 using golden_fork.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +18,7 @@ namespace golden_fork.Infrastructure
         public static IServiceCollection infrastructureConfiguration(this IServiceCollection services)
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }   
     }
