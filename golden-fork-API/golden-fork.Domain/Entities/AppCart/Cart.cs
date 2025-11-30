@@ -14,6 +14,7 @@ namespace golden_fork.core.Entities.AppCart
         [ForeignKey(nameof(UserId))]
         public User User { get; set; } = null!;
         public ICollection<CartItem> CartItems { get; set; } = new HashSet<CartItem>(); 
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; }
     }
 }

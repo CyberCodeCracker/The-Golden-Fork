@@ -145,10 +145,176 @@ namespace golden_fork.Infrastructure.Data
                 .WithOne(p => p.Order)
                 .HasForeignKey<Payment>(p => p.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<Category>().ToTable("Categories");
+            modelBuilder.Entity<Menu>().ToTable("Menus");
+            modelBuilder.Entity<Item>().ToTable("Items");           
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Cart>().ToTable("Carts");
+            modelBuilder.Entity<CartItem>().ToTable("CartItems");
+            modelBuilder.Entity<Order>().ToTable("Orders");
+            modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
+            modelBuilder.Entity<Payment>().ToTable("Payments");
+
+            // ========================
+            // STRING CONSTRAINTS (Required + MaxLength)
+            // ========================
+            modelBuilder.Entity<User>(e =>
+            {
+                e.Property(u => u.Username).IsRequired().HasMaxLength(50);
+                e.Property(u => u.Email).IsRequired().HasMaxLength(100);
+                e.Property(u => u.Password).IsRequired().HasMaxLength(255);
+                e.Property(u => u.PhoneNumber).HasMaxLength(20);
+                e.HasIndex(u => u.Email).IsUnique();
+            });
+            modelBuilder.Entity<UserRole>(e =>
+            {
+                e.Property(r => r.Name).IsRequired().HasMaxLength(30);
+                e.HasIndex(r => r.Name).IsUnique();
+            });
+
+            modelBuilder.Entity<Category>(e =>
+            {
+                e.Property(c => c.Name).IsRequired().HasMaxLength(50);
+                e.HasIndex(c => c.Name).IsUnique();
+            });
+
+            modelBuilder.Entity<Item>(e =>
+            {
+                e.Property(i => i.Name).IsRequired().HasMaxLength(100);
+                e.Property(i => i.Description).HasMaxLength(500);
+                e.Property(i => i.ImageUrl).HasMaxLength(500);
+                e.Property(i => i.Price).IsRequired().HasColumnType("decimal(18,2)");
+            });
+
+            modelBuilder.Entity<Menu>(e =>
+            {
+                e.Property(m => m.Name).IsRequired().HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Payment>(e =>
+            {
+                e.Property(p => p.Method).IsRequired().HasMaxLength(30); // "Card", "Cash", etc.
+                e.Property(p => p.Status).IsRequired().HasMaxLength(20);        // "Pending", "Completed", "Failed"
+                e.Property(p => p.Amount).IsRequired().HasColumnType("decimal(18,2)");
+            });
+
+            modelBuilder.Entity<Order>(e =>
+            {
+                e.Property(o => o.Status).IsRequired().HasMaxLength(20);        // "Pending", "Confirmed", "Delivered"...
+                e.Property(o => o.TotalPrice).IsRequired().HasColumnType("decimal(18,2)");
+            });
+
+            modelBuilder.Entity<OrderItem>(e =>
+            {
+                e.Property(oi => oi.UnitPrice).IsRequired().HasColumnType("decimal(18,2)");
+                e.Property(oi => oi.Quantity).IsRequired();
+            });
+
+            // ========================
+            // VALUE RANGE CONSTRAINTS (optional but nice)
+            // ========================
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Price)
+                .HasColumnType("decimal(18,2)")
+                .HasConversion<decimal>() // makes sure > 0
+                .IsRequired();
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(oi => oi.Quantity)
+                .IsRequired()
+                .HasDefaultValue(1);
+
+            // Prevent negative prices (EF Core 7+ way)
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Price)
+                .HasConversion<decimal>()
+                .IsRequired()
+                .HasAnnotation("MinValue", 0.01m);
+
+            // ========================
+            // DEFAULT VALUES (very useful)
+            // ========================
+            modelBuilder.Entity<Order>()
+                .Property(o => o.OrderDate)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Status)
+                .HasDefaultValue("Pending");
+
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Status)
+                .HasDefaultValue("Pending");
+
+            modelBuilder.Entity<Cart>()
+                .Property(c => c.CreatedAt)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            // ========================
+            // SEED DATA 
+            // ========================
+
+            modelBuilder.Entity<UserRole>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasData(
+                    new UserRole { Id = 1, Name = "Admin" },
+                    new UserRole { Id = 2, Name = "Customer" },
+                    new UserRole { Id = 3, Name = "Kitchen" },
+                    new UserRole { Id = 4, Name = "Delivery" }
+                );
+            });
+
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasData(
+                    new Category { Id = 1, Name = "Appetizers" },
+                    new Category { Id = 2, Name = "Main Courses" },
+                    new Category { Id = 3, Name = "Desserts" },
+                    new Category { Id = 4, Name = "Beverages" }
+                );
+            });
+
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasData(
+                    new Menu { Id = 1, Name = "Lunch Menu" },
+                    new Menu { Id = 2, Name = "Dinner Menu" }
+                );
+            });
+
+            modelBuilder.Entity<Item>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasData(
+                    new Item { Id = 1, CategoryId = 1, Name = "Bruschetta", Price = 8.99m, Description = "Tomato & basil", ImageUrl = "/img/bruschetta.jpg" },
+                    new Item { Id = 2, CategoryId = 2, Name = "Grilled Salmon", Price = 24.99m, Description = "With lemon butter", ImageUrl = "/img/salmon.jpg" },
+                    new Item { Id = 3, CategoryId = 3, Name = "Tiramisu", Price = 7.99m, Description = "Classic Italian", ImageUrl = "/img/tiramisu.jpg" }
+                );
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasData(
+                    new User
+                    {
+                        Id = 1,
+                        Username = "admin",
+                        Email = "admin@goldenfork.com",
+                        Password = "$2a$11$j3K8vP9mN5xL2rT6yU0iOcVfGaNd2z3fZ8k9pL5mN2xR7vQ1w/.kJtH",
+                        RoleId = 1,
+                        PhoneNumber = "555-0001"
+                    }
+                );
+            });
+
+
         }
 
-
     }
-
-
 }

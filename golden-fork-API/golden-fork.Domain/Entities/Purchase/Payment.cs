@@ -16,7 +16,8 @@ namespace golden_fork.core.Entities.Purchase
         public Decimal Amount { get; set; }
         // Cast Method to Empty to avoid being null
         public String Method { get; set; } = String.Empty;
+        public String Status { get; set; }
         public bool IsPaid { get; set; } = false;
-        public DateTime? PaidAt { get; set; }
+        public DateTime? PaidAt { get; set; } 
     }
 }

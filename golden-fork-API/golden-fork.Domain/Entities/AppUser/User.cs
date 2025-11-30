@@ -13,9 +13,10 @@ namespace golden_fork.core.Entities.AppUser
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public string POassword { get; set; }
+        public string Password { get; set; }
+        [NotMapped]
         public string ConfirmPassword { get; set; }
-        public string? PhoneNUmber { get; set; }
+        public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }

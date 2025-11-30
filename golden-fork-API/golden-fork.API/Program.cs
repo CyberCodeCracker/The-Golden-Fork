@@ -1,6 +1,7 @@
 ﻿using golden_fork.core.Entities.AppUser;
+using golden_fork.Infrastructure;
 using golden_fork.Infrastructure.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;   // ← THIS WAS MISSING
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +18,7 @@ namespace golden_fork.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.infrastructureConfiguration(builder.Configuration);    
 
             // DbContext
             builder.Services.AddDbContext<AppDbContext>(options =>

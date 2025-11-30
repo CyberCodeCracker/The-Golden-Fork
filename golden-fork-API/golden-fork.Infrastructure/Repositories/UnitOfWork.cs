@@ -34,7 +34,7 @@ namespace golden_fork.Infrastructure.Repositories
             _context = context;
         }   
 
-        public ICategoryRepository CategoryRepository => _categoryRepository ?? = new CategoryRepository(_context);
+        public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context);
 
         public ICartRepository CartRepository => _cartRepository ??= new CartRepository(_context);
 
