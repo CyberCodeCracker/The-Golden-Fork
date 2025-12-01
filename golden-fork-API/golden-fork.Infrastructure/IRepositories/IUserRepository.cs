@@ -10,5 +10,6 @@ namespace golden_fork.Infrastructure.IRepositories
 {
     public interface IUserRepository : IGenericRepository<User>
     {
+        Task<bool> ExistsByEmailAsync(string email;
     }
 }

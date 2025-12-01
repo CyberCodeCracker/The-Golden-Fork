@@ -15,10 +15,14 @@ namespace golden_fork.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // ========================
+            // 1. Services
+            // ========================
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.infrastructureConfiguration(builder.Configuration);    
+
+            builder.Services.infrastructureConfiguration(builder.Configuration);
 
             // DbContext
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -26,20 +30,24 @@ namespace golden_fork.API
                     builder.Configuration.GetConnectionString("DefaultConnection")
                     ?? "Server=(localdb)\\mssqllocaldb;Database=GoldenForkDb;Trusted_Connection=true;MultipleActiveResultSets=true"));
 
-            // Identity
-            builder.Services.AddIdentity<User, UserRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-                options.User.RequireUniqueEmail = true;
-            })
-            .AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders();
+            // ========================
+            // 2. JWT — SECRET FROM ENV ONLY (NEVER IN JSON)
+            // ========================
 
-            // JWT Authentication
+            var jwtSecret = builder.Configuration["JWT:Key"];
+
+            if (string.IsNullOrWhiteSpace(jwtSecret))
+            {
+                throw new InvalidOperationException(
+                    "ERROR: GOLDENFORK_JWT_SECRET environment variable is not set!\n" +
+                    "Run this in your terminal before starting the API:\n\n" +
+                    "    $env:GOLDENFORK_JWT_SECRET = \"your-very-long-random-key-here==\"\n\n" +
+                    "Or set it permanently in Windows → Environment Variables.");
+            }
+
+            var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "GoldenForkAPI";
+            var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "GoldenForkClients";
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -53,15 +61,32 @@ namespace golden_fork.API
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                    ValidIssuer = jwtIssuer,
+                    ValidAudience = jwtAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                    ClockSkew = TimeSpan.FromMinutes(1)
+                };
+
+                // Read JWT from HttpOnly cookie (not from header
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var token = context.Request.Cookies["GoldenForkAuth"];
+                        if (!string.IsNullOrEmpty(token))
+                        {
+                            context.Token = token;
+                        }
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
             builder.Services.AddAuthorization();
 
+            // ========================
+            // 3. App pipeline
+            // ========================
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -72,7 +97,7 @@ namespace golden_fork.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();   // ← important: before UseAuthorization
+            app.UseAuthentication();  // before UseAuthorization
             app.UseAuthorization();
 
             app.MapControllers();

@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\golden-fork.Domain\golden-fork.Domain.csproj" />
+    <ProjectReference Include="..\golden-fork.Infrastructure\golden-fork.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

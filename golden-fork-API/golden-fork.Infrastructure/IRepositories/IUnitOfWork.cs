@@ -1,4 +1,5 @@
-﻿using System;
+﻿using golden_fork.Infrastructure.IRepositorie;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace golden_fork.Infrastructure.IRepositories
         public ITokenRepository TokenRepository { get; }
         public IUserRepository UserRepository { get; }
         public IUserRoleRepository UserRoleRepository { get; }
+
+        IGenericRepository<T> Repository<T>() where T : class;
+
+        Task ExecuteInTransactionAsync(Func<Task> action);
 
 
     }

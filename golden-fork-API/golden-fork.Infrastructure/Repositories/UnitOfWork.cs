@@ -1,5 +1,7 @@
 ﻿using golden_fork.Infrastructure.Data;
+using golden_fork.Infrastructure.IRepositorie;
 using golden_fork.Infrastructure.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -56,6 +58,51 @@ namespace golden_fork.Infrastructure.Repositories
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context);
 
-        public IUserRoleRepository UserRoleRepository => _userRoleRepository ??= new UserRoleRepository(_context);  
+        public IUserRoleRepository UserRoleRepository => _userRoleRepository ??= new UserRoleRepository(_context);
+
+        public int Save()
+        {
+            return _context.SaveChanges();
+        }
+
+        public async Task ExecuteInTransactionAsync(Func<Task> action)
+        {
+            var strategy = _context.Database.CreateExecutionStrategy();
+
+            await strategy.ExecuteAsync(async () =>
+            {
+                await using var transaction = await _context.Database.BeginTransactionAsync();
+                try
+                {
+                    await action();
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            });
+        }
+
+        public void Dispose()
+        {
+            _transaction?.Dispose();
+            _context.Dispose();
+        }
+
+        public IGenericRepository<T> Repository<T>() where T : class
+        {
+            var type = typeof(T);
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repoInstance = new GenericRepository<T>(_context);
+                _repositories[type] = repoInstance;
+            }
+
+            return (IGenericRepository<T>)_repositories[type];
+        }
     }
 }
