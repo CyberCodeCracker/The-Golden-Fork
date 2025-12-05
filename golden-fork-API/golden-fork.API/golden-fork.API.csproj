@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="15.1.0" />
+	  <PackageReference Include="AutoMapper" Version="12.0.1" />
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	  <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.19" />
@@ -21,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\golden-fork.Core\golden-fork.Core.csproj" />
     <ProjectReference Include="..\golden-fork.Domain\golden-fork.Domain.csproj" />
     <ProjectReference Include="..\golden-fork.Infrastructure\golden-fork.Infrastructure.csproj" />
   </ItemGroup>

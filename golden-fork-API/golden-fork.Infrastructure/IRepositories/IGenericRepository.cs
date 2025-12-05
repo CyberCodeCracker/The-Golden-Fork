@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,6 +17,10 @@ namespace golden_fork.Infrastructure.IRepositorie
             Expression<Func<T, bool>>? filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             bool noTracking = false);
+
+        Task<T?> GetFirstOrDefaultAsync(
+            Expression<Func<T, bool>>? predicate = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 
         Task<T?> GetByIdAsync(int id);
         public Task<T?> GetBylastAsync(Expression<Func<T, string>> orderBySelector);

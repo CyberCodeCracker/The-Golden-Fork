@@ -1,1 +1,76 @@
-[]
+[
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/AppUser/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.API.Controllers.ChangePasswordRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "Login",
+    "RelativePath": "api/AppUser/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.core.DTOs.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "GetProfile",
+    "RelativePath": "api/AppUser/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/AppUser/profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.API.Controllers.UpdateProfileRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "Register",
+    "RelativePath": "api/AppUser/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.core.DTOs.RegistrationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

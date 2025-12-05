@@ -1,9 +1,12 @@
 ﻿using golden_fork.core.Entities.AppUser;
+using golden_fork.Core.IServices;
+using golden_fork.Core.Services;
 using golden_fork.Infrastructure;
 using golden_fork.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -21,6 +24,9 @@ namespace golden_fork.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(core.MappingProfiles.ProfileMapper).Assembly);
+
+            builder.Services.AddScoped<IAppUserService, AppUserService>();
 
             builder.Services.infrastructureConfiguration(builder.Configuration);
 

@@ -3,40 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.core\\services\\appuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\services\\appuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.core\\iservices\\kitchen\\imenuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\iservices\\kitchen\\imenuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|solutionrelative:golden-fork.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.core\\services\\kitchen\\kitchenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\services\\kitchen\\kitchenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|solutionrelative:golden-fork.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.infrastructure\\irepositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|solutionrelative:golden-fork.infrastructure\\irepositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.infrastructure\\irepositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|solutionrelative:golden-fork.infrastructure\\irepositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.api\\controllers\\kitchen\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\controllers\\kitchen\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.api\\controllers\\appusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\controllers\\appusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.core\\iservices\\iappuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\iservices\\iappuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\the-golden-fork\\golden-fork-api\\golden-fork.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Repositories\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "golden-fork.Infrastructure\\Repositories\\GenericRepository.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Repositories\\GenericRepository.cs",
-              "RelativeToolTip": "golden-fork.Infrastructure\\Repositories\\GenericRepository.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAwwBYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T10:00:51.247Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -68,105 +35,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "golden-fork.Infrastructure\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "golden-fork.Infrastructure\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAWwBUAAAAkAAAAAAAAAA==",
+              "Title": "KitchenService.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Kitchen\\KitchenService.cs",
+              "RelativeDocumentMoniker": "golden-fork.Core\\Services\\Kitchen\\KitchenService.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Kitchen\\KitchenService.cs",
+              "RelativeToolTip": "golden-fork.Core\\Services\\Kitchen\\KitchenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T09:59:51.364Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IGenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\IRepositories\\IGenericRepository.cs",
-              "RelativeDocumentMoniker": "golden-fork.Infrastructure\\IRepositories\\IGenericRepository.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\IRepositories\\IGenericRepository.cs",
-              "RelativeToolTip": "golden-fork.Infrastructure\\IRepositories\\IGenericRepository.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwCAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T09:58:56.93Z",
+              "WhenOpened": "2025-12-05T14:45:48.474Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AppUserService.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\AppUserService.cs",
-              "RelativeDocumentMoniker": "golden-fork.Core\\Services\\AppUserService.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\AppUserService.cs",
-              "RelativeToolTip": "golden-fork.Core\\Services\\AppUserService.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAYwEkAAAArAAAAAAAAAA==",
+              "Title": "IMenuService.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\Kitchen\\IMenuService.cs",
+              "RelativeDocumentMoniker": "golden-fork.Core\\IServices\\Kitchen\\IMenuService.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\Kitchen\\IMenuService.cs",
+              "RelativeToolTip": "golden-fork.Core\\IServices\\Kitchen\\IMenuService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T08:58:03.807Z",
+              "WhenOpened": "2025-12-05T14:45:26.832Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\IRepositories\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "golden-fork.Infrastructure\\IRepositories\\IUserRepository.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\IRepositories\\IUserRepository.cs",
-              "RelativeToolTip": "golden-fork.Infrastructure\\IRepositories\\IUserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T09:59:09.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "AppUserController.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\AppUserController.cs",
               "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\AppUserController.cs",
               "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\AppUserController.cs",
               "RelativeToolTip": "golden-fork.API\\Controllers\\AppUserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T08:40:00.097Z",
+              "WhenOpened": "2025-12-05T14:44:25.701Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IAppUserService.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\IAppUserService.cs",
-              "RelativeDocumentMoniker": "golden-fork.Core\\IServices\\IAppUserService.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\IAppUserService.cs",
-              "RelativeToolTip": "golden-fork.Core\\IServices\\IAppUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAArAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "RelativeToolTip": "golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T08:57:55.667Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Program.cs",
-              "RelativeDocumentMoniker": "golden-fork.API\\Program.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Program.cs",
-              "RelativeToolTip": "golden-fork.API\\Program.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAArwCMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T08:11:25.602Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\appsettings.json",
-              "RelativeDocumentMoniker": "golden-fork.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\appsettings.json",
-              "RelativeToolTip": "golden-fork.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-01T08:03:13.255Z",
+              "WhenOpened": "2025-12-05T14:44:09.922Z",
               "EditorCaption": ""
             }
           ]

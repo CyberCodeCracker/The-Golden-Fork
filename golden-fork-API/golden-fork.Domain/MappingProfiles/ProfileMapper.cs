@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using golden_fork.core.DTOs;
 using golden_fork.core.Entities.AppUser;
+using golden_fork.core.Entities.Kitchen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace golden_fork.core.MappingProfiles
     {
         public ProfileMapper()
         {
-            CreateMap<RegistrationRequest, User>();   
+            CreateMap<RegistrationRequest, User>();
+            CreateMap<MenuRequest, Menu>();
         }
     }
 }

@@ -1,17 +1,16 @@
-﻿using golden_fork.core.DTOs;
+﻿// golden_fork.Core/Services/AppUserService.cs
+using golden_fork.core.DTOs;
 using golden_fork.core.Entities.AppUser;
 using golden_fork.Core.IServices;
 using golden_fork.Infrastructure.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
+using BCrypt.Net; 
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace golden_fork.Core.Services
 {
@@ -29,17 +28,18 @@ namespace golden_fork.Core.Services
         public string GenerateJwtToken(User user)
         {
             var claims = new List<Claim>
-        {
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.Username),
-            new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.Role, user.Role?.Name ?? "Customer"),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+            {
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.Username),
+                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.Role, user.Role?.Name ?? "Customer"),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                 Environment.GetEnvironmentVariable("GOLDENFORK_JWT_SECRET")
-                ?? throw new InvalidOperationException("JWT secret missing")));
+                ?? throw new InvalidOperationException("JWT secret is missing")));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -53,28 +53,73 @@ namespace golden_fork.Core.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public Task<(bool success, string message, User? user)> LoginAsync(LoginRequest dto)
+        public async Task<(bool success, string message, User? user)> LoginAsync(LoginRequest dto)
         {
-            throw new NotImplementedException();
+            if (dto == null)
+                return (false, "Request cannot be null", null);
+
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+                return (false, "Username/email and password are required", null);
+
+            var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(
+                u => u.Email == dto.Email,
+                include: q => q.Include(u => u.Role));
+
+            if (user == null)
+                return (false, "Invalid username or email", null);
+
+            // Hash input password and compare with stored hashed password
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+                return (false, "Invalid password", null);
+
+            return (true, "Login successful", user);
         }
 
-        public async Task<(bool success, string message, int? userId)> RegisterAsync(RegistrationRequest entity)
+        public async Task<(bool success, string message, int? userId)> RegisterAsync(RegistrationRequest dto)
         {
-            // Check if user already exists
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));    
-            }
-            if (string.IsNullOrWhiteSpace(entity.Username))
-                throw new ArgumentException("Username est requis.", nameof(entity.Username));
-            if (string.IsNullOrWhiteSpace(entity.Email))
-                throw new ArgumentException("Mail est requis.", nameof(entity.Email));
-            if (string.IsNullOrWhiteSpace(entity.Password))
-                throw new ArgumentException("Mot de passe est requis.", nameof(entity.Password));
-            if (string.IsNullOrWhiteSpace(entity.PhoneNumber))
-                throw new ArgumentException("Téléphone est requis.", nameof(entity.PhoneNumber));
+            if (dto == null)
+                throw new ArgumentNullException(nameof(dto));
 
-            if (await )
+            if (string.IsNullOrWhiteSpace(dto.Username))
+                return (false, "Username is required", null);
+
+            if (string.IsNullOrWhiteSpace(dto.Email))
+                return (false, "Email is required", null);
+
+            if (string.IsNullOrWhiteSpace(dto.Password))
+                return (false, "Password is required", null);
+
+            if (string.IsNullOrWhiteSpace(dto.PhoneNumber))
+                return (false, "Phone number is required", null);
+
+            // Check duplicates
+            var existing = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(
+                u => u.Username == dto.Username || u.Email == dto.Email);
+
+            if (existing != null)
+            {
+                if (existing.Username == dto.Username)
+                    return (false, "Username already taken", null);
+                return (false, "Email already registered", null);
+            }
+
+            // Hash password with BCrypt (recommended over HMACSHA512 for passwords)
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+
+            var user = new User
+            {
+                Username = dto.Username,
+                Email = dto.Email,
+                Password = hashedPassword,           // ← stored as BCrypt hash
+                PhoneNumber = dto.PhoneNumber,
+                RoleId = 2,            // 2 = Customer
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await _unitOfWork.UserRepository.AddAsync(user);
+            await _unitOfWork.UserRepository.SaveChangesAsync();
+
+            return (true, "User registered successfully", user.Id);
         }
     }
 }

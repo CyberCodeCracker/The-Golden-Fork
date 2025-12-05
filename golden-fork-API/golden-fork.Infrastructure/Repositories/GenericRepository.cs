@@ -1,6 +1,7 @@
 ﻿using golden_fork.Infrastructure.Data;
 using golden_fork.Infrastructure.IRepositorie;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -198,6 +199,19 @@ namespace golden_fork.Infrastructure.Repositories
         public Task InsertAsync(T entity)
         {
             return AddAsync(entity);
+        }
+
+        public virtual async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (include != null)
+                query = include(query);
+
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
