@@ -2,6 +2,7 @@
 using golden_fork.core.DTOs;
 using golden_fork.Core.IServices;
 using golden_fork.Infrastructure.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -46,6 +47,24 @@ namespace golden_fork.API.Controllers
             {
                 success = false,
                 message = result.message
+            });
+        }
+
+
+        [Authorize]
+        [HttpGet("debug/userinfo")]
+        public IActionResult DebugUserInfo()
+        {
+            var user = User;
+            var claims = user.Claims.Select(c => new { c.Type, c.Value }).ToList();
+
+            return Ok(new
+            {
+                IsAuthenticated = user.Identity?.IsAuthenticated,
+                Username = user.Identity?.Name,
+                Claims = claims,
+                RoleId = user.FindFirst("RoleId")?.Value,
+                Role = user.FindFirst(ClaimTypes.Role)?.Value
             });
         }
 

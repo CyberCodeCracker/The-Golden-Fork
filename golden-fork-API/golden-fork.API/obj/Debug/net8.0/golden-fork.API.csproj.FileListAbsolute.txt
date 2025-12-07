@@ -189,9 +189,9 @@ C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\golden-fork.Core.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\golden-fork.Core.pdb
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

@@ -46,9 +46,7 @@ namespace golden_fork.Infrastructure.IRepositorie
 
         Task DeleteAsync(T entity);
 
-        Task DeleteByStringIdAsync(string id);
-
-        Task DeleteByIntIdAsync(int id);
+        Task DeleteByIdAsync(int id);
 
         Task DeleteListAsync(IEnumerable<T> entities);
 

@@ -101,18 +101,7 @@ namespace golden_fork.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task DeleteByStringIdAsync(string id)
-        {
-            var result = await GetByIdAsync(id);
-
-            if (result == null)
-                throw new KeyNotFoundException($"{typeof(T).Name} avec id '{id}' non trouvé.");
-
-            _dbSet.Remove(result);
-            await Task.CompletedTask;
-        }
-
-        public async Task DeleteByIntIdAsync(int id)
+        public async Task DeleteByIdAsync(int id)
         {
             var result = await GetByIdAsync(id);
 

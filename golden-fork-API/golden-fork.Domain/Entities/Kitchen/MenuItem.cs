@@ -17,6 +17,6 @@ namespace golden_fork.core.Entities.Kitchen
         public int Position { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsSpecial { get; set; }
-
+        public decimal? SpecialPrice { get; set; }
     }
 }
