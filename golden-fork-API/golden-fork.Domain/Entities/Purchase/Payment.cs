@@ -19,5 +19,6 @@ namespace golden_fork.core.Entities.Purchase
         public String Status { get; set; }
         public bool IsPaid { get; set; } = false;
         public DateTime? PaidAt { get; set; } 
+
     }
 }

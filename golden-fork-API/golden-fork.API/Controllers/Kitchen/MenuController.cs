@@ -69,7 +69,7 @@ namespace golden_fork.API.Controllers.Kitchen
 
         [Authorize]
         [HttpPost("Create")]
-        [AuthorizeRoles(UserRole.Admin, UserRole.Chef)] // Only Admins and Kitchen Staff can create menus
+        [AuthorizeRoles(UserRole.Admin, UserRole.Chef)]
         public async Task<IActionResult> CreateMenu(MenuRequest request)
         {
             try

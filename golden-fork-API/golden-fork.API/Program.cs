@@ -14,6 +14,7 @@ using System.Text;
 using System.Reflection;
 using golden_fork.Core.IServices.Kitchen;
 using golden_fork.Core.Services.Kitchen;
+using golden_fork.Core.IServices.Cart;
 
 namespace golden_fork.API
 {
@@ -32,6 +33,9 @@ namespace golden_fork.API
 
             builder.Services.AddScoped<IAppUserService, AppUserService>();
             builder.Services.AddScoped<IMenuService, MenuService>();
+            builder.Services.AddScoped<IItemService, ItemService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICartService, CartService>();
 
             builder.Services.infrastructureConfiguration(builder.Configuration);
 

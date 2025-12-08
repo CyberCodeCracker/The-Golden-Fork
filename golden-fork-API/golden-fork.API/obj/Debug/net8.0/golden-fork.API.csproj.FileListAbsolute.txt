@@ -194,4 +194,5 @@ C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\golden-fork.Core.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\golden-fork.Core.pdb
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 C:\Users\souha\source\repos\The-Golden-Fork\golden-fork-API\golden-fork.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

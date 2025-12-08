@@ -152,7 +152,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 7, 8, 57, 53, 378, DateTimeKind.Utc).AddTicks(5072),
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(445),
                             Email = "admin@goldenfork.com",
                             Password = "$2a$11$j3K8vP9mN5xL2rT6yU0iOcVfGaNd2z3fZ8k9pL5mN2xR7vQ1w/.kJtH",
                             PhoneNumber = "555-0001",
@@ -256,13 +256,13 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 7, 8, 57, 53, 378, DateTimeKind.Utc).AddTicks(4896),
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(300),
                             Name = "Lunch Menu"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 12, 7, 8, 57, 53, 378, DateTimeKind.Utc).AddTicks(4900),
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(305),
                             Name = "Dinner Menu"
                         });
                 });
@@ -302,6 +302,9 @@ namespace golden_fork.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -309,6 +312,9 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -321,21 +327,25 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(204),
                             Name = "Appetizers"
                         },
                         new
                         {
                             Id = 2,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(207),
                             Name = "Main Courses"
                         },
                         new
                         {
                             Id = 3,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(229),
                             Name = "Desserts"
                         },
                         new
                         {
                             Id = 4,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(230),
                             Name = "Beverages"
                         });
                 });
@@ -351,7 +361,11 @@ namespace golden_fork.Infrastructure.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -372,6 +386,12 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasAnnotation("MinValue", 0.01m);
 
+                    b.Property<decimal?>("SpecialPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -383,6 +403,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(377),
                             Description = "Tomato & basil",
                             ImageUrl = "/img/bruschetta.jpg",
                             IsAvailable = false,
@@ -393,6 +414,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(385),
                             Description = "With lemon butter",
                             ImageUrl = "/img/salmon.jpg",
                             IsAvailable = false,
@@ -403,6 +425,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 3,
+                            CreatedAt = new DateTime(2025, 12, 8, 9, 35, 35, 550, DateTimeKind.Utc).AddTicks(386),
                             Description = "Classic Italian",
                             ImageUrl = "/img/tiramisu.jpg",
                             IsAvailable = false,
@@ -433,6 +456,9 @@ namespace golden_fork.Infrastructure.Data.Migrations
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

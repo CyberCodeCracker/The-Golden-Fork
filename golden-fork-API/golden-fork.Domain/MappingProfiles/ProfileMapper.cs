@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using golden_fork.core.DTOs;
+using golden_fork.core.DTOs.Cart;
 using golden_fork.core.DTOs.Kitchen;
+using golden_fork.core.Entities.AppCart;
 using golden_fork.core.Entities.AppUser;
 using golden_fork.core.Entities.Kitchen;
+using golden_fork.core.Entities.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +39,29 @@ namespace golden_fork.core.MappingProfiles
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Item.Price))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Item.Category.Name));
+
+            CreateMap<ItemRequest, Item>().ReverseMap();
+            CreateMap<ItemUpdate, Item>().ReverseMap();
+            CreateMap<Item, ItemResponse>().ReverseMap();
+
+            // In your MappingProfiles/KitchenProfile.cs or main profile
+            CreateMap<CategoryRequest, Category>().ReverseMap();
+            CreateMap<CategoryUpdate, Category>().ReverseMap();
+            CreateMap<Category, CategoryResponse>().ReverseMap();
+
+            // Cart → CartResponse (manual mapping needed because of nested data)
+            CreateMap<Cart, CartResponse>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Username))
+                .ForMember(dest => dest.TotalPrice, opt => opt.Ignore()) // calculated manually
+                .ForMember(dest => dest.TotalItems, opt => opt.Ignore())
+                .ForMember(dest => dest.Items, opt => opt.Ignore());
+
+            // CartItem → CartItemResponse
+            CreateMap<CartItem, CartItemResponse>()
+                .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Item.Price));
         }
     }
+    
 }
