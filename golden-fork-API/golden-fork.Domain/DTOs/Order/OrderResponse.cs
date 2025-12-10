@@ -1,4 +1,5 @@
-﻿using System;
+﻿using golden_fork.core.DTOs.Order;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,20 +21,4 @@ namespace golden_fork.core.DTOs.Purchase
         public PaymentResponse? Payment { get; set; }
     }
 
-    public class OrderItemResponse
-    {
-        public int ItemId { get; set; }
-        public string ItemName { get; set; } = string.Empty;
-        public decimal UnitPrice { get; set; }
-        public int Quantity { get; set; }
-        public decimal LineTotal => UnitPrice * Quantity;
-    }
-
-    public class PaymentResponse
-    {
-        public int Id { get; set; }
-        public decimal Amount { get; set; }
-        public string Status { get; set; } = string.Empty;
-        public string Method { get; set; } = string.Empty;
-    }
 }

@@ -2,10 +2,13 @@
 using golden_fork.core.DTOs;
 using golden_fork.core.DTOs.Cart;
 using golden_fork.core.DTOs.Kitchen;
+using golden_fork.core.DTOs.Order;
+using golden_fork.core.DTOs.Purchase;
 using golden_fork.core.Entities.AppCart;
 using golden_fork.core.Entities.AppUser;
 using golden_fork.core.Entities.Kitchen;
 using golden_fork.core.Entities.Menu;
+using golden_fork.core.Entities.Purchase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +64,17 @@ namespace golden_fork.core.MappingProfiles
                 .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Item.Price));
+
+            CreateMap<Order, OrderResponse>()
+                        .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Username))
+                        .ForMember(dest => dest.ItemCount, opt => opt.MapFrom(src => src.OrderItems.Sum(oi => oi.Quantity)))
+                        .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.OrderItems));
+
+            CreateMap<OrderItem, OrderItemResponse>()
+                .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl));
+
+            CreateMap<Payment, PaymentResponse>();
         }
     }
     
