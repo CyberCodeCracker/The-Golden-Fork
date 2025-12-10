@@ -93,15 +93,17 @@ namespace golden_fork.Core.Services
             if (string.IsNullOrWhiteSpace(dto.PhoneNumber))
                 return (false, "Phone number is required", null);
 
+            if (dto.Password != dto.ConfirmPassword)
+                return (false, "Passwords do not match", null);
+
             // Check duplicates
             var existing = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(
                 u => u.Username == dto.Username || u.Email == dto.Email);
 
             if (existing != null)
             {
-                if (existing.Username == dto.Username)
-                    return (false, "Username already taken", null);
-                return (false, "Email already registered", null);
+                if (existing.Email == dto.Email)
+                    return (false, "Email already registered", null);
             }
 
             // Hash password with BCrypt (recommended over HMACSHA512 for passwords)

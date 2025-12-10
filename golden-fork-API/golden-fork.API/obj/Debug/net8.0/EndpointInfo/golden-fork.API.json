@@ -1111,6 +1111,83 @@
           }
         }
       }
+    },
+    "/api/Payment/cash/{orderId}": {
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Payment/{orderId}/confirm": {
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Payment/callback": {
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCallbackDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCallbackDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCallbackDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1589,6 +1666,28 @@
         },
         "additionalProperties": false
       },
+      "PaymentCallbackDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "signature": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PaymentResponse": {
         "type": "object",
         "properties": {
@@ -1596,16 +1695,28 @@
             "type": "integer",
             "format": "int32"
           },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "amount": {
             "type": "number",
             "format": "double"
+          },
+          "method": {
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "string",
             "nullable": true
           },
-          "method": {
+          "isPaid": {
+            "type": "boolean"
+          },
+          "paidAt": {
             "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },

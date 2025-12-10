@@ -74,7 +74,8 @@ namespace golden_fork.core.MappingProfiles
                 .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl));
 
-            CreateMap<Payment, PaymentResponse>();
+            CreateMap<Payment, PaymentResponse>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.IsPaid ? "Paid" : "Pending"));
         }
     }
     

@@ -670,5 +670,53 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.PaymentController",
+    "Method": "ConfirmPayment",
+    "RelativePath": "api/Payment/{orderId}/confirm",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.PaymentController",
+    "Method": "Callback",
+    "RelativePath": "api/Payment/callback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.core.DTOs.Purchase.PaymentCallbackDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.PaymentController",
+    "Method": "CreateCashPayment",
+    "RelativePath": "api/Payment/cash/{orderId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

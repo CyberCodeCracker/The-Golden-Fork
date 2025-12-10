@@ -18,7 +18,8 @@ namespace golden_fork.core.Entities.Purchase
         public String Method { get; set; } = String.Empty;
         public String Status { get; set; }
         public bool IsPaid { get; set; } = false;
-        public DateTime? PaidAt { get; set; } 
+        public DateTime? PaidAt { get; set; }
+        public string? TransactionId { get; set; }  // From CinetPay, Stripe, etc.
 
     }
 }
