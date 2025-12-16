@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("golden-fork.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00ee24a2c5161014f1142c26709e4abcad826710")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49311a5d291100b0486dea8ff01b6c6ca38feefd")]
 [assembly: System.Reflection.AssemblyProductAttribute("golden-fork.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("golden-fork.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

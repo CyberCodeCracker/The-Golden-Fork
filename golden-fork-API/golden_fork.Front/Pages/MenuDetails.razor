@@ -1,0 +1,430 @@
+﻿@page "/menu/{menuId:int}"
+@attribute [Authorize]
+@using System.Security.Claims
+@using golden_fork.Front.DTOs.Kitchen
+@using System.Text.Json
+@using System.Net.Http.Headers
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>Menu Details • Golden Fork</PageTitle>
+
+<div class="container mx-auto px-4 py-8">
+    @if (isLoading)
+    {
+        <div class="flex justify-center py-20">
+            <span class="loading loading-spinner loading-lg"></span>
+        </div>
+    }
+    else if (menu == null)
+    {
+        <div class="text-center py-20">
+            <p class="text-2xl text-gray-500">Menu not found</p>
+            <button @onclick="BackToMenus" class="btn btn-primary mt-4">
+                Back to Menus
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="mb-8 flex justify-between items-start">
+            <div>
+                <h1 class="text-4xl font-bold text-orange-600 mb-4">@menu.Name</h1>
+                @if (!string.IsNullOrEmpty(menu.Description))
+                {
+                    <p class="text-xl text-gray-700 mb-6">@menu.Description</p>
+                }
+                <p class="text-lg text-gray-600">@menu.Items.Count() item@(menu.Items.Count() == 1 ? "" : "s")</p>
+            </div>
+
+            @if (IsAdminOrChef)
+            {
+                <button @onclick="OpenAddItemModal" class="btn btn-success">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add New Item
+                </button>
+            }
+        </div>
+
+        @if (menu.Items == null || !menu.Items.Any())
+        {
+            <div class="text-center py-20">
+                <p class="text-2xl text-gray-500">No items in this menu yet.</p>
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                @foreach (var item in menu.Items)
+                {
+                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all w-full max-w-md mx-auto">
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <figure class="h-64 overflow-hidden">
+                                <img src="@item.ImageUrl" alt="@item.Name" class="w-full h-full object-cover" />
+                            </figure>
+                        }
+                        <div class="card-body">
+                            <h2 class="card-title text-2xl">@item.Name</h2>
+
+                            <!-- Description - now visible -->
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                                <p class="text-gray-700 mt-2">@item.Description</p>
+                            }
+                            else
+                            {
+                                <p class="text-gray-500 italic">No description available</p>
+                            }
+
+                            <div class="mt-6 flex flex-col gap-4">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <p class="text-3xl font-bold text-primary">@item.Price.ToString("C")</p>
+                                        @if (item.SpecialPrice.HasValue)
+                                        {
+                                            <p class="text-lg text-gray-500 line-through">@item.SpecialPrice.Value.ToString("C")</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-3">
+                                    <button @onclick="() => OpenItemDetails(item)" class="btn btn-info flex-1">
+                                        View Details
+                                    </button>
+
+                                    @if (item.IsAvailable)
+                                    {
+                                        <button class="btn btn-primary flex-1">Add to Cart</button>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-error badge-lg">Unavailable</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Delete Button - Admin/Chef only -->
+                            @if (IsAdminOrChef)
+                            {
+                                <div class="absolute top-2 right-2">
+                                    <button @onclick="() => RemoveItemFromMenu(item.ItemId)" class="btn btn-ghost btn-circle text-red-600">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+
+<!-- Item Details Modal -->
+<!-- Item Details Modal -->
+@if (showItemDetailsModal)
+{
+    <div class="modal modal-open">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">@selectedItem.Name</h3>
+
+            @if (!string.IsNullOrEmpty(selectedItem.ImageUrl))
+            {
+                <img src="@selectedItem.ImageUrl" alt="@selectedItem.Name" class="w-full h-64 object-cover rounded-lg mb-6" />
+            }
+
+            <div class="space-y-3">
+                <p class="text-lg"><strong>Price:</strong> @selectedItem.Price.ToString("C")</p>
+                @if (selectedItem.SpecialPrice.HasValue)
+                {
+                    <p class="text-lg"><strong>Special Price:</strong> <span class="text-green-600 font-bold">@selectedItem.SpecialPrice.Value.ToString("C")</span></p>
+                }
+                @if (!string.IsNullOrEmpty(selectedItem.Description))
+                {
+                    <div class="mt-4">
+                        <p class="font-semibold">Description:</p>
+                        <p class="text-gray-700 mt-1">@selectedItem.Description</p>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-gray-500 italic">No description available</p>
+                }
+            </div>
+
+            <div class="modal-action mt-6">
+                <button @onclick="CloseItemDetailsModal" class="btn btn-primary">Close</button>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Add New Item Modal -->
+@if (showAddItemModal)
+{
+    <div class="modal modal-open">
+        <div class="modal-box w-11/12 max-w-2xl">
+            <h3 class="font-bold text-2xl mb-6">Add New Item to @menu.Name</h3>
+
+            <EditForm Model="newItem" OnValidSubmit="HandleAddItem">
+                <DataAnnotationsValidator />
+
+                @if (!string.IsNullOrEmpty(modalMessage))
+                {
+                    <div class="alert @(modalSuccess ? "alert-success" : "alert-error") mb-4">
+                        <span>@modalMessage</span>
+                    </div>
+                }
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="label"><span class="label-text">Category *</span></label>
+                        <InputSelect @bind-Value="newItem.CategoryId" TValue="int" class="select select-bordered w-full">
+                            <option value="0">-- Select Category --</option>
+                            @if (categories != null)
+                            {
+                                @foreach (var cat in categories)
+                                {
+                                    <option value="@cat.Id">@cat.Name</option>
+                                }
+                            }
+                        </InputSelect>
+                        @if (newItem.CategoryId == 0)
+                        {
+                            <p class="text-red-500 text-sm mt-1">Please select a valid category</p>
+                        }
+                        <ValidationMessage For="() => newItem.CategoryId" class="text-red-500 text-sm mt-1" />
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Item Name *</span></label>
+                        <InputText @bind-Value="newItem.Name" class="input input-bordered w-full" />
+                        <ValidationMessage For="() => newItem.Name" class="text-red-500 text-sm mt-1" />
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Price *</span></label>
+                        <InputNumber @bind-Value="newItem.Price" class="input input-bordered w-full" step="0.01" />
+                        <ValidationMessage For="() => newItem.Price" class="text-red-500 text-sm mt-1" />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="label"><span class="label-text">Description</span></label>
+                        <InputTextArea @bind-Value="newItem.Description" class="textarea textarea-bordered w-full" rows="3" />
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Photo</span></label>
+                        <InputFile OnChange="OnFileChange" class="file-input file-input-bordered w-full" />
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Special Price (optional)</span></label>
+                        <InputNumber @bind-Value="newItem.SpecialPrice" class="input input-bordered w-full" step="0.01" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label cursor-pointer">
+                            <span class="label-text">Available</span>
+                            <InputCheckbox @bind-Value="newItem.IsAvailable" class="checkbox checkbox-primary" />
+                        </label>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label cursor-pointer">
+                            <span class="label-text">Special Offer</span>
+                            <InputCheckbox @bind-Value="newItem.IsSpecial" class="checkbox checkbox-primary" />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-action mt-6">
+                    <button type="submit" class="btn btn-primary" disabled="@(modalLoading || newItem.CategoryId == 0)">
+                        @if (modalLoading)
+                        {
+                            <span class="loading loading-spinner"></span>
+                        }
+                        Add Item
+                    </button>
+                    <button type="button" @onclick="CloseAddItemModal" class="btn">Cancel</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int menuId { get; set; }
+
+    private MenuWithItemsResponse? menu;
+    private List<CategoryResponse>? categories;
+    private bool isLoading = true;
+    private bool IsAdminOrChef = false;
+
+    // Item Details Modal
+    private bool showItemDetailsModal = false;
+    private MenuItemResponse selectedItem = new();
+
+    // Add Item Modal
+    private bool showAddItemModal = false;
+    private MenuItemRequest newItem = new();
+    private string modalMessage = "";
+    private bool modalSuccess = false;
+    private bool modalLoading = false;
+    private IBrowserFile? selectedFile;
+
+    private void OnFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMenu();
+        await LoadCategories();
+        await CheckRole();
+    }
+
+    private async Task LoadMenu()
+    {
+        isLoading = true;
+        try
+        {
+            menu = await Http.GetFromJsonAsync<MenuWithItemsResponse>($"api/menu/{menuId}");
+        }
+        catch
+        {
+            menu = null;
+        }
+        isLoading = false;
+    }
+
+    private async Task LoadCategories()
+    {
+        try
+        {
+            var pagedResult = await Http.GetFromJsonAsync<PagedResult<CategoryResponse>>("api/category");
+            categories = pagedResult?.Items?.ToList() ?? new List<CategoryResponse>();
+        }
+        catch
+        {
+            categories = new List<CategoryResponse>();
+        }
+    }
+
+    private async Task CheckRole()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var role = authState.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+        IsAdminOrChef = role == "Admin" || role == "Chef";
+    }
+
+    private void BackToMenus()
+    {
+        Navigation.NavigateTo("/menu");
+    }
+
+    private void OpenAddItemModal()
+    {
+        newItem = new MenuItemRequest();
+        selectedFile = null;
+        modalMessage = "";
+        showAddItemModal = true;
+    }
+
+    private void CloseAddItemModal()
+    {
+        showAddItemModal = false;
+    }
+
+    private async Task HandleAddItem()
+    {
+        modalLoading = true;
+        modalMessage = "";
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync($"api/menu/{menuId}/items", newItem);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonElement = await response.Content.ReadFromJsonAsync<JsonElement>();
+
+                int itemId = 0;
+                if (jsonElement.TryGetProperty("itemId", out var itemIdProp))
+                {
+                    itemId = itemIdProp.GetInt32();
+                }
+                else if (jsonElement.TryGetProperty("id", out var idProp))
+                {
+                    itemId = idProp.GetInt32();
+                }
+
+                if (selectedFile != null && itemId > 0)
+                {
+                    var content = new MultipartFormDataContent();
+                    content.Add(new StreamContent(selectedFile.OpenReadStream(5 * 1024 * 1024)), "photo", selectedFile.Name);
+
+                    var uploadResponse = await Http.PostAsync($"api/item/{itemId}/upload-photo", content);
+
+                    if (!uploadResponse.IsSuccessStatusCode)
+                    {
+                        modalMessage = "Item added, but photo upload failed";
+                    }
+                }
+
+                modalSuccess = true;
+                modalMessage = "Item added successfully!";
+                await Task.Delay(1500);
+                CloseAddItemModal();
+                await LoadMenu();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                modalSuccess = false;
+                modalMessage = "Failed to add item: " + error;
+            }
+        }
+        catch (Exception ex)
+        {
+            modalSuccess = false;
+            modalMessage = "Error: " + ex.Message;
+        }
+
+        modalLoading = false;
+    }
+
+    // Item Details Modal
+    private void OpenItemDetails(MenuItemResponse item)
+    {
+        selectedItem = item;
+        showItemDetailsModal = true;
+    }
+
+    private void CloseItemDetailsModal()
+    {
+        showItemDetailsModal = false;
+    }
+
+    // Remove Item from Menu (Admin/Chef only)
+    private async Task RemoveItemFromMenu(int itemId)
+    {
+        var confirm = await JS.InvokeAsync<bool>("confirm", "Remove this item from the menu?");
+        if (!confirm) return;
+
+        var response = await Http.DeleteAsync($"api/menu/{menuId}/items/{itemId}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadMenu();
+        }
+    }
+}

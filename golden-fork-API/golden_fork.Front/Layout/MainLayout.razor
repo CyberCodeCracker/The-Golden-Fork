@@ -1,0 +1,63 @@
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="min-h-screen bg-base-200">
+    <!-- Top Navbar -->
+    <div class="navbar bg-base-100 shadow-lg fixed top-0 z-50">
+        <div class="flex-1">
+            <a href="/" class="btn btn-ghost normal-case text-2xl text-orange-600">Golden Fork</a>
+        </div>
+        <div class="flex-none gap-2">
+            <a href="/menu" class="btn btn-ghost">Menus</a>
+            <a href="/categories" class="btn btn-ghost">Categories</a>
+            <a href="/items" class="btn btn-ghost">Items</a>
+            <a href="/profile" class="btn btn-ghost">Profile</a>
+            <button @onclick="Logout" class="btn btn-error">Logout</button>
+        </div>
+    </div>
+
+    <div class="drawer lg:drawer-open mt-16">
+        <input id="admin-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+            <!-- Main content -->
+            <div class="p-4">
+                @Body
+            </div>
+        </div>
+
+        <!-- Admin Sidebar (only visible to Admin) -->
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <div class="drawer-side">
+                    <label for="admin-drawer" class="drawer-overlay"></label>
+                    <div class="menu p-4 w-80 min-h-full bg-base-100 text-base-content overflow-y-auto">
+                        <h2 class="menu-title text-xl mb-4">Admin Panel</h2>
+
+                        <!-- Clients Table -->
+                        <h3 class="text-lg font-semibold mb-2">Clients</h3>
+                        <ClientsTable />
+
+                        <div class="divider my-6"></div>
+
+                        <!-- Payments Table -->
+                        <h3 class="text-lg font-semibold mb-2">Payments</h3>
+                        <PaymentsTable />
+                    </div>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>
+
+@code {
+    private async Task Logout()
+    {
+        await JS.InvokeVoidAsync("localStorage.removeItem", "jwtToken");
+        // Clear header if using HttpClient
+        // Http.DefaultRequestHeaders.Authorization = null;
+        Navigation.NavigateTo("/login", true);
+    }
+}

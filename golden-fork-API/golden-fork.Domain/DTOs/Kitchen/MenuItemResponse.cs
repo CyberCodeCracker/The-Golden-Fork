@@ -10,10 +10,12 @@ namespace golden_fork.core.DTOs.Kitchen
     {
         public int ItemId { get; set; }
         public string Name { get; set; } = string.Empty;
+        public String Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string? ImageUrl { get; set; }
         public string Category { get; set; } = string.Empty;
         public bool IsSpecial { get; set; }
         public decimal? SpecialPrice { get; set; }
+        public bool IsAvailable { get; set; }   
     }
 }

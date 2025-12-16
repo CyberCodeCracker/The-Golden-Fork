@@ -17,6 +17,7 @@ using golden_fork.Core.Services.Kitchen;
 using golden_fork.Core.IServices.Cart;
 using golden_fork.Core.IServices.Purchase;
 using golden_fork.Core.Services.Purchase;
+using golden_fork.API.Middleware;
 
 namespace golden_fork.API
 {
@@ -40,6 +41,7 @@ namespace golden_fork.API
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IPaymentService, PaymentService>();
+            builder.Services.AddScoped<IMenuItemService, MenuItemService>();
 
             builder.Services.infrastructureConfiguration(builder.Configuration);
 
@@ -125,19 +127,21 @@ namespace golden_fork.API
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
 
-                // Read JWT from HttpOnly cookie (not from header
-                options.Events = new JwtBearerEvents
+            });
+            builder.Host.UseDefaultServiceProvider(options => options.ValidateScopes = false);
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowBlazor", policy =>
                 {
-                    OnMessageReceived = context =>
-                    {
-                        var token = context.Request.Cookies["GoldenForkAuth"];
-                        if (!string.IsNullOrEmpty(token))
-                        {
-                            context.Token = token;
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
+                    policy.WithOrigins(
+                            "http://localhost:5181",   // ← your current frontend
+                            "https://localhost:5181",  // future HTTPS
+                            "https://localhost:7234",
+                            "https://localhost:7001")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                });
             });
 
             builder.Services.AddAuthorization();
@@ -152,11 +156,13 @@ namespace golden_fork.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowBlazor"); // ← HERE
             app.UseAuthentication();  // before UseAuthorization
             app.UseAuthorization();
+            app.UseStaticFiles(); // Make sure this is present
+
 
             app.MapControllers();
 

@@ -1,11 +1,9 @@
-﻿// golden_fork.API/Controllers/ItemController.cs
-using golden_fork.core.DTOs.Kitchen;
+﻿using golden_fork.core.DTOs.Kitchen;
 using golden_fork.Core.IServices.Kitchen;
 using golden_fork.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-
 namespace golden_fork.API.Controllers
 {
     [Route("api/[controller]")]
@@ -13,12 +11,10 @@ namespace golden_fork.API.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
-
         public ItemController(IItemService itemService)
         {
             _itemService = itemService;
         }
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<PagedResult<ItemResponse>>> GetAll(
@@ -32,7 +28,6 @@ namespace golden_fork.API.Controllers
             {
                 var result = await _itemService.GetAllItemsAsync(
                     pageNumber, pageSize, searchTerm, sortBy, ascending);
-
                 return Ok(result);
             }
             catch (Exception ex)
@@ -40,20 +35,16 @@ namespace golden_fork.API.Controllers
                 return StatusCode(500, new { message = "An error occurred while fetching items.", error = ex.Message });
             }
         }
-
         // GET: api/item/5
         [HttpGet("{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<ItemResponse>> GetById(int id)
         {
             var item = await _itemService.GetByIdAsync(id);
-
             if (item == null)
                 return NotFound(new { message = $"Item with ID {id} not found." });
-
             return Ok(item);
         }
-
         [HttpPost]
         [Authorize]
         [AuthorizeRoles(UserRole.Admin, UserRole.Chef)]
@@ -62,10 +53,8 @@ namespace golden_fork.API.Controllers
             try
             {
                 var (success, message, itemId) = await _itemService.CreateAsync(request);
-
                 if (!success)
                     return BadRequest(new { message });
-
                 return CreatedAtAction(
                     nameof(GetById),
                     new { id = itemId },
@@ -76,7 +65,6 @@ namespace golden_fork.API.Controllers
                 return StatusCode(500, new { message = "Failed to create item.", error = ex.Message });
             }
         }
-
         [HttpPut("{id}")]
         [Authorize]
         [AuthorizeRoles(UserRole.Admin, UserRole.Chef)]
@@ -85,7 +73,6 @@ namespace golden_fork.API.Controllers
             try
             {
                 var (success, message) = await _itemService.UpdateAsync(id, request);
-
                 return success
                     ? Ok(new { message })
                     : BadRequest(new { message });
@@ -95,7 +82,6 @@ namespace golden_fork.API.Controllers
                 return StatusCode(500, new { message = "Failed to update item.", error = ex.Message });
             }
         }
-
         [HttpDelete("{id}")]
         [Authorize]
         [AuthorizeRoles(UserRole.Admin, UserRole.Chef)]
@@ -104,7 +90,6 @@ namespace golden_fork.API.Controllers
             try
             {
                 var (success, message) = await _itemService.DeleteAsync(id);
-
                 return success
                     ? Ok(new { message })
                     : NotFound(new { message });
@@ -114,7 +99,6 @@ namespace golden_fork.API.Controllers
                 return StatusCode(500, new { message = "Failed to delete item.", error = ex.Message });
             }
         }
-
         [HttpPost("{itemId}/upload-photo")]
         [Authorize]
         [AuthorizeRoles(UserRole.Admin, UserRole.Chef)]
@@ -122,12 +106,10 @@ namespace golden_fork.API.Controllers
         {
             if (photo == null || photo.Length == 0)
                 return BadRequest(new { message = "No photo uploaded." });
-
             try
             {
                 // Fix 1: Explicitly declare the tuple variables
                 var (success, message, imageUrl) = await _itemService.UploadPhotoAsync(itemId, photo, isMain);
-
                 return success
                     ? Ok(new { message, imageUrl })
                     : BadRequest(new { message });

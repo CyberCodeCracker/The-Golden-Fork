@@ -39,6 +39,7 @@ namespace golden_fork.core.MappingProfiles
             CreateMap<MenuItem, MenuItemResponse>()
                 .ForMember(dest => dest.ItemId, opt => opt.MapFrom(src => src.ItemId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Item.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Item.Description))   
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Item.Price))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Item.Category.Name));
@@ -76,6 +77,15 @@ namespace golden_fork.core.MappingProfiles
 
             CreateMap<Payment, PaymentResponse>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.IsPaid ? "Paid" : "Pending"));
+
+            CreateMap<MenuItemRequest, Item>()
+                .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
+                .ForMember(dest => dest.SpecialPrice, opt => opt.MapFrom(src => src.SpecialPrice))
+                .ForMember(dest => dest.IsAvailable, opt => opt.MapFrom(src => src.IsAvailable));
         }
     }
     

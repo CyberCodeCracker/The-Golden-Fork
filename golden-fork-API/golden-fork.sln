@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden-fork.API", "golden-f
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden-fork.Core", "golden-fork.Core\golden-fork.Core.csproj", "{B39F5641-A98F-4BCF-9D02-F3F67A46140C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden_fork.Front", "golden_fork.Front\golden_fork.Front.csproj", "{72719C8A-06BC-427F-A925-21372BF61671}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{B39F5641-A98F-4BCF-9D02-F3F67A46140C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39F5641-A98F-4BCF-9D02-F3F67A46140C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39F5641-A98F-4BCF-9D02-F3F67A46140C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72719C8A-06BC-427F-A925-21372BF61671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72719C8A-06BC-427F-A925-21372BF61671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72719C8A-06BC-427F-A925-21372BF61671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72719C8A-06BC-427F-A925-21372BF61671}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{A7937C53-B956-4653-A0A7-EE557C52C9B9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B39F5641-A98F-4BCF-9D02-F3F67A46140C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{72719C8A-06BC-427F-A925-21372BF61671} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {413E8FA3-47A9-4F52-A98B-94A22CF63FA2}

@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace golden_fork.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class AppUserController : BaseController
     {
@@ -50,6 +50,30 @@ namespace golden_fork.API.Controllers
             });
         }
 
+        // In your AuthController or UserController
+        [HttpGet("me")]
+        [Authorize]
+        public IActionResult GetCurrentUser()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+            var username = User.FindFirst(ClaimTypes.Name)?.Value; // or however you store username in claims
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new
+            {
+                Id = int.Parse(userId),
+                Email = email,
+                Username = username,
+                Role = role
+            });
+        }
+
 
         [Authorize]
         [HttpGet("debug/userinfo")]
@@ -80,11 +104,12 @@ namespace golden_fork.API.Controllers
             {
                 var token = _appUserService.GenerateJwtToken(result.user);
 
+                // RETURN TOKEN IN BODY — NO COOKIE
                 return Ok(new
                 {
                     success = true,
                     message = result.message,
-                    token = token,
+                    token = token,  // ← frontend will store this
                     user = new
                     {
                         id = result.user.Id,
@@ -102,6 +127,23 @@ namespace golden_fork.API.Controllers
             });
         }
 
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // Expire the cookie by setting it with a past expiration date
+            Response.Cookies.Append("GoldenForkAuth", "", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.None,
+                Path = "/",
+                Expires = DateTimeOffset.UtcNow.AddDays(-1) // Expire immediately
+            });
+
+            return Ok(new { message = "Logged out successfully" });
+        }
+
+        [Authorize] 
         [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
         {

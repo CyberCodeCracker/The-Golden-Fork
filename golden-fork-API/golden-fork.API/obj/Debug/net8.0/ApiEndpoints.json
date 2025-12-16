@@ -1,89 +1,5 @@
 [
   {
-    "ContainingType": "golden_fork.API.Controllers.AppUserController",
-    "Method": "ChangePassword",
-    "RelativePath": "api/AppUser/change-password",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "golden_fork.API.Controllers.ChangePasswordRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.AppUserController",
-    "Method": "DebugUserInfo",
-    "RelativePath": "api/AppUser/debug/userinfo",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.AppUserController",
-    "Method": "Login",
-    "RelativePath": "api/AppUser/login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "golden_fork.core.DTOs.LoginRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.AppUserController",
-    "Method": "GetProfile",
-    "RelativePath": "api/AppUser/profile",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.AppUserController",
-    "Method": "UpdateProfile",
-    "RelativePath": "api/AppUser/profile",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "golden_fork.API.Controllers.UpdateProfileRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.AppUserController",
-    "Method": "Register",
-    "RelativePath": "api/AppUser/register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "golden_fork.core.DTOs.RegistrationRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "golden_fork.API.Controllers.CartController",
     "Method": "GetCart",
     "RelativePath": "api/Cart",
@@ -444,40 +360,8 @@
   },
   {
     "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
-    "Method": "CreateMenu",
-    "RelativePath": "api/Menu/Create",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "golden_fork.core.DTOs.Kitchen.MenuRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
-    "Method": "DeleteMenuById",
-    "RelativePath": "api/Menu/Delete/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
     "Method": "GetAllMenus",
-    "RelativePath": "api/Menu/GetAll",
+    "RelativePath": "api/Menu",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -513,8 +397,40 @@
   {
     "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
     "Method": "GetMenuById",
-    "RelativePath": "api/Menu/GetById/{id}",
+    "RelativePath": "api/Menu/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
+    "Method": "CreateMenu",
+    "RelativePath": "api/Menu/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "golden_fork.core.DTOs.Kitchen.MenuRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
+    "Method": "DeleteMenuById",
+    "RelativePath": "api/Menu/Delete/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -714,6 +630,110 @@
       {
         "Name": "orderId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/user/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.API.Controllers.ChangePasswordRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "DebugUserInfo",
+    "RelativePath": "api/user/debug/userinfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "Login",
+    "RelativePath": "api/user/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.core.DTOs.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "Logout",
+    "RelativePath": "api/user/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/user/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "GetProfile",
+    "RelativePath": "api/user/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/user/profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.API.Controllers.UpdateProfileRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "Register",
+    "RelativePath": "api/user/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.core.DTOs.RegistrationRequest",
         "IsRequired": true
       }
     ],

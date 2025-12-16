@@ -60,14 +60,14 @@ namespace golden_fork.Core.Services
                 return (false, "Request cannot be null", null);
 
             if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
-                return (false, "Username/email and password are required", null);
+                return (false, "Email and password are required", null);
 
             var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(
                 u => u.Email == dto.Email,
                 include: q => q.Include(u => u.Role));
 
             if (user == null)
-                return (false, "Invalid username or email", null);
+                return (false, "Invalid email", null);
 
             // Hash input password and compare with stored hashed password
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))

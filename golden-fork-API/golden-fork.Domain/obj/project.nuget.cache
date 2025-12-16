@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ddsOPz0bNP0=",
+  "dgSpecHash": "4fR7ElRl7Ts=",
   "success": true,
-  "projectFilePath": "C:\\Users\\souha\\source\\repos\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\golden-fork.Domain.csproj",
+  "projectFilePath": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\golden-fork.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\souha\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\souha\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

@@ -6,7 +6,7 @@
     "version": "v1"
   },
   "paths": {
-    "/api/AppUser/register": {
+    "/api/user/register": {
       "post": {
         "tags": [
           "AppUser"
@@ -37,7 +37,7 @@
         }
       }
     },
-    "/api/AppUser/debug/userinfo": {
+    "/api/user/me": {
       "get": {
         "tags": [
           "AppUser"
@@ -49,7 +49,19 @@
         }
       }
     },
-    "/api/AppUser/login": {
+    "/api/user/debug/userinfo": {
+      "get": {
+        "tags": [
+          "AppUser"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/user/login": {
       "post": {
         "tags": [
           "AppUser"
@@ -80,7 +92,19 @@
         }
       }
     },
-    "/api/AppUser/profile": {
+    "/api/user/logout": {
+      "post": {
+        "tags": [
+          "AppUser"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/user/profile": {
       "get": {
         "tags": [
           "AppUser"
@@ -121,7 +145,7 @@
         }
       }
     },
-    "/api/AppUser/change-password": {
+    "/api/user/change-password": {
       "post": {
         "tags": [
           "AppUser"
@@ -742,7 +766,7 @@
         }
       }
     },
-    "/api/Menu/GetAll": {
+    "/api/Menu": {
       "get": {
         "tags": [
           "Menu"
@@ -797,7 +821,7 @@
         }
       }
     },
-    "/api/Menu/GetById/{id}": {
+    "/api/Menu/{id}": {
       "get": {
         "tags": [
           "Menu"

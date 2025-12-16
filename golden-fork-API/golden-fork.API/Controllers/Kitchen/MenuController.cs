@@ -23,7 +23,7 @@ namespace golden_fork.API.Controllers.Kitchen
         }
 
         [Authorize]
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAllMenus(
             [FromQuery] int pageNumber = 1,
             [FromQuery] int pageSize = 10,
@@ -48,7 +48,7 @@ namespace golden_fork.API.Controllers.Kitchen
         }
 
         [Authorize]
-        [HttpGet("GetById/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetMenuById(int id)
         {
             try

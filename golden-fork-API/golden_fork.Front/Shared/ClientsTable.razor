@@ -1,0 +1,59 @@
+﻿@using golden_fork.Front.DTOs
+@using golden_fork.Front.DTOs.Kitchen
+@inject HttpClient Http
+
+<table class="table table-zebra w-full">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (clients == null)
+        {
+            <tr>
+                <td colspan="5" class="text-center">Loading...</td>
+            </tr>
+        }
+        else if (clients.Count == 0)
+        {
+            <tr>
+                <td colspan="5" class="text-center">No clients</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var client in clients)
+            {
+                <tr>
+                    <td>@client.Id</td>
+                    <td>@client.Username</td>
+                    <td>@client.Email</td>
+                    <td>@client.Role</td>
+                    <td>@client.CreatedAt.ToShortDateString()</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<UserResponse>? clients;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            clients = await Http.GetFromJsonAsync<List<UserResponse>>("api/admin/clients");
+        }
+        catch (Exception ex)
+        {
+            // Optional: log or show error
+            clients = new List<UserResponse>();
+        }
+    }
+}

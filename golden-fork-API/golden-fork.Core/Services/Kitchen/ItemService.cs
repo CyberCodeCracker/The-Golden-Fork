@@ -6,6 +6,7 @@ using golden_fork.core.Entities.Menu;
 using golden_fork.Core.IServices.Kitchen;
 using golden_fork.Infrastructure.IRepositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.IO;
@@ -16,11 +17,17 @@ namespace golden_fork.Core.Services.Kitchen
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IHostEnvironment _env;
+        private readonly string _webRootPath;
+        private readonly string _apiBaseUrl; // Added field for API URL
 
-        public ItemService(IUnitOfWork unitOfWork, IMapper mapper)
+        public ItemService(IUnitOfWork unitOfWork, IMapper mapper, IHostEnvironment env)
         {
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _env = env;
+            _webRootPath = Path.Combine(_env.ContentRootPath, "wwwroot"); // ← Use ContentRootPath
+            _apiBaseUrl = "http://localhost:5128"; // Your API port
         }
 
         public async Task<PagedResult<ItemResponse>> GetAllItemsAsync(
@@ -91,7 +98,8 @@ namespace golden_fork.Core.Services.Kitchen
             var itemEntity = _mapper.Map<Item>(request);
             itemEntity.IsAvailable = true;
             itemEntity.CreatedAt = DateTime.UtcNow;
-            itemEntity.ImageUrl ??= "/images/default-item.jpg";
+            // FIX: Use full API URL for default image
+            itemEntity.ImageUrl ??= $"{_apiBaseUrl}/images/default-item.jpg";
 
             await _unitOfWork.ItemRepository.AddAsync(itemEntity);
             await _unitOfWork.ItemImageRepository.SaveChangesAsync();
@@ -144,64 +152,88 @@ namespace golden_fork.Core.Services.Kitchen
                 .Include(i => i.ItemImages)
                 .FirstOrDefaultAsync(i => i.Id == itemId);
 
-            if (item == null) return (false, "Item not found", null);
-            if (photo == null || photo.Length == 0) return (false, "No photo uploaded", null);
+            if (item == null)
+                return (false, "Item not found", null);
 
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            if (photo == null || photo.Length == 0)
+                return (false, "No photo uploaded", null);
+
+            // Use wwwroot/images as storage folder
+            var uploadsFolder = Path.Combine(_webRootPath, "images");
             Directory.CreateDirectory(uploadsFolder);
 
             var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(photo.FileName)}";
             var filePath = Path.Combine(uploadsFolder, fileName);
 
-            await using var stream = new FileStream(filePath, FileMode.Create);
-            await photo.CopyToAsync(stream);
+            await using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await photo.CopyToAsync(stream);
+            }
 
-            var newUrl = $"/images/{fileName}";
+            // Use the API base URL field
+            var newUrl = $"{_apiBaseUrl}/images/{fileName}";  // ← Full URL including API domain
+
 
             // If this is marked as main → demote all others
             if (isMain)
             {
                 foreach (var img in item.ItemImages)
+                {
                     img.IsMain = false;
+                }
             }
 
-            // Add new image
+            // Add the new image record
             item.ItemImages.Add(new ItemImage
             {
-                Url = newUrl,
+                Url = newUrl,  // Store full URL in database
                 IsMain = isMain
             });
 
-            // SYNC MAIN IMAGE AUTOMATICALLY
+            // Sync the main image to Item.ImageUrl
             SyncMainImage(item);
 
             await _unitOfWork.ItemRepository.SaveChangesAsync();
 
             return (true, "Photo uploaded successfully", newUrl);
         }
+
         private void SyncMainImage(Item item)
         {
-            // Find the current main image
             var mainImage = item.ItemImages.FirstOrDefault(i => i.IsMain);
 
-            // If there's a main image → update ImageUrl
             if (mainImage != null)
             {
                 item.ImageUrl = mainImage.Url;
             }
-            // If no main image but there are images → use the first one
             else if (item.ItemImages.Any())
             {
-                item.ImageUrl = item.ItemImages.First().Url;
+                item.ImageUrl = item.ItemImages.First().Url;  // fallback to first image
             }
-            // Fallback
             else
             {
-                item.ImageUrl = "/images/default-item.jpg";
+                // FIX: Use full API URL for default image
+                item.ImageUrl = $"{_apiBaseUrl}/images/default-item.jpg";
             }
 
             item.UpdatedAt = DateTime.UtcNow;
         }
+
+        // Helper method to ensure URLs are complete
+        private string EnsureFullImageUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return $"{_apiBaseUrl}/images/default-item.jpg";
+
+            if (url.StartsWith("http"))
+                return url;
+
+            if (url.StartsWith("/"))
+                return $"{_apiBaseUrl}{url}";
+
+            return $"{_apiBaseUrl}/{url}";
+        }
+
     }
 
 }
