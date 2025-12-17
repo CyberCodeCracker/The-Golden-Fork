@@ -11,7 +11,8 @@ namespace golden_fork.core.DTOs.Kitchen
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public int ItemCount { get; set; } // ← useful for UI
+        public String ImageUrl { get; set; } = string.Empty;
+        public int ItemCount { get; set; } 
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

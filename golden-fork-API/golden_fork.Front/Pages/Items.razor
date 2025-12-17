@@ -56,7 +56,7 @@
                     <div class="card-body">
                         <div class="flex justify-between items-start">
                             <h2 class="card-title text-2xl">@item.Name</h2>
-                            <div class="badge badge-secondary badge-lg">@item.Category</div>
+                            <div class="badge badge-secondary badge-lg">@item.Category.Name</div>
                         </div>
 
                         @if (!string.IsNullOrEmpty(item.Description))
@@ -97,7 +97,7 @@
                                 <button @onclick="() => OpenEditItemModal(item)" class="btn btn-warning btn-sm flex-1">
                                     Edit
                                 </button>
-                                <button @onclick="() => DeleteItem(item.ItemId)" class="btn btn-error btn-sm flex-1">
+                                <button @onclick="() => DeleteItem(item.Id)" class="btn btn-error btn-sm flex-1">
                                     Delete
                                 </button>
                             </div>
@@ -249,7 +249,7 @@
 }
 
 @code {
-    private PagedResult<MenuItemResponse>? pagedResult;
+    private PagedResult<ItemResponse>? pagedResult;
     private List<CategoryResponse>? categories;
     private string searchTerm = "";
     private int currentPage = 1;
@@ -259,11 +259,11 @@
 
     // Item Details Modal
     private bool showItemDetailsModal = false;
-    private MenuItemResponse selectedItem = new();
+    private ItemResponse selectedItem = new();
 
     // Add Item Modal
     private bool showAddItemModal = false;
-    private MenuItemRequest newItem = new();
+    private ItemRequest newItem = new();  // ← Use ItemRequest
     private string modalMessage = "";
     private bool modalSuccess = false;
     private bool modalLoading = false;
@@ -292,11 +292,11 @@
                 url += $"&searchTerm={Uri.EscapeDataString(searchTerm)}";
             }
 
-            pagedResult = await Http.GetFromJsonAsync<PagedResult<MenuItemResponse>>(url);
+            pagedResult = await Http.GetFromJsonAsync<PagedResult<ItemResponse>>(url);
         }
         catch
         {
-            pagedResult = new PagedResult<MenuItemResponse>();
+            pagedResult = new PagedResult<ItemResponse>();
         }
         isLoading = false;
     }
@@ -328,7 +328,7 @@
         await LoadItems();
     }
 
-    private void OpenItemDetails(MenuItemResponse item)
+    private void OpenItemDetails(ItemResponse item)
     {
         selectedItem = item;
         showItemDetailsModal = true;
@@ -341,7 +341,7 @@
 
     private void OpenAddItemModal()
     {
-        newItem = new MenuItemRequest();
+        newItem = new ItemRequest();
         selectedFile = null;
         modalMessage = "";
         showAddItemModal = true;
@@ -413,7 +413,6 @@
     {
         if (itemId == 0)
         {
-            // Safety check - shouldn't happen
             Console.WriteLine("Error: itemId is 0");
             return;
         }
@@ -436,8 +435,8 @@
         }
     }
 
-    private void OpenEditItemModal(MenuItemResponse item)
+    private void OpenEditItemModal(ItemResponse item)
     {
-        // TODO: Implement edit modal
+        // TODO: Implement edit
     }
 }

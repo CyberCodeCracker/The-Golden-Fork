@@ -11,6 +11,7 @@ namespace golden_fork.core.Entities.Menu
         public String Name { get; set; }
         public String? Description { get; set; }
         public ICollection<Item> Items { get; set; } = new HashSet<Item>();
+        public String ImageUrl { get; set; } = "/images/default-image.jpg";
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 }

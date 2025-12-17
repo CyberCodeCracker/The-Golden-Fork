@@ -219,20 +219,6 @@ namespace golden_fork.Core.Services.Kitchen
             item.UpdatedAt = DateTime.UtcNow;
         }
 
-        // Helper method to ensure URLs are complete
-        private string EnsureFullImageUrl(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return $"{_apiBaseUrl}/images/default-item.jpg";
-
-            if (url.StartsWith("http"))
-                return url;
-
-            if (url.StartsWith("/"))
-                return $"{_apiBaseUrl}{url}";
-
-            return $"{_apiBaseUrl}/{url}";
-        }
 
     }
 

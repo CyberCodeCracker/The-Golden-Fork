@@ -53,6 +53,9 @@ namespace golden_fork.core.MappingProfiles
             CreateMap<CategoryUpdate, Category>().ReverseMap();
             CreateMap<Category, CategoryResponse>().ReverseMap();
 
+            CreateMap<Category, CategoryWithItemsResponse>()
+                .ForMember(dest => dest.ItemCount, opt => opt.Ignore())  // Set manually in service
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items));
             // Cart → CartResponse (manual mapping needed because of nested data)
             CreateMap<Cart, CartResponse>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Username))
