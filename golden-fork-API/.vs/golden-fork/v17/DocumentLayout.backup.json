@@ -3,48 +3,74 @@
   "WorkspaceRootPath": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\ordershistory.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\ordershistory.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.core\\services\\appuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\services\\appuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.api\\controllers\\appusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\controllers\\appusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.UserRoles.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\items.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\items.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\dtos\\kitchen\\itemupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\dtos\\kitchen\\itemupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\dtos\\kitchen\\itemupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\dtos\\kitchen\\itemupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\shared\\carditem.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\shared\\carditem.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.api\\controllers\\kitchen\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\controllers\\kitchen\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\orders.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\orders.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\shared\\cartpanel.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\shared\\cartpanel.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\enums\\orderstatusextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\enums\\orderstatusextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\dtos\\order\\orderupdaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\dtos\\order\\orderupdaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.core\\services\\purchase\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\services\\purchase\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\menu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\menu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.api\\controllers\\purchase\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|solutionrelative:golden-fork.api\\controllers\\purchase\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\dtos\\order\\orderresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\dtos\\order\\orderresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.core\\services\\purchase\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\services\\purchase\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\dtos\\order\\orderupdaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\dtos\\order\\orderupdaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.core\\iservices\\purchase\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B39F5641-A98F-4BCF-9D02-F3F67A46140C}|golden-fork.Core\\golden-fork.Core.csproj|solutionrelative:golden-fork.core\\iservices\\purchase\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\entities\\purchase\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\entities\\purchase\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\shared\\carditem.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\shared\\carditem.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\ordershistory.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\ordershistory.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\categorydetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\categorydetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\enums\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\enums\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FF71338-A0C0-43C4-8867-F6CD9BFE15C9}|golden-fork.API\\golden-fork.API.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.api\\controllers\\purchase\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,14 +79,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\items.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\items.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\categorydetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\categorydetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\menudetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -75,20 +93,12 @@
       "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\pages\\menu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\pages\\menu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\dtos\\kitchen\\categorywithitemsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\dtos\\kitchen\\categorywithitemsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden_fork.front\\dtos\\kitchen\\categorywithitemsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{72719C8A-06BC-427F-A925-21372BF61671}|golden_fork.Front\\golden_fork.Front.csproj|solutionrelative:golden_fork.front\\dtos\\kitchen\\categorywithitemsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\mappingprofiles\\profilemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\mappingprofiles\\profilemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.domain\\entities\\kitchen\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -142,10 +152,6 @@
       "RelativeMoniker": "D:0:0:{C83F1A4D-0877-4868-822B-407C243FC8E4}|golden-fork.Domain\\golden-fork.Domain.csproj|solutionrelative:golden-fork.domain\\dtos\\kitchen\\categoryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|c:\\users\\souha\\source\\repos\\golden_fork\\the-golden-fork\\golden-fork-api\\golden-fork.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A7937C53-B956-4653-A0A7-EE557C52C9B9}|golden-fork.Infrastructure\\golden-fork.Infrastructure.csproj|solutionrelative:golden-fork.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Items.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     }
   ],
@@ -161,40 +167,86 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OrdersHistory.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\OrdersHistory.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\OrdersHistory.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\OrdersHistory.razor",
-              "RelativeToolTip": "golden_fork.Front\\Pages\\OrdersHistory.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-18T09:26:18Z",
+              "Title": "AppUserService.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\AppUserService.cs",
+              "RelativeDocumentMoniker": "golden-fork.Core\\Services\\AppUserService.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\AppUserService.cs",
+              "RelativeToolTip": "golden-fork.Core\\Services\\AppUserService.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAYwG0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T11:20:59.386Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Orders.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Orders.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Orders.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Orders.razor*",
-              "RelativeToolTip": "golden_fork.Front\\Pages\\Orders.razor*",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAEwK0AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-18T09:24:34.623Z",
+              "Title": "AppUserController.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\AppUserController.cs",
+              "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\AppUserController.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\AppUserController.cs",
+              "RelativeToolTip": "golden-fork.API\\Controllers\\AppUserController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAIAwwCEAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T11:20:49.18Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderUpdateRequest.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "RelativeDocumentMoniker": "golden-fork.Domain\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "RelativeToolTip": "golden-fork.Domain\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "dbo.UserRoles [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.UserRoles.sql",
+              "ToolTip": "dbo.UserRoles [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-12-18T11:20:37.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dbo.Users [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Users.sql",
+              "ToolTip": "dbo.Users [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-12-18T11:20:22.87Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ItemUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "RelativeDocumentMoniker": "golden_fork.Front\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "RelativeToolTip": "golden_fork.Front\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAYwA4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T09:22:04.991Z",
+              "WhenOpened": "2025-12-18T11:04:55.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ItemUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "RelativeDocumentMoniker": "golden-fork.Domain\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "RelativeToolTip": "golden-fork.Domain\\DTOs\\Kitchen\\ItemUpdate.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAwA8AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T10:54:47.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "RelativeToolTip": "golden-fork.API\\Controllers\\Kitchen\\MenuController.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAjwIEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T10:52:57.586Z",
               "EditorCaption": ""
             },
             {
@@ -203,85 +255,150 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
+              "Title": "CardItem.razor",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Shared\\CardItem.razor",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Shared\\CardItem.razor",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Shared\\CardItem.razor",
+              "RelativeToolTip": "golden_fork.Front\\Shared\\CardItem.razor",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwA8AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-18T08:14:36.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Items.razor",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Items.razor",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Items.razor",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Items.razor",
+              "RelativeToolTip": "golden_fork.Front\\Pages\\Items.razor",
+              "ViewState": "AgIAAFUAAAAAAAAAAAApwF0AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-17T08:25:05.83Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Orders.razor",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Orders.razor",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Orders.razor",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Orders.razor",
+              "RelativeToolTip": "golden_fork.Front\\Pages\\Orders.razor",
+              "ViewState": "AgIAAEMBAAAAAAAAAAApwE0BAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-18T09:24:34.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Purchase\\OrderService.cs",
+              "RelativeDocumentMoniker": "golden-fork.Core\\Services\\Purchase\\OrderService.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Purchase\\OrderService.cs",
+              "RelativeToolTip": "golden-fork.Core\\Services\\Purchase\\OrderService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAYwE8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T10:32:54.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IOrderService.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\Purchase\\IOrderService.cs",
+              "RelativeDocumentMoniker": "golden-fork.Core\\IServices\\Purchase\\IOrderService.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\Purchase\\IOrderService.cs",
+              "RelativeToolTip": "golden-fork.Core\\IServices\\Purchase\\IOrderService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAhwBkAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T10:32:32.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "OrderController.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Purchase\\OrderController.cs",
               "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\Purchase\\OrderController.cs",
               "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Purchase\\OrderController.cs",
               "RelativeToolTip": "golden-fork.API\\Controllers\\Purchase\\OrderController.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAiwDcAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAgwCUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-18T09:05:01.373Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OrderStatusExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\Enums\\OrderStatusExtensions.cs",
-              "RelativeDocumentMoniker": "golden-fork.Domain\\Enums\\OrderStatusExtensions.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\Enums\\OrderStatusExtensions.cs",
-              "RelativeToolTip": "golden-fork.Domain\\Enums\\OrderStatusExtensions.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAqwBoAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T09:19:25.808Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CartPanel.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Shared\\CartPanel.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Shared\\CartPanel.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Shared\\CartPanel.razor",
-              "RelativeToolTip": "golden_fork.Front\\Shared\\CartPanel.razor",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAuwFgAAAAjAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "Menu.razor",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Menu.razor",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Menu.razor",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Menu.razor",
+              "RelativeToolTip": "golden_fork.Front\\Pages\\Menu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-18T08:33:38.49Z",
+              "WhenOpened": "2025-12-17T17:58:23.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "OrderResponse.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Order\\OrderResponse.cs",
-              "RelativeDocumentMoniker": "golden_fork.Front\\DTOs\\Order\\OrderResponse.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Order\\OrderResponse.cs",
-              "RelativeToolTip": "golden_fork.Front\\DTOs\\Order\\OrderResponse.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAywBMAAAAqAAAAAAAAAA==",
+              "DocumentIndex": 14,
+              "Title": "CartService.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Services\\CartService.cs",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Services\\CartService.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Services\\CartService.cs",
+              "RelativeToolTip": "golden_fork.Front\\Services\\CartService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAwwD0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T09:20:21.989Z",
+              "WhenOpened": "2025-12-18T10:23:00.161Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "OrderUpdateRequest.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "RelativeDocumentMoniker": "golden_fork.Front\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "RelativeToolTip": "golden_fork.Front\\DTOs\\Order\\OrderUpdateRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA6AAAAAAAAAA==",
+              "DocumentIndex": 15,
+              "Title": "OrdersHistory.razor",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\OrdersHistory.razor",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\OrdersHistory.razor",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\OrdersHistory.razor",
+              "RelativeToolTip": "golden_fork.Front\\Pages\\OrdersHistory.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-18T09:26:18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CategoryDetails.razor",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\CategoryDetails.razor",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\CategoryDetails.razor",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\CategoryDetails.razor",
+              "RelativeToolTip": "golden_fork.Front\\Pages\\CategoryDetails.razor",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAmwLIAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-17T10:16:43.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "OrderStatus.cs",
+              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Enums\\OrderStatus.cs",
+              "RelativeDocumentMoniker": "golden_fork.Front\\Enums\\OrderStatus.cs",
+              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Enums\\OrderStatus.cs",
+              "RelativeToolTip": "golden_fork.Front\\Enums\\OrderStatus.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAADgvxQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T09:20:11.372Z",
+              "WhenOpened": "2025-12-18T09:26:58.169Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Purchase\\OrderService.cs",
-              "RelativeDocumentMoniker": "golden-fork.Core\\Services\\Purchase\\OrderService.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Purchase\\OrderService.cs*",
-              "RelativeToolTip": "golden-fork.Core\\Services\\Purchase\\OrderService.cs*",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAWwIsAAABrAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T09:13:11.901Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 18,
               "Title": "PaymentController.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Purchase\\PaymentController.cs",
               "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\Purchase\\PaymentController.cs",
@@ -294,33 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\Entities\\Purchase\\Order.cs",
-              "RelativeDocumentMoniker": "golden-fork.Domain\\Entities\\Purchase\\Order.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\Entities\\Purchase\\Order.cs",
-              "RelativeToolTip": "golden-fork.Domain\\Entities\\Purchase\\Order.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAADwvxIAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T09:13:42.56Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CardItem.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Shared\\CardItem.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Shared\\CardItem.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Shared\\CardItem.razor",
-              "RelativeToolTip": "golden_fork.Front\\Shared\\CardItem.razor",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAuwAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-18T08:14:36.148Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "golden_fork.Front\\Layout\\MainLayout.razor",
@@ -333,7 +424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "app.css",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\wwwroot\\css\\app.css",
               "RelativeDocumentMoniker": "golden_fork.Front\\wwwroot\\css\\app.css",
@@ -346,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "MenuDetails.razor",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\MenuDetails.razor",
               "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\MenuDetails.razor",
@@ -359,33 +450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CategoryDetails.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\CategoryDetails.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\CategoryDetails.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\CategoryDetails.razor",
-              "RelativeToolTip": "golden_fork.Front\\Pages\\CategoryDetails.razor",
-              "ViewState": "AgIAAEoBAAAAAAAAAAAAAFABAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-17T10:16:43.33Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Items.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Items.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Items.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Items.razor",
-              "RelativeToolTip": "golden_fork.Front\\Pages\\Items.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-17T08:25:05.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "golden_fork.Front\\wwwroot\\index.html",
@@ -397,37 +462,12 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Menu.razor",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Menu.razor",
-              "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Menu.razor",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Menu.razor",
-              "RelativeToolTip": "golden_fork.Front\\Pages\\Menu.razor",
-              "ViewState": "AgIAAN4AAAAAAAAAAAAAAOgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-17T17:58:23.349Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ProfileMapper.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\MappingProfiles\\ProfileMapper.cs",
-              "RelativeDocumentMoniker": "golden-fork.Domain\\MappingProfiles\\ProfileMapper.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\MappingProfiles\\ProfileMapper.cs",
-              "RelativeToolTip": "golden-fork.Domain\\MappingProfiles\\ProfileMapper.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAQwDgAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T10:28:24.181Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\Entities\\Kitchen\\Category.cs",
               "RelativeDocumentMoniker": "golden-fork.Domain\\Entities\\Kitchen\\Category.cs",
@@ -440,7 +480,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "CategoryWithItemsResponse.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Kitchen\\CategoryWithItemsResponse.cs",
               "RelativeDocumentMoniker": "golden-fork.Domain\\DTOs\\Kitchen\\CategoryWithItemsResponse.cs",
@@ -453,7 +493,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "CategoryWithItemsResponse.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Kitchen\\CategoryWithItemsResponse.cs",
               "RelativeDocumentMoniker": "golden_fork.Front\\DTOs\\Kitchen\\CategoryWithItemsResponse.cs",
@@ -465,7 +505,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "CategoryService.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Kitchen\\CategoryService.cs",
               "RelativeDocumentMoniker": "golden-fork.Core\\Services\\Kitchen\\CategoryService.cs",
@@ -478,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "ICategortService.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\IServices\\Kitchen\\ICategortService.cs",
               "RelativeDocumentMoniker": "golden-fork.Core\\IServices\\Kitchen\\ICategortService.cs",
@@ -490,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\Controllers\\Kitchen\\CategoryController.cs",
               "RelativeDocumentMoniker": "golden-fork.API\\Controllers\\Kitchen\\CategoryController.cs",
@@ -502,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Repositories\\GenericRepository.cs",
               "RelativeDocumentMoniker": "golden-fork.Infrastructure\\Repositories\\GenericRepository.cs",
@@ -515,7 +555,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "CategoryResponse.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Kitchen\\CategoryResponse.cs",
               "RelativeDocumentMoniker": "golden_fork.Front\\DTOs\\Kitchen\\CategoryResponse.cs",
@@ -527,7 +567,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "dbo.Categories.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Categories.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Categories.sql",
@@ -536,7 +576,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\Entities\\Kitchen\\Item.cs",
               "RelativeDocumentMoniker": "golden-fork.Domain\\Entities\\Kitchen\\Item.cs",
@@ -549,7 +589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "Categories.razor",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\Pages\\Categories.razor",
               "RelativeDocumentMoniker": "golden_fork.Front\\Pages\\Categories.razor",
@@ -561,7 +601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "ItemService.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Core\\Services\\Kitchen\\ItemService.cs",
               "RelativeDocumentMoniker": "golden-fork.Core\\Services\\Kitchen\\ItemService.cs",
@@ -569,11 +609,12 @@
               "RelativeToolTip": "golden-fork.Core\\Services\\Kitchen\\ItemService.cs",
               "ViewState": "AgIAAJ4AAAAAAAAAAAAswK4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T09:13:20.762Z"
+              "WhenOpened": "2025-12-17T09:13:20.762Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "CategoryRequest.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden_fork.Front\\DTOs\\Kitchen\\CategoryRequest.cs",
               "RelativeDocumentMoniker": "golden_fork.Front\\DTOs\\Kitchen\\CategoryRequest.cs",
@@ -585,7 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "ItemResponse.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Kitchen\\ItemResponse.cs",
               "RelativeDocumentMoniker": "golden-fork.Domain\\DTOs\\Kitchen\\ItemResponse.cs",
@@ -597,7 +638,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "CategoryRequest.cs",
               "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Domain\\DTOs\\Kitchen\\CategoryRequest.cs",
               "RelativeDocumentMoniker": "golden-fork.Domain\\DTOs\\Kitchen\\CategoryRequest.cs",
@@ -609,20 +650,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "golden-fork.Infrastructure\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.Infrastructure\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "golden-fork.Infrastructure\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T08:58:08.793Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 38,
               "Title": "dbo.Items.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Items.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/GoldenForkDb/True/SqlTable/dbo.Items.sql",

@@ -16,8 +16,11 @@
         <select class="select select-bordered" @bind="selectedStatusFilter">
             <option value="">All Statuses</option>
             <option value="Pending">Pending</option>
-            <option value="Processing">Processing</option>
-            <option value="Completed">Completed</option>
+            <option value="Preparing">Preparing</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Ready">Ready</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Paid">Paid</option>
             <option value="Cancelled">Cancelled</option>
         </select>
         
@@ -38,10 +41,18 @@
     {
         <div class="text-center py-20">
             <p class="text-2xl text-gray-500">No orders found</p>
+            <p class="text-gray-500 mt-2">Try adjusting your filters or check if orders exist in the system.</p>
         </div>
     }
     else
     {
+        <div class="bg-base-100 p-4 rounded-lg mb-4">
+            <p class="text-lg">
+                Showing <span class="font-bold">@orders.Count</span> orders 
+                (Page @currentPage of @totalPages)
+            </p>
+        </div>
+        
         <div class="space-y-6">
             @foreach (var order in orders)
             {
@@ -59,6 +70,16 @@
                                 <p class="text-gray-600">
                                     Items: @order.ItemCount
                                 </p>
+                                @if (order.Payment != null)
+                                {
+                                    <p class="text-gray-600">
+                                        Payment: 
+                                        <span class="badge @GetPaymentStatusBadgeClass(order.Payment.Status)">
+                                            @order.Payment.Status
+                                        </span>
+                                        (@order.Payment.Method)
+                                    </p>
+                                }
                             </div>
                             
                             <div class="text-right">
@@ -67,13 +88,16 @@
                                 </div>
                                 <div class="mt-2">
                                     <select class="select select-bordered select-sm" 
-                                            value="@selectedUpdateStatus"
+                                            value="@GetSelectedStatus(order.Id)"
                                             @onchange="@((ChangeEventArgs e) => OnStatusChange(order.Id, e.Value?.ToString()))">
                                         <option value="">Change Status</option>
                                         <option value="Pending">Pending</option>
-                                        <option value="Processing">Processing</option>
-                                        <option value="Completed">Completed</option>
+                                        <option value="Confirmed">Confirmed</option>
+                                        <option value="Preparing">Preparing</option>  <!-- Changed from Processing -->
+                                        <option value="Ready">Ready</option>
+                                        <option value="Delivered">Delivered</option>  <!-- Changed from Completed -->
                                         <option value="Cancelled">Cancelled</option>
+                                        <option value="Paid">Paid</option>
                                     </select>
                                 </div>
                             </div>
@@ -103,6 +127,12 @@
                                             </tr>
                                         }
                                     </tbody>
+                                    <tfoot>
+                                        <tr class="font-bold">
+                                            <td colspan="3" class="text-right">Total:</td>
+                                            <td>@order.TotalPrice.ToString("C")</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -114,22 +144,26 @@
                                 <span class="badge @GetStatusBadgeClass(order.Status.ToString()) ml-2">
                                     @order.Status
                                 </span>
+                                @if (order.UpdatedAt.HasValue)
+                                {
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        Last updated: @order.UpdatedAt.Value.ToString("g")
+                                    </p>
+                                }
                             </div>
                             
                             <div class="flex gap-2">
-                                @if (order.Id == selectedOrderId && 
-                                     !string.IsNullOrEmpty(selectedUpdateStatus) && 
-                                     selectedUpdateStatus != order.Status.ToString())
+                                @{
+                                    var selectedStatus = GetSelectedStatus(order.Id);
+                                }
+                                @if (!string.IsNullOrEmpty(selectedStatus) && 
+                                     selectedStatus != order.Status.ToString())
                                 {
-                                    <button @onclick="() => UpdateOrderStatus(order.Id, selectedUpdateStatus)" 
+                                    <button @onclick="() => UpdateOrderStatus(order.Id, selectedStatus)" 
                                             class="btn btn-primary btn-sm">
                                         Update Status
                                     </button>
                                 }
-                                <button @onclick="() => ViewOrderDetails(order.Id)" 
-                                        class="btn btn-info btn-sm">
-                                    View Details
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -175,9 +209,8 @@
     private DateTime? startDate = DateTime.Today.AddDays(-30);
     private DateTime? endDate = DateTime.Today;
     
-    // For status updates
-    private int? selectedOrderId = null;
-    private string selectedUpdateStatus = "";
+    // For status updates - track status for each order separately
+    private Dictionary<int, string> orderStatusSelections = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -219,75 +252,152 @@
                 {
                     orders = result.Items ?? new List<OrderResponse>();
                     totalPages = result.TotalPages;
+                    
+                    // Initialize status selections for each order
+                    foreach (var order in orders)
+                    {
+                        if (!orderStatusSelections.ContainsKey(order.Id))
+                        {
+                            orderStatusSelections[order.Id] = order.Status.ToString();
+                        }
+                    }
                 }
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API Error: {error}");
             }
         }
         catch (Exception ex)
         {
-            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
+            Console.WriteLine($"Error in LoadOrders: {ex.Message}");
         }
 
         isLoading = false;
         StateHasChanged();
     }
 
-    private void OnStatusSelected(int orderId)
+    private string GetSelectedStatus(int orderId)
     {
-        selectedOrderId = orderId;
-        StateHasChanged();
+        return orderStatusSelections.ContainsKey(orderId) 
+            ? orderStatusSelections[orderId] 
+            : "";
     }
-
-    private async Task UpdateOrderStatus(int orderId, string newStatusString)
+private async Task UpdateOrderStatus(int orderId, string newStatusString)
+{
+    Console.WriteLine($"DEBUG: UpdateOrderStatus called for order {orderId} with status {newStatusString}");
+    
+    try
     {
-        var confirm = await JS.InvokeAsync<bool>("confirm", 
-            $"Change order status to {newStatusString}?");
-        
-        if (!confirm) return;
-
-        try
+        // Parse the string to OrderStatus enum (case-insensitive)
+        if (Enum.TryParse<OrderStatus>(newStatusString, true, out var newStatus))
         {
-            // Parse the string to OrderStatus enum
-            if (Enum.TryParse<OrderStatus>(newStatusString, out var newStatus))
+            Console.WriteLine($"DEBUG: Parsed '{newStatusString}' to {newStatus} ({(int)newStatus})");
+            
+            // Use the simpler endpoint: api/order/{id}/status
+            var endpoint = $"api/order/{orderId}/status";
+            
+            // Create the request with Status property
+            var updateRequest = new OrderUpdateRequest { Status = newStatus };
+            
+            Console.WriteLine($"DEBUG: Sending PUT to {endpoint}");
+            Console.WriteLine($"DEBUG: Request body: {{ Status: {newStatus} }}");
+            
+            var response = await Http.PutAsJsonAsync(endpoint, updateRequest);
+            
+            Console.WriteLine($"DEBUG: Response status: {response.StatusCode}");
+            
+            if (response.IsSuccessStatusCode)
             {
-                var updateRequest = new OrderUpdateRequest { Status = newStatus };
-                var response = await Http.PutAsJsonAsync($"api/order/{orderId}/status", updateRequest);
+                Console.WriteLine($"DEBUG: Success! Updating local state...");
                 
-                if (response.IsSuccessStatusCode)
+                // Update the local order status
+                var order = orders.FirstOrDefault(o => o.Id == orderId);
+                if (order != null)
                 {
-                    await JS.InvokeVoidAsync("alert", "Order status updated!");
-                    await LoadOrders(); // Refresh the list
-                    
-                    // Reset selection
-                    selectedOrderId = null;
-                    selectedUpdateStatus = "";
+                    order.Status = newStatus;
+                    order.UpdatedAt = DateTime.Now;
                 }
-                else
-                {
-                    var error = await response.Content.ReadAsStringAsync();
-                    await JS.InvokeVoidAsync("alert", $"Failed: {error}");
-                }
+                
+                // Update the selection for this order
+                orderStatusSelections[orderId] = newStatusString;
+                
+                StateHasChanged();
+                Console.WriteLine($"DEBUG: UI refreshed");
             }
             else
             {
-                await JS.InvokeVoidAsync("alert", $"Invalid status: {newStatusString}");
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"DEBUG: Update failed: {error}");
+                
+                // If this fails, fall back to the other endpoint
+                await TryAlternativeEndpoint(orderId, newStatus, newStatusString);
             }
         }
-        catch (Exception ex)
+        else
         {
-            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
+            Console.WriteLine($"DEBUG: Failed to parse '{newStatusString}' as OrderStatus");
+            Console.WriteLine($"DEBUG: Valid values are: {string.Join(", ", Enum.GetNames(typeof(OrderStatus)))}");
         }
     }
-
-    private void OnStatusChange(int orderId, string newStatus)
+    catch (Exception ex)
     {
-        selectedOrderId = orderId;
-        selectedUpdateStatus = newStatus;
-        StateHasChanged();
+        Console.WriteLine($"DEBUG: Exception: {ex.Message}");
     }
+}
 
-    private void ViewOrderDetails(int orderId)
+private async Task TryAlternativeEndpoint(int orderId, OrderStatus newStatus, string newStatusString)
+{
+    try
     {
-        JS.InvokeVoidAsync("alert", $"Viewing order #{orderId} details");
+        Console.WriteLine($"DEBUG: Trying alternative endpoint: api/order/update-status");
+        
+        // Fall back to the other endpoint if needed
+        var altRequest = new { OrderId = orderId, NewStatus = newStatus };
+        var response = await Http.PutAsJsonAsync("api/order/update-status", altRequest);
+        
+        Console.WriteLine($"DEBUG: Alternative response: {response.StatusCode}");
+        
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine($"DEBUG: Success with alternative endpoint!");
+            
+            // Update the local order status
+            var order = orders.FirstOrDefault(o => o.Id == orderId);
+            if (order != null)
+            {
+                order.Status = newStatus;
+                order.UpdatedAt = DateTime.Now;
+            }
+            
+            // Update the selection for this order
+            orderStatusSelections[orderId] = newStatusString;
+            
+            StateHasChanged();
+        }
+        else
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"DEBUG: Alternative endpoint also failed: {error}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"DEBUG: Exception with alternative endpoint: {ex.Message}");
+    }
+}
+private void OnStatusChange(int orderId, string newStatus)
+    {
+        if (orderStatusSelections.ContainsKey(orderId))
+        {
+            orderStatusSelections[orderId] = newStatus ?? "";
+        }
+        else
+        {
+            orderStatusSelections.Add(orderId, newStatus ?? "");
+        }
+        StateHasChanged();
     }
 
     private void ChangePage(int page)
@@ -314,6 +424,17 @@
             "processing" => "badge-warning",
             "pending" => "badge-info",
             "cancelled" => "badge-error",
+            _ => "badge-neutral"
+        };
+    }
+
+    private string GetPaymentStatusBadgeClass(string status)
+    {
+        return status.ToLower() switch
+        {
+            "paid" => "badge-success",
+            "pending" => "badge-warning",
+            "failed" => "badge-error",
             _ => "badge-neutral"
         };
     }
