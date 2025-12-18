@@ -10,8 +10,8 @@ namespace golden_fork.core.Entities.Menu
 {
     public class Item : BaseEntity
     {
-        public String Name { get; set; } = String.Empty;
-        public String Description { get; set; }
+        public String Name { get; set; }
+        public String? Description { get; set; } 
         public decimal Price { get; set; }
         public decimal? SpecialPrice { get; set; }
         public String ImageUrl { get; set; }

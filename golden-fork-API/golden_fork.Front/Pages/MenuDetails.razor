@@ -63,24 +63,25 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 @foreach (var item in menu.Items)
                 {
-                <CardItem 
-                    Item="@(new ItemResponse { 
-                        Id = item.ItemId,
-                        Name = item.Name,
-                        Description = item.Description,
-                        Price = item.Price,
-                        SpecialPrice = item.SpecialPrice,
-                        ImageUrl = item.ImageUrl,
-                        IsAvailable = item.IsAvailable,
-                        IsSpecial = item.IsSpecial
-                    })"
-                    ShowAdminControls="IsAdminOrChef"
-                    ShowNoDescriptionMessage="true"
-                    CurrentQuantity="@(quantities.ContainsKey(item.ItemId) ? quantities[item.ItemId] : 1)"
-                    OnViewDetailsCallback="() => OpenItemDetails(item)"
-                    OnAddToCartCallback="() => AddToCart(item)"
-                    OnRemoveItemCallback="() => RemoveItemFromMenu(item.ItemId)"
-                    OnQuantityChangedCallback="(qty) => quantities[item.ItemId] = qty" />  
+        <CardItem 
+            Item="@(new golden_fork.Front.DTOs.Kitchen.ItemResponse { // Specify namespace
+                Id = item.ItemId,
+                Name = item.Name,
+                Description = item.Description,
+                Price = item.Price,
+                SpecialPrice = item.SpecialPrice,
+                ImageUrl = item.ImageUrl,
+                IsAvailable = item.IsAvailable,
+                IsSpecial = item.IsSpecial,
+                Category = new DTOs.Kitchen.CategoryResponse { Name = item.Category }
+            })"
+            ShowAdminControls="IsAdminOrChef"
+            ShowNoDescriptionMessage="true"
+            CurrentQuantity="@(quantities.ContainsKey(item.ItemId) ? quantities[item.ItemId] : 1)"
+            OnViewDetailsCallback="() => OpenItemDetails(item)"
+            OnAddToCartCallback="() => AddToCart(item)"
+            OnRemoveItemCallback="() => RemoveItemFromMenu(item.ItemId)"
+            OnQuantityChangedCallback="(qty) => quantities[item.ItemId] = qty" /> 
                 }
             </div>
         }
@@ -98,6 +99,7 @@
                 <img src="@selectedItem.ImageUrl" alt="@selectedItem.Name" class="w-full h-64 object-cover rounded-lg mb-6" />
             }
             <div class="space-y-3">
+                <p class="text-lg"><strong>Category:</strong> @selectedItem.Category</p>
                 <p class="text-lg"><strong>Price:</strong> @selectedItem.Price.ToString("C")</p>
                 @if (selectedItem.SpecialPrice.HasValue)
                 {
@@ -114,6 +116,13 @@
                 {
                     <p class="text-gray-500 italic">No description available</p>
                 }
+                <p class="text-sm @(selectedItem.IsAvailable ? "text-success" : "text-error")">
+                    @(selectedItem.IsAvailable ? "✓ Available" : "✗ Unavailable")
+                </p>
+                @if (selectedItem.IsSpecial)
+                {
+                    <div class="badge badge-success">Special Offer</div>
+                }
             </div>
             <div class="modal-action mt-6">
                 <button @onclick="CloseItemDetailsModal" class="btn btn-primary">Close</button>
@@ -127,16 +136,105 @@
 {
     <div class="modal modal-open">
         <div class="modal-box w-11/12 max-w-5xl">
-            <h3 class="font-bold text-2xl mb-6">Add Items to @menu.Name</h3>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-2xl">Add Items to @menu.Name</h3>
+                <button @onclick="CloseAddItemsModal" class="btn btn-sm btn-circle">✕</button>
+            </div>
 
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-error mb-4">
+                    @errorMessage
+                </div>
+            }
+
+            <!-- Item Selection Form -->
+            @if (selectedItemForAdd != null)
+            {
+                <div class="card bg-base-200 mb-6">
+                    <div class="card-body">
+                        <h4 class="card-title">Configure Item: @selectedItemForAdd.Name</h4>
+                        <EditForm Model="menuItemRequest" OnValidSubmit="SubmitAddItemToMenu">
+                            <DataAnnotationsValidator />
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="label"><span class="label-text">Position in Menu</span></label>
+                                    <InputNumber @bind-Value="menuItemRequest.Position" class="input input-bordered w-full" />
+                                </div>
+                                
+                                <div>
+                                    <label class="label"><span class="label-text">Category</span></label>
+                                    <InputSelect @bind-Value="menuItemRequest.CategoryId" TValue="int" class="select select-bordered w-full">
+                                        <option value="0">-- Select Category --</option>
+                                        @foreach (var cat in categories)
+                                        {
+                                            <option value="@cat.Id">@cat.Name</option>
+                                        }
+                                    </InputSelect>
+                                </div>
+                                
+                                <div class="md:col-span-2">
+                                    <label class="label"><span class="label-text">Name *</span></label>
+                                    <InputText @bind-Value="menuItemRequest.Name" class="input input-bordered w-full" />
+                                </div>
+                                
+                                <div class="md:col-span-2">
+                                    <label class="label"><span class="label-text">Description</span></label>
+                                    <InputTextArea @bind-Value="menuItemRequest.Description" class="textarea textarea-bordered w-full" rows="3" />
+                                </div>
+                                
+                                <div>
+                                    <label class="label"><span class="label-text">Price *</span></label>
+                                    <InputNumber @bind-Value="menuItemRequest.Price" class="input input-bordered w-full" step="0.01" />
+                                </div>
+                                
+                                <div>
+                                    <label class="label"><span class="label-text">Special Price (optional)</span></label>
+                                    <InputNumber @bind-Value="menuItemRequest.SpecialPrice" class="input input-bordered w-full" step="0.01" />
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label cursor-pointer">
+                                        <span class="label-text">Available</span>
+                                        <InputCheckbox @bind-Value="menuItemRequest.IsAvailable" class="checkbox checkbox-primary" />
+                                    </label>
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label cursor-pointer">
+                                        <span class="label-text">Special Offer</span>
+                                        <InputCheckbox @bind-Value="menuItemRequest.IsSpecial" class="checkbox checkbox-success" />
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-action mt-6">
+                                <button type="submit" class="btn btn-primary" disabled="@(isAddingItem)">
+                                    @if (isAddingItem)
+                                    {
+                                        <span class="loading loading-spinner"></span>
+                                    }
+                                    Add to Menu
+                                </button>
+                                <button type="button" @onclick="CancelItemSelection" class="btn">Cancel</button>
+                            </div>
+                        </EditForm>
+                    </div>
+                </div>
+            }
+
+            <!-- Items List -->
             <div class="overflow-x-auto">
                 <table class="table table-zebra w-full">
                     <thead>
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Price</th>
                             <th>Special Price</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -144,7 +242,10 @@
                         @if (allItems == null || !allItems.Any())
                         {
                             <tr>
-                                <td colspan="5" class="text-center">No items available</td>
+                                <td colspan="7" class="text-center py-8">
+                                    <span class="loading loading-spinner loading-sm"></span>
+                                    <span class="ml-2">Loading items...</span>
+                                </td>
                             </tr>
                         }
                         else
@@ -160,6 +261,7 @@
                                         }
                                     </td>
                                     <td>@item.Name</td>
+                                    <td>@item.Category?.Name</td>
                                     <td>@item.Price.ToString("C")</td>
                                     <td>
                                         @if (item.SpecialPrice.HasValue)
@@ -172,14 +274,21 @@
                                         }
                                     </td>
                                     <td>
+                                        <span class="badge @(item.IsAvailable ? "badge-success" : "badge-error")">
+                                            @(item.IsAvailable ? "Available" : "Unavailable")
+                                        </span>
+                                    </td>
+                                    <td>
                                         @if (isAlreadyAdded)
                                         {
-                                            <span class="badge badge-success">Already added</span>
+                                            <span class="badge badge-success">Already in menu</span>
                                         }
                                         else
                                         {
-                                            <button @onclick="() => AddItemToMenu(item.Id)" class="btn btn-primary btn-sm">
-                                                Add
+                                            <button @onclick="() => SelectItemForAdd(item)" 
+                                                    class="btn btn-primary btn-sm"
+                                                    disabled="@(selectedItemForAdd != null)">
+                                                Select
                                             </button>
                                         }
                                     </td>
@@ -201,7 +310,8 @@
     [Parameter] public int menuId { get; set; }
 
     private MenuWithItemsResponse? menu;
-    private List<ItemResponse>? allItems;
+    private List<golden_fork.Front.DTOs.Kitchen.ItemResponse>? allItems; // Specify full namespace
+    private List<CategoryResponse>? categories;
     private bool isLoading = true;
     private bool IsAdminOrChef = false;
 
@@ -210,43 +320,32 @@
     private MenuItemResponse selectedItem = new();
     private bool showAddItemsModal = false;
 
+    // Add item to menu
+    private golden_fork.Front.DTOs.Kitchen.ItemResponse? selectedItemForAdd = null; // Specify namespace
+    private MenuItemRequest menuItemRequest = new();
+    private bool isAddingItem = false;
+    private string errorMessage = string.Empty;
+
     // Quantity per item
     private Dictionary<int, int> quantities = new();
 
-    private string apiBaseUrl = "http://localhost:5128"; // Your API URL
+    private string apiBaseUrl = "http://localhost:5128";
 
     private string GetCorrectImageUrl(string url)
     {
         if (string.IsNullOrEmpty(url))
             return $"{apiBaseUrl}/images/default-item.jpg";
 
-        // If it's a relative path starting with /media/, convert to API URL
         if (url.StartsWith("/media/"))
             return $"{apiBaseUrl}/images/{url.Substring(7)}";
 
-        // If it's a relative path starting with /images/, convert to API URL
         if (url.StartsWith("/images/"))
             return $"{apiBaseUrl}{url}";
 
-        // If it's already a full URL, return as-is
         if (url.StartsWith("http"))
             return url;
 
-        // Default fallback
         return $"{apiBaseUrl}/images/default-item.jpg";
-    }
-
-    // Handle quantity updates
-    private void UpdateQuantity(int itemId, string? value)
-    {
-        if (int.TryParse(value, out int quantity) && quantity > 0)
-        {
-            quantities[itemId] = quantity;
-        }
-        else
-        {
-            quantities[itemId] = 1;
-        }
     }
 
     protected override async Task OnInitializedAsync()
@@ -267,7 +366,6 @@
             Console.WriteLine($"Error loading menu: {ex.Message}");
             menu = null;
         }
-
         isLoading = false;
     }
 
@@ -275,13 +373,27 @@
     {
         try
         {
-            var paged = await Http.GetFromJsonAsync<PagedResult<ItemResponse>>("api/item");
-            allItems = paged?.Items ?? new List<ItemResponse>();
+            var paged = await Http.GetFromJsonAsync<PagedResult<golden_fork.Front.DTOs.Kitchen.ItemResponse>>("api/item?pageSize=100");
+            allItems = paged?.Items ?? new List<golden_fork.Front.DTOs.Kitchen.ItemResponse>();
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error loading items: {ex.Message}");
-            allItems = new List<ItemResponse>();
+            allItems = new List<golden_fork.Front.DTOs.Kitchen.ItemResponse>();
+        }
+    }
+
+    private async Task LoadCategories()
+    {
+        try
+        {
+            var result = await Http.GetFromJsonAsync<PagedResult<CategoryResponse>>("api/category");
+            categories = result?.Items ?? new List<CategoryResponse>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading categories: {ex.Message}");
+            categories = new List<CategoryResponse>();
         }
     }
 
@@ -311,33 +423,88 @@
     private async Task OpenAddItemsModal()
     {
         await LoadAllItems();
+        await LoadCategories();
         showAddItemsModal = true;
     }
 
     private void CloseAddItemsModal()
     {
         showAddItemsModal = false;
+        selectedItemForAdd = null;
+        menuItemRequest = new();
+        errorMessage = string.Empty;
     }
 
-    private async Task AddItemToMenu(int itemId)
+    private void SelectItemForAdd(golden_fork.Front.DTOs.Kitchen.ItemResponse item) // Update parameter type
     {
+        selectedItemForAdd = item;
+        
+        // Pre-fill the form with item data
+        menuItemRequest = new MenuItemRequest
+        {
+            Name = item.Name,
+            Description = item.Description,
+            Price = item.Price,
+            SpecialPrice = item.SpecialPrice,
+            IsAvailable = item.IsAvailable,
+            IsSpecial = item.IsSpecial,
+            ImageUrl = item.ImageUrl,
+            CategoryId = item.Category?.Id ?? 0,
+            Position = 0 // Default position
+        };
+    }
+
+    private void CancelItemSelection()
+    {
+        selectedItemForAdd = null;
+        menuItemRequest = new();
+    }
+
+    private async Task SubmitAddItemToMenu()
+    {
+        if (selectedItemForAdd == null) return;
+        
+        isAddingItem = true;
+        errorMessage = string.Empty;
+        StateHasChanged();
+
         try
         {
-            var response = await Http.PostAsJsonAsync($"api/menu/{menuId}/items/{itemId}", new { });
+            // Validate CategoryId
+            if (menuItemRequest.CategoryId == 0)
+            {
+                errorMessage = "Please select a category";
+                isAddingItem = false;
+                StateHasChanged();
+                return;
+            }
+
+            var response = await Http.PostAsJsonAsync($"api/menu/{menuId}/items", menuItemRequest);
 
             if (response.IsSuccessStatusCode)
             {
-                await LoadMenu();
+                var result = await response.Content.ReadFromJsonAsync<MenuItemAddResponse>();
+                await JS.InvokeVoidAsync("alert", $"Item '{menuItemRequest.Name}' added successfully to {menu?.Name}!");
+                
+                // Reset and close
+                selectedItemForAdd = null;
+                menuItemRequest = new();
+                await LoadMenu(); // Refresh the menu
             }
             else
             {
-                var error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Error adding item to menu: {error}");
+                var errorContent = await response.Content.ReadAsStringAsync();
+                errorMessage = $"Failed to add item: {errorContent}";
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception adding item to menu: {ex.Message}");
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isAddingItem = false;
+            StateHasChanged();
         }
     }
 
@@ -352,17 +519,18 @@
 
             if (response.IsSuccessStatusCode)
             {
-                await LoadMenu();
+                await JS.InvokeVoidAsync("alert", "Item removed from menu!");
+                await LoadMenu(); // Refresh the menu
             }
             else
             {
                 var error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Error removing item from menu: {error}");
+                await JS.InvokeVoidAsync("alert", $"Failed to remove item: {error}");
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception removing item from menu: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
         }
     }
 
@@ -370,25 +538,12 @@
     {
         try
         {
-            // Get the current quantity for this item
             var quantity = quantities.ContainsKey(item.ItemId) ? quantities[item.ItemId] : 1;
 
-            // Create a simple cart item without complex mapping
-            var cartItem = new CartItemDto
-            {
-                ItemId = item.ItemId,
-                Name = item.Name,
-                Price = item.Price,
-                Quantity = quantity,
-                ImageUrl = item.ImageUrl
-            };
-
-            // If CartService expects ItemResponse, create a minimal one
             if (CartService != null)
             {
-                // Check what CartService.AddItem expects
-                // You might need to adjust this based on your CartService implementation
-                var simpleItem = new ItemResponse
+                // Use the DTO ItemResponse directly
+                var simpleItem = new golden_fork.Front.DTOs.Kitchen.ItemResponse // Specify namespace
                 {
                     Id = item.ItemId,
                     Name = item.Name,
@@ -400,33 +555,41 @@
                     IsSpecial = item.IsSpecial
                 };
 
-                // Call the CartService
                 CartService.AddItem(simpleItem, quantity);
-
-                // Show success message
                 await JS.InvokeVoidAsync("alert", $"{quantity}x {item.Name} added to cart!");
-
-                // Reset quantity to 1 after adding
                 quantities[item.ItemId] = 1;
-
-                // Force UI update
                 StateHasChanged();
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error adding to cart: {ex.Message}");
             await JS.InvokeVoidAsync("alert", $"Error adding to cart: {ex.Message}");
         }
     }
 
-    // Simple DTO for cart items
-    private class CartItemDto
+    // REMOVE the local ItemResponse class - keep only these DTOs:
+
+    public class MenuWithItemsResponse
     {
-        public int ItemId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public string? ImageUrl { get; set; }
+        public string? Description { get; set; }
+        public List<MenuItemResponse> Items { get; set; } = new();
+    }
+
+    public class MenuItemAddResponse
+    {
+        public string Message { get; set; } = string.Empty;
+        public bool Success { get; set; }
+        public int ItemId { get; set; }
+    }
+
+    public class PagedResult<T>
+    {
+        public List<T> Items { get; set; } = new();
+        public int TotalCount { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
     }
 }

@@ -675,11 +675,11 @@
         editItemOriginalName = item.Name;
         currentItemImageUrl = item.ImageUrl ?? "";
 
-        // Map ItemResponse to ItemUpdate
+        // Map ItemResponse to ItemUpdate - MAKE SURE Description IS SET!
         editItem = new ItemUpdate
         {
             Name = item.Name,
-            Description = item.Description,
+            Description = item.Description ?? "", // <-- IMPORTANT: Set to empty string if null
             Price = item.Price,
             CategoryId = item.Category?.Id,
             SpecialPrice = item.SpecialPrice,
@@ -691,7 +691,6 @@
         editModalMessage = "";
         showEditItemModal = true;
     }
-
     private void OpenEditItemModalFromDetails()
     {
         // Close details modal first
@@ -720,26 +719,46 @@
 
         try
         {
-            // Prepare update data - only send non-null properties
-            var updateData = new Dictionary<string, object>();
+            // Get the original item to preserve ALL required fields
+            var originalItem = pagedResult?.Items.FirstOrDefault(i => i.Id == editingItemId);
 
-            if (!string.IsNullOrEmpty(editItem.Name))
-                updateData["name"] = editItem.Name;
+            if (originalItem == null)
+            {
+                editModalSuccess = false;
+                editModalMessage = "Item not found in current list";
+                editModalLoading = false;
+                StateHasChanged();
+                return;
+            }
 
-            if (!string.IsNullOrEmpty(editItem.Description))
-                updateData["description"] = editItem.Description;
+            // Prepare update data - ALWAYS include required fields
+            var updateData = new Dictionary<string, object>
+            {
+                // Always include Name (use new or original)
+                ["name"] = !string.IsNullOrWhiteSpace(editItem.Name) ? editItem.Name : originalItem.Name,
 
-            if (editItem.Price.HasValue)
-                updateData["price"] = editItem.Price.Value;
+                // CRITICAL: Always include Description (use new or original)
+                ["description"] = !string.IsNullOrWhiteSpace(editItem.Description) ? editItem.Description : originalItem.Description ?? "",
 
-            if (editItem.CategoryId.HasValue)
-                updateData["categoryId"] = editItem.CategoryId.Value;
+                // Always include Price (use new or original)
+                ["price"] = editItem.Price ?? originalItem.Price,
 
+                // Always include CategoryId (use new or original)
+                ["categoryId"] = editItem.CategoryId ?? originalItem.Category?.Id ?? 0,
+
+                // These are the fields being changed
+                ["isAvailable"] = editItem.IsAvailable,
+                ["isSpecial"] = editItem.IsSpecial
+            };
+
+            // Only include SpecialPrice if it has a value
             if (editItem.SpecialPrice.HasValue)
                 updateData["specialPrice"] = editItem.SpecialPrice.Value;
 
-            updateData["isAvailable"] = editItem.IsAvailable;
-            updateData["isSpecial"] = editItem.IsSpecial;
+            // Debug: Log what we're sending
+            Console.WriteLine($"Sending update for item {editingItemId}");
+            Console.WriteLine($"Description: '{updateData["description"]}'");
+            Console.WriteLine($"Price: {updateData["price"]}");
 
             var response = await Http.PutAsJsonAsync($"api/item/{editingItemId}", updateData);
 
@@ -771,18 +790,19 @@
                 var error = await response.Content.ReadAsStringAsync();
                 editModalSuccess = false;
                 editModalMessage = "Failed to update: " + error;
+                Console.WriteLine($"Update failed: {error}");
             }
         }
         catch (Exception ex)
         {
             editModalSuccess = false;
             editModalMessage = "Error: " + ex.Message;
+            Console.WriteLine($"Exception: {ex.Message}");
         }
 
         editModalLoading = false;
         StateHasChanged();
     }
-
     private string GetCorrectImageUrl(string url)
     {
         if (string.IsNullOrEmpty(url))

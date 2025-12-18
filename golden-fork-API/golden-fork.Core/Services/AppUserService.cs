@@ -1,4 +1,6 @@
 ﻿// golden_fork.Core/Services/AppUserService.cs
+using BCrypt.Net; 
+using golden_fork.core;
 using golden_fork.core.DTOs;
 using golden_fork.core.Entities.AppUser;
 using golden_fork.Core.IServices;
@@ -8,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using BCrypt.Net; 
 using System.Security.Cryptography;
 using System.Text;
 
@@ -123,6 +124,79 @@ namespace golden_fork.Core.Services
             await _unitOfWork.UserRepository.SaveChangesAsync();
 
             return (true, "User registered successfully", user.Id);
+        }
+        public async Task<int> GetUserCountAsync()
+        {
+            return await _unitOfWork.UserRepository.GetQueryable().CountAsync();
+        }
+
+        public async Task<List<UserResponseDto>> GetAllUsersAsync()
+        {
+            var users = await _unitOfWork.UserRepository.GetQueryable()
+                .Include(u => u.Role)
+                .Select(u => new UserResponseDto
+                {
+                    Id = u.Id.ToString(),
+                    Name = u.Username,
+                    Email = u.Email,
+                    Role = u.Role.Name,
+                })
+                .ToListAsync();
+
+            return users;
+        }
+
+        public async Task<(bool success, string message)> UpdateUserRoleAsync(string userId, string newRole)
+        {
+            if (!int.TryParse(userId, out int id))
+            {
+                return (false, "Invalid user ID format");
+            }
+
+            var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(
+                u => u.Id == id,
+                include: q => q.Include(u => u.Role));
+
+            if (user == null)
+            {
+                return (false, "User not found");
+            }
+
+            var role = await _unitOfWork.UserRoleRepository.GetFirstOrDefaultAsync(r => r.Name == newRole);
+            if (role == null)
+            {
+                return (false, $"Role '{newRole}' does not exist");
+            }
+
+            if (user.RoleId == role.Id)
+            {
+                return (false, $"User already has the '{newRole}' role");
+            }
+
+            user.RoleId = role.Id;
+            await _unitOfWork.UserRepository.SaveChangesAsync();
+
+            return (true, $"User role updated to {newRole}");
+        }
+
+        public async Task<(bool success, string message)> DeleteUserAsync(string userId)
+        {
+            if (!int.TryParse(userId, out int id))
+            {
+                return (false, "Invalid user ID format");
+            }
+
+            var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == id);
+            if (user == null)
+            {
+                return (false, "User not found");
+            }
+
+
+            await _unitOfWork.UserRepository.DeleteAsync(user);
+            await _unitOfWork.UserRepository.SaveChangesAsync();
+
+            return (true, "User deleted successfully");
         }
     }
 }

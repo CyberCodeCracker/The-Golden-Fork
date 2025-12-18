@@ -1,0 +1,204 @@
+﻿@page "/admin/clients"
+@attribute [Authorize(Roles = "Admin")]
+@using System.Security.Claims
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<PageTitle>Manage Clients • Golden Fork</PageTitle>
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-orange-600 mb-8">Manage Clients</h1>
+
+    @if (isLoading)
+    {
+        <div class="flex justify-center py-20">
+            <span class="loading loading-spinner loading-lg"></span>
+        </div>
+    }
+    else if (clients == null || !clients.Any())
+    {
+        <div class="text-center py-20">
+            <p class="text-2xl text-gray-500">No clients found</p>
+        </div>
+    }
+    else
+    {
+        <div class="overflow-x-auto bg-base-100 rounded-lg shadow">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Current Role</th>
+                        <th>Change Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var client in clients)
+                    {
+                        <tr>
+                            <td>
+                                <div class="flex items-center space-x-3">
+                                    <div class="avatar">
+                                        <div class="mask mask-squircle w-12 h-12">
+                                            @if (!string.IsNullOrEmpty(client.ProfileImageUrl))
+                                            {
+                                                <img src="@client.ProfileImageUrl" alt="@client.Name" />
+                                            }
+                                            else
+                                            {
+                                                <div class="bg-gray-300 w-12 h-12 flex items-center justify-center">
+                                                    <span class="text-gray-600">@client.Name?.Substring(0, 1).ToUpper()</span>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold">@client.Name</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@client.Email</td>
+                            <td>
+                                <span class="badge @GetRoleBadgeClass(client.Role)">@client.Role</span>
+                            </td>
+                            <td>
+                                <select class="select select-bordered select-sm w-full max-w-xs"
+                                        @bind="client.NewRole">
+                                    <option value="">Select New Role</option>
+                                    <option value="Client">Client</option>
+                                    <option value="Chef">Chef</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(client.NewRole) && client.NewRole != client.Role)
+                                {
+                                    <button @onclick="() => UpdateUserRole(client.Id, client.NewRole)"
+                                            class="btn btn-sm btn-primary">
+                                        Update Role
+                                    </button>
+                                }
+                                <button @onclick="() => DeleteUser(client.Id)"
+                                        class="btn btn-sm btn-error ml-2">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    private List<ClientDto> clients = new();
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadClients();
+    }
+
+    private async Task LoadClients()
+    {
+        isLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            var response = await Http.GetFromJsonAsync<List<ClientDto>>("api/user/all");
+            if (response != null)
+            {
+                clients = response;
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("alert", $"Error loading clients: {ex.Message}");
+        }
+
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    private async Task UpdateUserRole(string userId, string newRole)
+    {
+        var confirm = await JS.InvokeAsync<bool>("confirm",
+            $"Change user role to {newRole}?");
+
+        if (!confirm) return;
+
+        try
+        {
+            var updateRequest = new { UserId = userId, NewRole = newRole };
+            var response = await Http.PutAsJsonAsync("api/user/update-role", updateRequest);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await JS.InvokeVoidAsync("alert", "Role updated successfully!");
+                await LoadClients(); // Refresh the list
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                await JS.InvokeVoidAsync("alert", $"Failed: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
+        }
+    }
+
+    private async Task DeleteUser(string userId)
+    {
+        var confirm = await JS.InvokeAsync<bool>("confirm",
+            "Delete this user permanently?");
+
+        if (!confirm) return;
+
+        try
+        {
+            var response = await Http.DeleteAsync($"api/user/{userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await JS.InvokeVoidAsync("alert", "User deleted successfully!");
+                await LoadClients(); // Refresh the list
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                await JS.InvokeVoidAsync("alert", $"Failed: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
+        }
+    }
+
+    private string GetRoleBadgeClass(string role)
+    {
+        return role switch
+        {
+            "Admin" => "badge-error",
+            "Chef" => "badge-warning",
+            "Client" => "badge-success",
+            _ => "badge-neutral"
+        };
+    }
+
+    public class ClientDto
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+        public string? ProfileImageUrl { get; set; }
+        public string? NewRole { get; set; }
+    }
+}

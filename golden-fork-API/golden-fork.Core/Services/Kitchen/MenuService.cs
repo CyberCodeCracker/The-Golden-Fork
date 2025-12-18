@@ -47,6 +47,7 @@ namespace golden_fork.Core.Services.Kitchen
             try
             {
                 await _unitOfWork.MenuRepository.DeleteByIdAsync(id);
+                await _unitOfWork.MenuRepository.SaveChangesAsync();    
                 return true;
             }
             catch (Exception ex)

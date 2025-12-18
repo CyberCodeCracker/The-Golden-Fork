@@ -233,13 +233,41 @@
 
     private async Task DeleteMenu(int id)
     {
-        var confirm = await JS.InvokeAsync<bool>("confirm", "Delete this menu?");
+        var confirm = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this menu? This action cannot be undone.");
         if (!confirm) return;
 
-        var response = await Http.DeleteAsync($"api/menu/{id}");
-        if (response.IsSuccessStatusCode)
+        try
         {
-            await LoadMenus();
+            // Your endpoint is: DELETE api/menu/Delete/{id}
+            var response = await Http.DeleteAsync($"api/menu/Delete/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Check if it's 204 No Content (your controller returns NoContent())
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    await JS.InvokeVoidAsync("alert", "Menu deleted successfully!");
+                    await LoadMenus();
+                }
+                else
+                {
+                    await JS.InvokeVoidAsync("alert", "Menu deleted successfully!");
+                    await LoadMenus();
+                }
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                await JS.InvokeVoidAsync("alert", "Menu not found. It may have already been deleted.");
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                await JS.InvokeVoidAsync("alert", $"Failed to delete menu: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
         }
     }
 

@@ -3,6 +3,7 @@ using golden_fork.core.DTOs;
 using golden_fork.Core.IServices;
 using golden_fork.Infrastructure.IRepositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -48,6 +49,62 @@ namespace golden_fork.API.Controllers
                 success = false,
                 message = result.message
             });
+        }
+
+        [HttpGet("all")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _appUserService.GetAllUsersAsync();
+            return Ok(users);
+        }
+
+        [HttpGet("count")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetUserCount()
+        {
+            // Use the service method if it exists
+            var count = await _appUserService.GetUserCountAsync();
+            return Ok(count);
+
+        }
+
+        [HttpPut("update-role")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateUserRole([FromBody] UpdateRoleRequest dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _appUserService.UpdateUserRoleAsync(dto.UserId, dto.NewRole);
+
+            if (result.success)
+            {
+                return Ok(new { success = true, message = result.message });
+            }
+
+            return BadRequest(new { success = false, message = result.message });
+        }
+
+        [HttpDelete("{userId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var result = await _appUserService.DeleteUserAsync(userId);
+
+            if (result.success)
+            {
+                return Ok(new { success = true, message = result.message });
+            }
+
+            return BadRequest(new { success = false, message = result.message });
+        }
+
+        // Add these DTOs to your controller or create a separate file
+        public class UpdateRoleRequest
+        {
+            public string UserId { get; set; } = string.Empty;
+            public string NewRole { get; set; } = string.Empty;
         }
 
         // In your AuthController or UserController
@@ -143,7 +200,7 @@ namespace golden_fork.API.Controllers
             return Ok(new { message = "Logged out successfully" });
         }
 
-        [Authorize] 
+        [Authorize]
         [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
         {

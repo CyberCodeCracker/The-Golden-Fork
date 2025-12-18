@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using golden_fork.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using golden_fork.Infrastructure.Data;
 namespace golden_fork.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251218142158_DescriptionNullable")]
+    partial class DescriptionNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,7 +155,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9620),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(1060),
                             Email = "admin@goldenfork.com",
                             Password = "$2a$11$j3K8vP9mN5xL2rT6yU0iOcVfGaNd2z3fZ8k9pL5mN2xR7vQ1w/.kJtH",
                             PhoneNumber = "555-0001",
@@ -256,13 +259,13 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9467),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(928),
                             Name = "Lunch Menu"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9471),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(933),
                             Name = "Dinner Menu"
                         });
                 });
@@ -331,28 +334,28 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9390),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(814),
                             ImageUrl = "/images/default-image.jpg",
                             Name = "Appetizers"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9393),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(816),
                             ImageUrl = "/images/default-image.jpg",
                             Name = "Main Courses"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9394),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(816),
                             ImageUrl = "/images/default-image.jpg",
                             Name = "Desserts"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9394),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(817),
                             ImageUrl = "/images/default-image.jpg",
                             Name = "Beverages"
                         });
@@ -373,6 +376,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -410,7 +414,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9551),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(1001),
                             Description = "Tomato & basil",
                             ImageUrl = "/img/bruschetta.jpg",
                             IsAvailable = false,
@@ -421,7 +425,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9555),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(1005),
                             Description = "With lemon butter",
                             ImageUrl = "/img/salmon.jpg",
                             IsAvailable = false,
@@ -432,7 +436,7 @@ namespace golden_fork.Infrastructure.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 12, 18, 14, 25, 53, 485, DateTimeKind.Utc).AddTicks(9556),
+                            CreatedAt = new DateTime(2025, 12, 18, 14, 21, 58, 549, DateTimeKind.Utc).AddTicks(1006),
                             Description = "Classic Italian",
                             ImageUrl = "/img/tiramisu.jpg",
                             IsAvailable = false,
