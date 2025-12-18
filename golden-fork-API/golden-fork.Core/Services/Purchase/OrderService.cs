@@ -26,6 +26,8 @@ namespace golden_fork.Core.Services.Purchase
             _mapper = mapper;
         }
 
+        // EXISTING METHODS (keep all existing code as is)...
+
         public async Task<PagedResult<OrderResponse>> GetAllAsync(
             int pageNumber = 1,
             int pageSize = 10,
@@ -34,6 +36,7 @@ namespace golden_fork.Core.Services.Purchase
             string? sortBy = "orderdate",
             bool ascending = false)
         {
+            // KEEP EXISTING IMPLEMENTATION AS IS
             var query = _unitOfWork.OrderRepository.GetQueryable();
 
             // Search
@@ -91,6 +94,7 @@ namespace golden_fork.Core.Services.Purchase
 
         public async Task<OrderResponse?> GetByIdAsync(int id)
         {
+            // KEEP EXISTING IMPLEMENTATION AS IS
             var order = await _unitOfWork.OrderRepository.GetQueryable()
                 .Include(o => o.User)
                 .Include(o => o.OrderItems)
@@ -115,6 +119,7 @@ namespace golden_fork.Core.Services.Purchase
 
         public async Task<(bool success, string message, int? orderId)> CreateFromCartAsync(int userId, CreateOrderFromCartRequest request)
         {
+            // KEEP EXISTING IMPLEMENTATION AS IS
             // Validate request
             if (request == null || !request.Items.Any())
                 return (false, "Cart is empty", null);
@@ -162,8 +167,10 @@ namespace golden_fork.Core.Services.Purchase
 
             return (true, "Order created successfully", order.Id);
         }
+
         public async Task<(bool success, string message)> UpdateStatusAsync(int orderId, OrderUpdateRequest request)
         {
+            // KEEP EXISTING IMPLEMENTATION AS IS
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if (order == null) return (false, "Order not found");
 
@@ -189,6 +196,7 @@ namespace golden_fork.Core.Services.Purchase
 
         public async Task<(bool success, string message)> CancelOrderAsync(int orderId)
         {
+            // KEEP EXISTING IMPLEMENTATION AS IS
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if (order == null) return (false, "Order not found");
 
@@ -210,6 +218,136 @@ namespace golden_fork.Core.Services.Purchase
         public bool CanCancelOrder(OrderStatus status)
         {
             return status == OrderStatus.Pending || status == OrderStatus.Confirmed;
+        }
+
+        // NEW METHODS FOR ADMIN PANEL
+
+        public async Task<int> GetPendingOrderCountAsync()
+        {
+            return await _unitOfWork.OrderRepository.GetQueryable()
+                .Where(o => o.Status == OrderStatus.Pending)
+                .CountAsync();
+        }
+
+        public async Task<PagedResult<AdminOrderResponse>> GetAllForAdminAsync(
+            int page = 1,
+            int pageSize = 10,
+            string? status = null,
+            DateTime? startDate = null,
+            DateTime? endDate = null)
+        {
+            Console.WriteLine($"=== GetAllForAdminAsync called ===");
+            Console.WriteLine($"Page: {page}, PageSize: {pageSize}");
+            Console.WriteLine($"Status filter: {status}");
+            Console.WriteLine($"StartDate: {startDate}, EndDate: {endDate}");
+
+            var query = _unitOfWork.OrderRepository.GetQueryable()
+                .Include(o => o.User)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Item)
+                .AsQueryable();
+
+            // Log initial count
+            var initialCount = await query.CountAsync();
+            Console.WriteLine($"Initial query count: {initialCount}");
+
+            // Apply status filter
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(o => o.Status.ToString().ToLower() == status.ToLower());
+                var afterStatusCount = await query.CountAsync();
+                Console.WriteLine($"After status filter ('{status}'): {afterStatusCount}");
+            }
+
+            // Apply date filters
+            if (startDate.HasValue)
+            {
+                query = query.Where(o => o.OrderDate >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(o => o.OrderDate <= endDate.Value.AddDays(1).AddTicks(-1));
+            }
+
+            // Get total count
+            var totalItems = await query.CountAsync();
+            Console.WriteLine($"Total items after all filters: {totalItems}");
+
+            // Apply pagination
+            var orders = await query
+                .OrderByDescending(o => o.OrderDate)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(o => new
+                {
+                    o.Id,
+                    CustomerName = o.User.Username,
+                    CustomerEmail = o.User.Email,
+                    o.OrderDate,
+                    o.TotalPrice,
+                    Status = o.Status.ToString(),
+                    ItemCount = o.OrderItems.Count
+                })
+                .ToListAsync();
+
+            Console.WriteLine($"Orders retrieved: {orders.Count}");
+            foreach (var order in orders)
+            {
+                Console.WriteLine($"- Order #{order.Id}: {order.CustomerName}, {order.Status}, ${order.TotalPrice}, {order.ItemCount} items");
+            }
+
+            // Map to response
+            var responseOrders = await query
+                .OrderByDescending(o => o.OrderDate)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(o => new AdminOrderResponse
+                {
+                    Id = o.Id,
+                    CustomerName = o.User.Username,
+                    CustomerEmail = o.User.Email,
+                    OrderDate = o.OrderDate,
+                    TotalAmount = o.TotalPrice,
+                    Status = o.Status.ToString(),
+                    OrderItems = o.OrderItems.Select(oi => new AdminOrderItemResponse
+                    {
+                        ItemName = oi.Item.Name,
+                        Quantity = oi.Quantity,
+                        UnitPrice = oi.UnitPrice
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            return new PagedResult<AdminOrderResponse>
+            {
+                Items = responseOrders,
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = totalItems
+            };
+        }
+
+        public async Task<(bool success, string message)> UpdateOrderStatusAdminAsync(int orderId, string newStatus)
+        {
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
+            if (order == null)
+            {
+                return (false, "Order not found");
+            }
+
+            // Validate and parse the new status
+            if (Enum.TryParse<OrderStatus>(newStatus, true, out var statusEnum))
+            {
+                order.Status = statusEnum;
+                order.UpdatedAt = DateTime.UtcNow;
+                await _unitOfWork.OrderRepository.SaveChangesAsync();
+                return (true, $"Order status updated to {newStatus}");
+            }
+            else
+            {
+                return (false, $"Invalid status: {newStatus}. Valid statuses are: Pending, Confirmed, Processing, Completed, Cancelled");
+            }
         }
     }
 }

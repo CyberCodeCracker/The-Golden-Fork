@@ -1,7 +1,10 @@
-﻿@page "/admin/payments"
+﻿@page "/admin/order-history"
 @attribute [Authorize(Roles = "Admin")]
 @inject HttpClient Http
 @inject IJSRuntime JS
+@using golden_fork.Front.DTOs.Order
+@using golden_fork.Front.DTOs.Purchase
+@using golden_fork.core.Enums
 
 <PageTitle>Order History • Golden Fork</PageTitle>
 
@@ -10,7 +13,7 @@
     
     <!-- Filters -->
     <div class="flex flex-wrap gap-4 mb-6">
-        <select class="select select-bordered" @bind="selectedStatus">
+        <select class="select select-bordered" @bind="selectedStatusFilter">
             <option value="">All Statuses</option>
             <option value="Pending">Pending</option>
             <option value="Processing">Processing</option>
@@ -48,20 +51,24 @@
                             <div>
                                 <h2 class="card-title">Order #@order.Id</h2>
                                 <p class="text-gray-600">
-                                    Customer: <strong>@order.CustomerName</strong> (@order.CustomerEmail)
+                                    Customer: <strong>@order.UserName</strong>
                                 </p>
                                 <p class="text-gray-600">
                                     Date: @order.OrderDate.ToString("f")
+                                </p>
+                                <p class="text-gray-600">
+                                    Items: @order.ItemCount
                                 </p>
                             </div>
                             
                             <div class="text-right">
                                 <div class="text-2xl font-bold text-primary">
-                                    @order.TotalAmount.ToString("C")
+                                    @order.TotalPrice.ToString("C")
                                 </div>
                                 <div class="mt-2">
                                     <select class="select select-bordered select-sm" 
-                                            @bind="order.NewStatus">
+                                            value="@selectedUpdateStatus"
+                                            @onchange="@((ChangeEventArgs e) => OnStatusChange(order.Id, e.Value?.ToString()))">
                                         <option value="">Change Status</option>
                                         <option value="Pending">Pending</option>
                                         <option value="Processing">Processing</option>
@@ -86,13 +93,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in order.OrderItems)
+                                        @foreach (var item in order.Items)
                                         {
                                             <tr>
                                                 <td>@item.ItemName</td>
                                                 <td>@item.Quantity</td>
                                                 <td>@item.UnitPrice.ToString("C")</td>
-                                                <td>@((item.Quantity * item.UnitPrice).ToString("C"))</td>
+                                                <td>@item.LineTotal.ToString("C")</td>
                                             </tr>
                                         }
                                     </tbody>
@@ -104,15 +111,17 @@
                         <div class="flex justify-between items-center mt-4 pt-4 border-t">
                             <div>
                                 <span class="font-semibold">Current Status:</span>
-                                <span class="badge @GetStatusBadgeClass(order.Status) ml-2">
+                                <span class="badge @GetStatusBadgeClass(order.Status.ToString()) ml-2">
                                     @order.Status
                                 </span>
                             </div>
                             
                             <div class="flex gap-2">
-                                @if (!string.IsNullOrEmpty(order.NewStatus) && order.NewStatus != order.Status)
+                                @if (order.Id == selectedOrderId && 
+                                     !string.IsNullOrEmpty(selectedUpdateStatus) && 
+                                     selectedUpdateStatus != order.Status.ToString())
                                 {
-                                    <button @onclick="() => UpdateOrderStatus(order.Id, order.NewStatus)" 
+                                    <button @onclick="() => UpdateOrderStatus(order.Id, selectedUpdateStatus)" 
                                             class="btn btn-primary btn-sm">
                                         Update Status
                                     </button>
@@ -157,14 +166,18 @@
 </div>
 
 @code {
-    private List<OrderDto> orders = new();
+    private List<OrderResponse> orders = new();
     private bool isLoading = true;
     private int currentPage = 1;
     private int pageSize = 10;
     private int totalPages = 1;
-    private string selectedStatus = "";
+    private string selectedStatusFilter = "";
     private DateTime? startDate = DateTime.Today.AddDays(-30);
     private DateTime? endDate = DateTime.Today;
+    
+    // For status updates
+    private int? selectedOrderId = null;
+    private string selectedUpdateStatus = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -180,8 +193,8 @@
         {
             var url = $"api/order/admin?page={currentPage}&pageSize={pageSize}";
             
-            if (!string.IsNullOrEmpty(selectedStatus))
-                url += $"&status={selectedStatus}";
+            if (!string.IsNullOrEmpty(selectedStatusFilter))
+                url += $"&status={selectedStatusFilter}";
             
             if (startDate.HasValue)
                 url += $"&startDate={startDate.Value:yyyy-MM-dd}";
@@ -189,44 +202,74 @@
             if (endDate.HasValue)
                 url += $"&endDate={endDate.Value:yyyy-MM-dd}";
 
-            var response = await Http.GetFromJsonAsync<OrderListResponse>(url);
+            var response = await Http.GetAsync(url);
             
-            if (response != null)
+            if (response.IsSuccessStatusCode)
             {
-                orders = response.Orders;
-                totalPages = response.TotalPages;
+                var content = await response.Content.ReadAsStringAsync();
+                
+                var result = System.Text.Json.JsonSerializer.Deserialize<PagedResponse<OrderResponse>>(
+                    content, 
+                    new System.Text.Json.JsonSerializerOptions 
+                    { 
+                        PropertyNameCaseInsensitive = true 
+                    });
+                
+                if (result != null)
+                {
+                    orders = result.Items ?? new List<OrderResponse>();
+                    totalPages = result.TotalPages;
+                }
             }
         }
         catch (Exception ex)
         {
-            await JS.InvokeVoidAsync("alert", $"Error loading orders: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
         }
 
         isLoading = false;
         StateHasChanged();
     }
 
-    private async Task UpdateOrderStatus(int orderId, string newStatus)
+    private void OnStatusSelected(int orderId)
+    {
+        selectedOrderId = orderId;
+        StateHasChanged();
+    }
+
+    private async Task UpdateOrderStatus(int orderId, string newStatusString)
     {
         var confirm = await JS.InvokeAsync<bool>("confirm", 
-            $"Change order status to {newStatus}?");
+            $"Change order status to {newStatusString}?");
         
         if (!confirm) return;
 
         try
         {
-            var updateRequest = new { OrderId = orderId, NewStatus = newStatus };
-            var response = await Http.PutAsJsonAsync("api/order/update-status", updateRequest);
-            
-            if (response.IsSuccessStatusCode)
+            // Parse the string to OrderStatus enum
+            if (Enum.TryParse<OrderStatus>(newStatusString, out var newStatus))
             {
-                await JS.InvokeVoidAsync("alert", "Order status updated!");
-                await LoadOrders(); // Refresh the list
+                var updateRequest = new OrderUpdateRequest { Status = newStatus };
+                var response = await Http.PutAsJsonAsync($"api/order/{orderId}/status", updateRequest);
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    await JS.InvokeVoidAsync("alert", "Order status updated!");
+                    await LoadOrders(); // Refresh the list
+                    
+                    // Reset selection
+                    selectedOrderId = null;
+                    selectedUpdateStatus = "";
+                }
+                else
+                {
+                    var error = await response.Content.ReadAsStringAsync();
+                    await JS.InvokeVoidAsync("alert", $"Failed: {error}");
+                }
             }
             else
             {
-                var error = await response.Content.ReadAsStringAsync();
-                await JS.InvokeVoidAsync("alert", $"Failed: {error}");
+                await JS.InvokeVoidAsync("alert", $"Invalid status: {newStatusString}");
             }
         }
         catch (Exception ex)
@@ -235,10 +278,15 @@
         }
     }
 
+    private void OnStatusChange(int orderId, string newStatus)
+    {
+        selectedOrderId = orderId;
+        selectedUpdateStatus = newStatus;
+        StateHasChanged();
+    }
+
     private void ViewOrderDetails(int orderId)
     {
-        // Navigate to order details page or show modal
-        // For now, just show an alert
         JS.InvokeVoidAsync("alert", $"Viewing order #{orderId} details");
     }
 
@@ -251,7 +299,7 @@
 
     private void ClearFilters()
     {
-        selectedStatus = "";
+        selectedStatusFilter = "";
         startDate = DateTime.Today.AddDays(-30);
         endDate = DateTime.Today;
         currentPage = 1;
@@ -260,38 +308,25 @@
 
     private string GetStatusBadgeClass(string status)
     {
-        return status switch
+        return status.ToLower() switch
         {
-            "Completed" => "badge-success",
-            "Processing" => "badge-warning",
-            "Pending" => "badge-info",
-            "Cancelled" => "badge-error",
+            "completed" => "badge-success",
+            "processing" => "badge-warning",
+            "pending" => "badge-info",
+            "cancelled" => "badge-error",
             _ => "badge-neutral"
         };
     }
 
-    public class OrderDto
+    // API Response wrapper
+    public class PagedResponse<T>
     {
-        public int Id { get; set; }
-        public string CustomerName { get; set; } = string.Empty;
-        public string CustomerEmail { get; set; } = string.Empty;
-        public DateTime OrderDate { get; set; }
-        public decimal TotalAmount { get; set; }
-        public string Status { get; set; } = string.Empty;
-        public List<OrderItemDto> OrderItems { get; set; } = new();
-        public string? NewStatus { get; set; }
-    }
-
-    public class OrderItemDto
-    {
-        public string ItemName { get; set; } = string.Empty;
-        public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
-    }
-
-    public class OrderListResponse
-    {
-        public List<OrderDto> Orders { get; set; } = new();
+        public List<T> Items { get; set; } = new();
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int TotalItems { get; set; }
         public int TotalPages { get; set; }
+        public bool HasPreviousPage { get; set; }
+        public bool HasNextPage { get; set; }
     }
 }

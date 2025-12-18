@@ -20,7 +20,6 @@ namespace golden_fork.Core.Services.Kitchen
         private readonly IMapper _mapper;
         private readonly IHostEnvironment _env;
         private readonly string _webRootPath;
-        private readonly string _apiBaseUrl; // Added field for API 
 
         public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, IHostEnvironment env)
         {
@@ -28,7 +27,6 @@ namespace golden_fork.Core.Services.Kitchen
             _mapper = mapper;
             _env = env;
             _webRootPath = Path.Combine(_env.ContentRootPath, "wwwroot"); // ← Use ContentRootPath
-            _apiBaseUrl = "http://localhost:5128"; // Your API port
         }
 
         public async Task<PagedResult<CategoryResponse>> GetAllAsync(
