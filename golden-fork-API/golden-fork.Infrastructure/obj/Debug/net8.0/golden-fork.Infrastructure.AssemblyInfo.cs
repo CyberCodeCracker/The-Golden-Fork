@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("golden-fork.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+33f3d1b5b31cce9bddad66c81f729766444dd032")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ccd5d5d70e1b56981c0ffc1ae61e28db5a5949fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("golden-fork.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("golden-fork.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

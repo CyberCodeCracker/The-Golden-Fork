@@ -1,4 +1,5 @@
-﻿using System;
+﻿using golden_fork.core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace golden_fork.Front.DTOs.Order
 {
     public class OrderUpdateRequest
     {
-        public string? Status { get; set; } // "En cours", "Préparée", "Livrée", "Annulée"
+        public OrderStatus Status { get; set; } 
     }
 }

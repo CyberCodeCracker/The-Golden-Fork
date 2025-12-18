@@ -1,4 +1,5 @@
-﻿using golden_fork.core.DTOs.Order;
+﻿using golden_fork.core.DTOs.Cart;
+using golden_fork.core.DTOs.Order;
 using golden_fork.core.DTOs.Purchase;
 using golden_fork.core.Entities.AppUser;
 using golden_fork.Core;
@@ -43,9 +44,10 @@ public class OrderController : ControllerBase
 
     [HttpPost("create-from-cart")]
     [Authorize]
-    public async Task<ActionResult> CreateFromCart()
+    public async Task<ActionResult> CreateFromCart([FromBody] CreateOrderFromCartRequest request)
     {
-        var (success, message, orderId) = await _orderService.CreateFromCartAsync(UserId);
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        var (success, message, orderId) = await _orderService.CreateFromCartAsync(userId, request);
         return success ? Ok(new { message, orderId }) : BadRequest(new { message });
     }
 

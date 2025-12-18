@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using golden_fork.Front.Services;
 using golden_fork.Front;
 using GoldenFork.Frontend;
 using GoldenFork.Frontend.Services;
@@ -19,6 +20,7 @@ var apiSettings = builder.Configuration.GetSection("ApiSettings").Get<ApiSetting
 // HttpClient
 // Register HttpClient with the auth handler
 builder.Services.AddScoped<JwtAuthHandler>();
+builder.Services.AddScoped<CartService>();
 builder.Services.AddHttpClient("API", client =>
 {
     client.BaseAddress = new Uri(apiSettings.BaseUrl);

@@ -1,0 +1,360 @@
+﻿@page "/orders/checkout"
+@using golden_fork.Front.Services
+@using System.Net.Http.Json
+@inject CartService CartService
+@inject NavigationManager Navigation
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold">Checkout</h1>
+            <p class="text-gray-600">Review your order and confirm payment</p>
+        </div>
+
+        @if (isLoading)
+        {
+            <div class="text-center py-12">
+                <span class="loading loading-spinner loading-lg"></span>
+                <p class="mt-4">Loading your cart...</p>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>@errorMessage</span>
+                <div class="mt-4">
+                    <a href="/items" class="btn btn-primary">Continue Shopping</a>
+                </div>
+            </div>
+        }
+        else if (!CartService.Items.Any())
+        {
+            <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.998-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+                <span>Your cart is empty. <a href="/items" class="link link-primary">Continue shopping</a></span>
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Order Items -->
+                <div class="lg:col-span-2">
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h2 class="card-title">Order Items</h2>
+
+                            <div class="overflow-x-auto">
+                                <table class="table table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cartItem in CartService.Items)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="flex items-center space-x-3">
+                                                        @if (!string.IsNullOrEmpty(cartItem.Item.ImageUrl))
+                                                        {
+                                                            <div class="avatar">
+                                                                <div class="mask mask-squircle w-12 h-12">
+                                                                    <img src="@cartItem.Item.ImageUrl" alt="@cartItem.Item.Name" />
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        <div>
+                                                            <div class="font-bold">@cartItem.Item.Name</div>
+                                                            <div class="text-sm opacity-70">@cartItem.GetPrice().ToString("C") each</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">@cartItem.Quantity</td>
+                                                <td>@cartItem.GetPrice().ToString("C")</td>
+                                                <td class="font-bold">@((cartItem.GetPrice() * cartItem.Quantity).ToString("C"))</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Notes -->
+                    <div class="card bg-base-100 shadow-lg mt-6">
+                        <div class="card-body">
+                            <h2 class="card-title">Order Notes</h2>
+                            <textarea @bind="orderNotes" class="textarea textarea-bordered w-full"
+                                      placeholder="Any special instructions for your order..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary & Payment -->
+                <div>
+                    <div class="card bg-base-100 shadow-lg sticky top-24">
+                        <div class="card-body">
+                            <h2 class="card-title">Order Summary</h2>
+
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span>Subtotal</span>
+                                    <span>@CartService.GetTotalPrice().ToString("C")</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Delivery</span>
+                                    <span class="text-success">Free</span>
+                                </div>
+                                <div class="flex justify-between text-lg font-bold">
+                                    <span>Total</span>
+                                    <span>@CartService.GetTotalPrice().ToString("C")</span>
+                                </div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <!-- Payment Method Selection - FIXED -->
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-start gap-4">
+                                    <input type="radio" name="paymentMethod" class="radio radio-primary"
+                                           value="cash"
+                                           checked="@(paymentMethod == "cash")"
+                                           @onchange="@(() => paymentMethod = "cash")" />
+                                    <span class="label-text">Cash on Delivery</span>
+                                </label>
+                                <label class="label cursor-pointer justify-start gap-4">
+                                    <input type="radio" name="paymentMethod" class="radio radio-primary"
+                                           value="card"
+                                           checked="@(paymentMethod == "card")"
+                                           @onchange="@(() => paymentMethod = "card")" />
+                                    <span class="label-text">Credit Card</span>
+                                </label>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(successMessage))
+                            {
+                                <div class="alert alert-success mt-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>@successMessage</span>
+                                </div>
+                            }
+
+                            @if (isProcessing)
+                            {
+                                <div class="alert alert-info mt-4">
+                                    <span class="loading loading-spinner loading-sm"></span>
+                                    <span>Processing your order...</span>
+                                </div>
+                            }
+
+                            <div class="card-actions mt-6">
+                                <button @onclick="PlaceOrder" class="btn btn-success w-full"
+                                        disabled="@(isProcessing || !CartService.Items.Any())">
+                                    @if (isProcessing)
+                                    {
+                                        <span class="loading loading-spinner loading-sm"></span>
+                                    }
+                                    Place Order & Pay
+                                </button>
+                                <button @onclick="CancelOrder" class="btn btn-outline btn-error w-full">
+                                    Cancel Order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private bool isLoading = true;
+    private bool isProcessing = false;
+    private string paymentMethod = "cash";
+    private string orderNotes = string.Empty;
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Subscribe to cart changes
+        CartService.OnChange += StateHasChanged;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Check if cart has items
+            if (!CartService.Items.Any())
+            {
+                // Check if user came from cart (has pendingCart flag)
+                var pendingCartValue = await JS.InvokeAsync<string>("localStorage.getItem", "pendingCart");
+                var hasPendingCart = !string.IsNullOrEmpty(pendingCartValue) &&
+                                     pendingCartValue.ToLower() != "null" &&
+                                     pendingCartValue.ToLower() != "false";
+
+                if (!hasPendingCart)
+                {
+                    errorMessage = "Please add items to your cart first";
+                    isLoading = false;
+                    return;
+                }
+
+                // Wait a bit in case cart is still loading
+                await Task.Delay(1000);
+
+                // Check again
+                if (!CartService.Items.Any())
+                {
+                    errorMessage = "Your cart is empty. Please add items before checkout.";
+                    isLoading = false;
+                    return;
+                }
+            }
+
+            // Clear the pendingCart flag since we're now on checkout page
+            await JS.InvokeVoidAsync("localStorage.removeItem", "pendingCart");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading cart: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task PlaceOrder()
+    {
+        if (!CartService.Items.Any())
+        {
+            errorMessage = "Cannot place order with empty cart";
+            return;
+        }
+
+        isProcessing = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+
+        try
+        {
+            // Prepare cart data to send to backend
+            var cartData = new
+            {
+                Items = CartService.Items.Select(ci => new
+                {
+                    ItemId = ci.Item.Id,
+                    Quantity = ci.Quantity,
+                    Price = ci.GetPrice()
+                }).ToList(),
+                TotalAmount = CartService.GetTotalPrice(),
+                Notes = orderNotes,
+                PaymentMethod = paymentMethod
+            };
+
+            // 1. Create the order with cart data - using PostAsJsonAsync which sets correct headers
+            var orderResponse = await Http.PostAsJsonAsync("api/order/create-from-cart", cartData);
+
+            if (!orderResponse.IsSuccessStatusCode)
+            {
+                // Check if it's 415 error specifically
+                if (orderResponse.StatusCode == System.Net.HttpStatusCode.UnsupportedMediaType)
+                {
+                    errorMessage = "Server error: Unable to process JSON request. Please contact support.";
+                }
+                else
+                {
+                    var errorContent = await orderResponse.Content.ReadAsStringAsync();
+                    errorMessage = $"Failed to create order: {errorContent}";
+                }
+                isProcessing = false;
+                StateHasChanged();
+                return;
+            }
+
+            var orderResult = await orderResponse.Content.ReadFromJsonAsync<OrderResult>();
+
+            if (orderResult == null)
+            {
+                errorMessage = "Failed to create order: Invalid response";
+                isProcessing = false;
+                StateHasChanged();
+                return;
+            }
+
+            // 2. Create payment based on selected method
+            HttpResponseMessage paymentResponse;
+
+            if (paymentMethod == "cash")
+            {
+                paymentResponse = await Http.PostAsync($"api/payment/cash/{orderResult.OrderId}", null);
+            }
+            else
+            {
+                // For card payment, you might need a different endpoint
+                // For now, create cash payment as fallback
+                paymentResponse = await Http.PostAsync($"api/payment/cash/{orderResult.OrderId}", null);
+            }
+
+            if (!paymentResponse.IsSuccessStatusCode)
+            {
+                var errorContent = await paymentResponse.Content.ReadAsStringAsync();
+                errorMessage = $"Order created (#{orderResult.OrderId}) but payment failed: {errorContent}";
+                isProcessing = false;
+                StateHasChanged();
+                return;
+            }
+
+            // 3. Clear cart
+            CartService.Clear();
+
+            successMessage = $"Order #{orderResult.OrderId} placed successfully! Redirecting to orders...";
+            StateHasChanged();
+
+            // Navigate to orders page after 3 seconds
+            await Task.Delay(3000);
+            Navigation.NavigateTo("/menu");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error placing order: {ex.Message}";
+            isProcessing = false;
+            StateHasChanged();
+        }
+    }
+    private void CancelOrder()
+    {
+        // Clear pendingCart flag
+        JS.InvokeVoidAsync("localStorage.removeItem", "pendingCart");
+
+        // Navigate back to items
+        Navigation.NavigateTo("/items");
+    }
+
+    private class OrderResult
+    {
+        public string Message { get; set; } = string.Empty;
+        public int OrderId { get; set; }
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= StateHasChanged;
+    }
+}

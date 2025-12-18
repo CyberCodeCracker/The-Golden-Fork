@@ -2,6 +2,7 @@
 using AutoMapper;
 using golden_fork.core.DTOs.Purchase;
 using golden_fork.core.Entities.Purchase;
+using golden_fork.core.Enums;
 using golden_fork.Core.IServices.Purchase;
 using golden_fork.Infrastructure.IRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +48,7 @@ namespace golden_fork.Core.Services.Purchase
                 return (false, "You are not authorized to pay for this order", null);
 
             // 3. Order status check
-            if (order.Status != "En cours")
+            if (order.Status != OrderStatus.Pending)
                 return (false, "Order cannot be paid in its current state", null);
 
             // 4. Prevent double payment
@@ -96,7 +97,7 @@ namespace golden_fork.Core.Services.Purchase
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if (order != null)
             {
-                order.Status = "Payée";
+                order.Status = OrderStatus.Paid;
                 await _unitOfWork.OrderRepository.UpdateAsync(order);
                 await _unitOfWork.OrderRepository.SaveChangesAsync();
             }
@@ -133,7 +134,7 @@ namespace golden_fork.Core.Services.Purchase
                 var order = await _unitOfWork.OrderRepository.GetByIdAsync(dto.OrderId);
                 if (order != null)
                 {
-                    order.Status = "Payée";
+                    order.Status = OrderStatus.Paid;
                     await _unitOfWork.OrderRepository.UpdateAsync(order);
                     await _unitOfWork.OrderRepository.SaveChangesAsync();
                 }

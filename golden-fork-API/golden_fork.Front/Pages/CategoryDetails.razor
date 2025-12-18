@@ -3,10 +3,13 @@
 @using System.Security.Claims
 @using golden_fork.Front.DTOs.Kitchen
 @using System.Text.Json
+@using golden_fork.Front.Shared
+@using golden_fork.Front.Services
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 @inject AuthenticationStateProvider AuthStateProvider
+@inject CartService CartService
 
 <PageTitle>Category Details • Golden Fork</PageTitle>
 
@@ -57,60 +60,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 @foreach (var item in category.Items)
                 {
-                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all w-full relative">
-                        @if (!string.IsNullOrEmpty(item.ImageUrl))
-                        {
-                            <figure class="h-64 overflow-hidden">
-                                <img src="@item.ImageUrl" alt="@item.Name" class="w-full h-full object-cover" />
-                            </figure>
-                        }
-                        <div class="card-body">
-                            <h2 class="card-title text-2xl">@item.Name</h2>
-
-                            @if (!string.IsNullOrEmpty(item.Description))
-                            {
-                                <p class="text-gray-700 mt-2">@item.Description</p>
-                            }
-
-                            <div class="mt-6 flex flex-col gap-4">
-                                <div class="flex justify-between items-end">
-                                    <div>
-                                        <p class="text-3xl font-bold text-primary">@item.Price.ToString("C")</p>
-                                        @if (item.SpecialPrice.HasValue)
-                                        {
-                                            <p class="text-lg text-gray-500 line-through">@item.SpecialPrice.Value.ToString("C")</p>
-                                        }
-                                    </div>
-                                </div>
-
-                                <div class="flex gap-3">
-                                    <button @onclick="() => OpenItemDetails(item)" class="btn btn-info flex-1">
-                                        View Details
-                                    </button>
-
-                                    @if (item.IsAvailable)
-                                    {
-                                        <button class="btn btn-primary flex-1">Add to Cart</button>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-error badge-lg">Unavailable</span>
-                                    }
-                                </div>
-                            </div>
-
-                            @if (IsAdminOrChef)
-                            {
-                                <div class="absolute top-2 right-2">
-                                    <button @onclick="() => RemoveItemFromCategory(item.Id)" class="btn btn-ghost btn-circle text-red-600">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            }
-                        </div>
-                    </div>
+                <CardItem 
+                    Item="item"
+                    ShowAdminControls="IsAdminOrChef"
+                    ShowNoDescriptionMessage="false"
+                    CurrentQuantity="@(quantities.ContainsKey(item.Id) ? quantities[item.Id] : 1)"
+                    OnViewDetailsCallback="() => OpenItemDetails(item)"
+                    OnAddToCartCallback="() => AddToCart(item)"
+                    OnRemoveItemCallback="() => RemoveItemFromCategory(item.Id)"
+                    OnQuantityChangedCallback="(qty) => quantities[item.Id] = qty" />        
                 }
             </div>
         }
@@ -125,7 +83,7 @@
             <h3 class="font-bold text-2xl mb-4">@selectedItem.Name</h3>
             @if (!string.IsNullOrEmpty(selectedItem.ImageUrl))
             {
-                <img src="@selectedItem.ImageUrl" alt="@selectedItem.Name" class="w-full h-64 object-cover rounded-lg mb-6" />
+                <img src="@GetCorrectImageUrl(selectedItem.ImageUrl)" alt="@selectedItem.Name" class="w-full h-64 object-cover rounded-lg mb-6" />
             }
             <p class="text-lg mb-2"><strong>Price:</strong> @selectedItem.Price.ToString("C")</p>
             @if (selectedItem.SpecialPrice.HasValue)
@@ -177,7 +135,7 @@
                                     <td>
                                         @if (!string.IsNullOrEmpty(item.ImageUrl))
                                         {
-                                            <img src="@item.ImageUrl" alt="@item.Name" class="w-16 h-16 object-cover rounded" />
+                                            <img src="@GetCorrectImageUrl(item.ImageUrl)" alt="@item.Name" class="w-16 h-16 object-cover rounded" />
                                         }
                                     </td>
                                     <td>@item.Name</td>
@@ -231,6 +189,32 @@
     private ItemResponse selectedItem = new();
     private bool showAddItemsModal = false;
 
+    // Quantity per item
+    private Dictionary<int, int> quantities = new();
+
+    private string apiBaseUrl = "http://localhost:5128"; // Your API URL
+
+    private string GetCorrectImageUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return $"{apiBaseUrl}/images/default-item.jpg";
+
+        // If it's a relative path starting with /media/, convert to API URL
+        if (url.StartsWith("/media/"))
+            return $"{apiBaseUrl}/images/{url.Substring(7)}";
+
+        // If it's a relative path starting with /images/, convert to API URL
+        if (url.StartsWith("/images/"))
+            return $"{apiBaseUrl}{url}";
+
+        // If it's already a full URL, return as-is
+        if (url.StartsWith("http"))
+            return url;
+
+        // Default fallback
+        return $"{apiBaseUrl}/images/default-item.jpg";
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await CheckRole();
@@ -244,9 +228,22 @@
         try
         {
             category = await Http.GetFromJsonAsync<CategoryWithItemsResponse>($"api/category/{categoryId}");
+
+            // Initialize quantities for all items in the category
+            if (category?.Items != null)
+            {
+                foreach (var item in category.Items)
+                {
+                    if (!quantities.ContainsKey(item.Id))
+                    {
+                        quantities[item.Id] = 1;
+                    }
+                }
+            }
         }
-        catch
+        catch (Exception ex)
         {
+            Console.WriteLine($"Error loading category: {ex.Message}");
             category = null;
         }
         isLoading = false;
@@ -259,8 +256,9 @@
             var paged = await Http.GetFromJsonAsync<PagedResult<ItemResponse>>("api/item");
             allItems = paged?.Items ?? new List<ItemResponse>();
         }
-        catch
+        catch (Exception ex)
         {
+            Console.WriteLine($"Error loading items: {ex.Message}");
             allItems = new List<ItemResponse>();
         }
     }
@@ -319,6 +317,55 @@
         if (response.IsSuccessStatusCode)
         {
             await LoadCategory();
+        }
+    }
+
+    // Handle quantity updates
+    private void UpdateQuantity(int itemId, string? value)
+    {
+        if (int.TryParse(value, out int quantity) && quantity > 0)
+        {
+            quantities[itemId] = quantity;
+        }
+        else
+        {
+            quantities[itemId] = 1;
+        }
+    }
+
+    // Add to cart functionality
+    private async Task AddToCart(ItemResponse item)
+    {
+        try
+        {
+            // Get the current quantity for this item
+            var quantity = quantities.ContainsKey(item.Id) ? quantities[item.Id] : 1;
+
+            if (CartService != null)
+            {
+                // Call the CartService
+                CartService.AddItem(item, quantity);
+
+                // Show success message
+                await JS.InvokeVoidAsync("alert", $"{quantity}x {item.Name} added to cart!");
+
+                // Reset quantity to 1 after adding
+                quantities[item.Id] = 1;
+
+                // Force UI update
+                StateHasChanged();
+            }
+            else
+            {
+                // Fallback if CartService is not available
+                await JS.InvokeVoidAsync("alert", $"{quantity}x {item.Name} added to cart! (Cart service not available)");
+                quantities[item.Id] = 1;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding to cart: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", $"Error adding to cart: {ex.Message}");
         }
     }
 }

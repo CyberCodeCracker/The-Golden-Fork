@@ -1,0 +1,166 @@
+﻿@using golden_fork.Front.Services
+@inject CartService CartService
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+@if (IsVisible)
+{
+    <div class="fixed inset-0 z-50" @onclick="CloseCart">
+        <div class="fixed bottom-4 right-4" @onclick:stopPropagation>
+            <div class="bg-base-100 shadow-2xl rounded-box w-96 max-h-96 overflow-hidden flex flex-col">
+                <div class="bg-primary text-primary-content p-4 flex justify-between items-center">
+                    <h3 class="font-bold">Your Cart</h3>
+                    <button @onclick="CloseCart" class="btn btn-ghost btn-circle btn-sm">
+                        ×
+                    </button>
+                </div>
+
+                <!-- Error Message Display -->
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="px-4 pt-2">
+                        <div class="alert alert-error alert-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-xs">@errorMessage</span>
+                        </div>
+                    </div>
+                }
+
+                <div class="flex-1 overflow-y-auto p-4">
+                    @if (!CartService.Items.Any())
+                    {
+                        <p class="text-center text-gray-500">Cart is empty</p>
+                    }
+                    else
+                    {
+                        <table class="table table-compact w-full">
+                            <tbody>
+                                @foreach (var cartItem in CartService.Items)
+                                {
+                                    <tr>
+                                        <td class="w-16">
+                                            @if (!string.IsNullOrEmpty(cartItem.Item.ImageUrl))
+                                            {
+                                                <img src="@cartItem.Item.ImageUrl" alt="@cartItem.Item.Name" class="w-12 h-12 object-cover rounded" />
+                                            }
+                                        </td>
+                                        <td class="text-sm">
+                                            <div>@cartItem.Item.Name</div>
+                                            <div class="text-xs opacity-70">x @cartItem.Quantity</div>
+                                        </td>
+                                        <td class="text-right">
+                                            @((cartItem.GetPrice() * cartItem.Quantity).ToString("C"))
+                                        </td>
+                                        <td>
+                                            <button @onclick="() => RemoveItem(cartItem.Item.Id)" class="btn btn-ghost btn-xs text-red-600">
+                                                ×
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+
+                <div class="border-t p-4">
+                    <div class="flex justify-between mb-4">
+                        <span class="font-bold">Total:</span>
+                        <span class="font-bold text-xl">@CartService.GetTotalPrice().ToString("C")</span>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button @onclick="ClearCart"
+                                class="btn btn-outline btn-error flex-1"
+                                disabled="@(!CartService.Items.Any())">
+                            Clear Cart
+                        </button>
+                        <button @onclick="ContinueShopping" class="btn btn-primary flex-1">
+                            Continue Shopping
+                        </button>
+                        <button @onclick="ProceedToCheckout"
+                                class="btn btn-success flex-1"
+                                disabled="@(!CartService.Items.Any())">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback<bool> IsVisibleChanged { get; set; }
+
+    private string errorMessage = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        CartService.OnChange += StateHasChanged;
+    }
+
+    private void ContinueShopping()
+    {
+        CloseCart();
+        Navigation.NavigateTo("/items");
+    }
+
+    private async Task ProceedToCheckout()
+    {
+        try
+        {
+            // Reset error message
+            errorMessage = string.Empty;
+            StateHasChanged(); // Update UI to clear any previous errors
+
+            // Make sure cart has items
+            if (!CartService.Items.Any())
+            {
+                errorMessage = "Cannot checkout with empty cart";
+                StateHasChanged();
+                return;
+            }
+
+            // Set localStorage flag as string "true"
+            await JS.InvokeVoidAsync("localStorage.setItem", "pendingCart", "true");
+
+            // Close cart panel
+            await CloseCart();
+
+            // Navigate to checkout
+            Navigation.NavigateTo("/orders/checkout");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+            StateHasChanged();
+        }
+    }
+
+    private void RemoveItem(int itemId)
+    {
+        errorMessage = string.Empty; // Clear error when user modifies cart
+        CartService.RemoveItem(itemId);
+    }
+
+    private void ClearCart()
+    {
+        errorMessage = string.Empty; // Clear error when user clears cart
+        CartService.Clear();
+    }
+
+    private async Task CloseCart()
+    {
+        errorMessage = string.Empty; // Clear error when closing cart
+        await IsVisibleChanged.InvokeAsync(false);
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= StateHasChanged;
+    }
+}

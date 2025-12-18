@@ -3,7 +3,9 @@
 @using System.Security.Claims
 @using golden_fork.Front.DTOs.Kitchen
 @using System.Text.Json
+@using golden_fork.Front.Services
 @inject HttpClient Http
+@inject CartService CartService
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 @inject AuthenticationStateProvider AuthStateProvider
@@ -46,73 +48,106 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             @foreach (var item in pagedResult.Items)
             {
-                <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all w-full relative">
+                <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all w-full relative flex flex-col h-full">
                     @if (!string.IsNullOrEmpty(item.ImageUrl))
                     {
-                        <figure class="h-64 overflow-hidden">
-                            <img src="@item.ImageUrl" alt="@item.Name" class="w-full h-full object-cover" />
+                        <figure class="h-64 overflow-hidden flex-shrink-0">
+                            <img src="@GetCorrectImageUrl(item.ImageUrl)" alt="@item.Name" class="w-full h-full object-cover" />
                         </figure>
                     }
-                    <div class="card-body">
-                        <div class="flex justify-between items-start">
-                            <h2 class="card-title text-2xl">@item.Name</h2>
-                            <div class="badge badge-secondary badge-lg">@item.Category.Name</div>
-                        </div>
+                    else
+                    {
+                        <figure class="h-64 bg-gray-200 flex items-center justify-center flex-shrink-0">
+                            <span class="text-gray-500">No Image</span>
+                        </figure>
+                    }
 
-                        @if (!string.IsNullOrEmpty(item.Description))
-                        {
-                            <p class="text-gray-700 mt-2">@item.Description</p>
-                        }
-
-                        <div class="mt-6 flex flex-col gap-4">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <p class="text-3xl font-bold text-primary">@item.Price.ToString("C")</p>
-                                    @if (item.SpecialPrice.HasValue)
-                                    {
-                                        <p class="text-lg text-gray-500 line-through">@item.SpecialPrice.Value.ToString("C")</p>
-                                    }
-                                </div>
+                    <div class="card-body flex flex-col h-full p-6">
+                        <!-- Content area that can grow -->
+                        <div class="flex-1 min-h-0">
+                            <div class="flex justify-between items-start mb-3">
+                                <h2 class="card-title text-2xl">@item.Name</h2>
+                                <div class="badge badge-secondary badge-lg">@item.Category?.Name</div>
                             </div>
 
-                            <div class="flex gap-3">
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                                <p class="text-gray-700 line-clamp-2">@item.Description</p>
+                            }
+                        </div>
+
+                        <!-- Fixed height bottom section -->
+                        <div class="mt-auto pt-4 border-t border-gray-200">
+                            <div class="mb-4">
+                                <p class="text-3xl font-bold text-primary">@item.Price.ToString("C")</p>
+                                @if (item.SpecialPrice.HasValue)
+                                {
+                                    <p class="text-lg text-gray-500 line-through">@item.SpecialPrice.Value.ToString("C")</p>
+                                }
+                            </div>
+
+                            <div class="flex gap-3 mb-3">
                                 <button @onclick="() => OpenItemDetails(item)" class="btn btn-info flex-1">
-                                    View Details
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Details
                                 </button>
 
                                 @if (item.IsAvailable)
                                 {
-                                    <button class="btn btn-primary flex-1">Add to Cart</button>
+                                    <div class="flex items-center gap-2">
+                                        @{
+                                            // Initialize quantity if not exists
+                                            if (!quantities.ContainsKey(item.Id))
+                                            {
+                                                quantities[item.Id] = 1;
+                                            }
+                                        }
+                                        <input type="number"
+                                               value="@quantities[item.Id]"
+                                               @onchange="(e) => UpdateQuantity(item.Id, e.Value?.ToString())"
+                                               min="1"
+                                               class="input input-bordered input-sm w-20" />
+                                        <button @onclick="() => AddToCart(item)" class="btn btn-primary px-4">
+                                            Add
+                                        </button>
+                                    </div>
                                 }
                                 else
                                 {
                                     <span class="badge badge-error badge-lg">Unavailable</span>
                                 }
                             </div>
-                        </div>
 
-                        @if (IsAdminOrChef)
-                        {
-                            <div class="flex gap-2 mt-4">
-                                <button @onclick="() => OpenEditItemModal(item)" class="btn btn-warning btn-sm flex-1">
-                                    Edit
-                                </button>
-                                <button @onclick="() => DeleteItem(item.Id)" class="btn btn-error btn-sm flex-1">
-                                    Delete
-                                </button>
-                            </div>
-                        }
+                            @if (IsAdminOrChef)
+                            {
+                                <div class="flex gap-2">
+                                    <button @onclick="() => OpenEditItemModal(item)" class="btn btn-warning btn-sm flex-1">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                        Edit
+                                    </button>
+                                    <button @onclick="() => DeleteItem(item.Id)" class="btn btn-error btn-sm flex-1">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             }
         </div>
-
         <!-- Pagination -->
         @if (pagedResult.TotalPages > 1)
         {
             <div class="flex justify-center mt-12 gap-2">
-                <button @onclick="() => ChangePage(pagedResult.PageNumber - 1)" 
-                        disabled="@(pagedResult.PageNumber == 1)" 
+                <button @onclick="() => ChangePage(pagedResult.PageNumber - 1)"
+                        disabled="@(pagedResult.PageNumber == 1)"
                         class="btn btn-outline">
                     Previous
                 </button>
@@ -121,8 +156,8 @@
                     Page @pagedResult.PageNumber of @pagedResult.TotalPages
                 </span>
 
-                <button @onclick="() => ChangePage(pagedResult.PageNumber + 1)" 
-                        disabled="@(pagedResult.PageNumber == pagedResult.TotalPages)" 
+                <button @onclick="() => ChangePage(pagedResult.PageNumber + 1)"
+                        disabled="@(pagedResult.PageNumber == pagedResult.TotalPages)"
                         class="btn btn-outline">
                     Next
                 </button>
@@ -135,23 +170,80 @@
 @if (showItemDetailsModal)
 {
     <div class="modal modal-open">
-        <div class="modal-box">
-            <h3 class="font-bold text-2xl mb-4">@selectedItem.Name</h3>
-            @if (!string.IsNullOrEmpty(selectedItem.ImageUrl))
-            {
-                <img src="@selectedItem.ImageUrl" alt="@selectedItem.Name" class="w-full h-64 object-cover rounded-lg mb-6" />
-            }
-            <p class="text-lg mb-2"><strong>Price:</strong> @selectedItem.Price.ToString("C")</p>
-            @if (selectedItem.SpecialPrice.HasValue)
-            {
-                <p class="text-lg mb-2"><strong>Special Price:</strong> <span class="text-green-600">@selectedItem.SpecialPrice.Value.ToString("C")</span></p>
-            }
-            @if (!string.IsNullOrEmpty(selectedItem.Description))
-            {
-                <p class="text-gray-700">@selectedItem.Description</p>
-            }
-            <div class="modal-action">
+        <div class="modal-box max-w-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-2xl">@selectedItem.Name</h3>
+                <button @onclick="CloseItemDetailsModal" class="btn btn-sm btn-circle">✕</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    @if (!string.IsNullOrEmpty(selectedItem.ImageUrl))
+                    {
+                        <img src="@GetCorrectImageUrl(selectedItem.ImageUrl)" alt="@selectedItem.Name" class="w-full h-64 object-cover rounded-lg" />
+                    }
+                    else
+                    {
+                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center rounded-lg">
+                            <span class="text-gray-500">No Image Available</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-3xl font-bold text-primary">@selectedItem.Price.ToString("C")</p>
+                            @if (selectedItem.SpecialPrice.HasValue)
+                            {
+                                <p class="text-lg text-gray-500 line-through">@selectedItem.SpecialPrice.Value.ToString("C")</p>
+                                <div class="badge badge-success mt-1">Special Offer!</div>
+                            }
+                        </div>
+                        <div class="badge badge-lg @(selectedItem.IsAvailable ? "badge-success" : "badge-error")">
+                            @(selectedItem.IsAvailable ? "Available" : "Unavailable")
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Category</h4>
+                        <p class="badge badge-secondary badge-lg">@selectedItem.Category?.Name</p>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(selectedItem.Description))
+                    {
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">Description</h4>
+                            <p class="text-gray-700">@selectedItem.Description</p>
+                        </div>
+                    }
+
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Add to Cart</h4>
+                        <div class="flex items-center gap-2">
+                            <input type="number"
+                                   @bind="selectedItemQuantity"
+                                   min="1"
+                                   class="input input-bordered w-20" />
+                            <button @onclick="AddSelectedItemToCart" class="btn btn-primary" disabled="@(!selectedItem.IsAvailable)">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-action mt-6">
                 <button @onclick="CloseItemDetailsModal" class="btn">Close</button>
+                @if (IsAdminOrChef)
+                {
+                    <button @onclick="OpenEditItemModalFromDetails" class="btn btn-warning">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        Edit Item
+                    </button>
+                }
             </div>
         </div>
     </div>
@@ -162,7 +254,10 @@
 {
     <div class="modal modal-open">
         <div class="modal-box w-11/12 max-w-2xl">
-            <h3 class="font-bold text-2xl mb-6">Add New Item</h3>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-2xl">Add New Item</h3>
+                <button @onclick="CloseAddItemModal" class="btn btn-sm btn-circle">✕</button>
+            </div>
 
             <EditForm Model="newItem" OnValidSubmit="HandleAddItem">
                 <DataAnnotationsValidator />
@@ -211,6 +306,10 @@
                     <div>
                         <label class="label"><span class="label-text">Photo</span></label>
                         <InputFile OnChange="OnFileChange" class="file-input file-input-bordered w-full" />
+                        @if (selectedFile != null)
+                        {
+                            <p class="text-sm text-gray-500 mt-1">Selected: @selectedFile.Name</p>
+                        }
                     </div>
 
                     <div>
@@ -248,6 +347,107 @@
     </div>
 }
 
+<!-- Edit Item Modal -->
+@if (showEditItemModal)
+{
+    <div class="modal modal-open">
+        <div class="modal-box w-11/12 max-w-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-2xl">Edit Item: @editItemOriginalName</h3>
+                <button @onclick="CloseEditItemModal" class="btn btn-sm btn-circle">✕</button>
+            </div>
+
+            <EditForm Model="editItem" OnValidSubmit="HandleUpdateItem">
+                <DataAnnotationsValidator />
+
+                @if (!string.IsNullOrEmpty(editModalMessage))
+                {
+                    <div class="alert @(editModalSuccess ? "alert-success" : "alert-error") mb-4">
+                        <span>@editModalMessage</span>
+                    </div>
+                }
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="label"><span class="label-text">Category</span></label>
+                        <InputSelect @bind-Value="editItem.CategoryId" TValue="int?" class="select select-bordered w-full">
+                            <option value="">-- Select Category --</option>
+                            @if (categories != null)
+                            {
+                                @foreach (var cat in categories)
+                                {
+                                    <option value="@cat.Id">@cat.Name</option>
+                                }
+                            }
+                        </InputSelect>
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Item Name</span></label>
+                        <InputText @bind-Value="editItem.Name" class="input input-bordered w-full" />
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Price</span></label>
+                        <InputNumber @bind-Value="editItem.Price" class="input input-bordered w-full" step="0.01" />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="label"><span class="label-text">Description</span></label>
+                        <InputTextArea @bind-Value="editItem.Description" class="textarea textarea-bordered w-full" rows="3" />
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Update Photo</span></label>
+                        <InputFile OnChange="OnEditFileChange" class="file-input file-input-bordered w-full" />
+                        @if (editSelectedFile != null)
+                        {
+                            <p class="text-sm text-gray-500 mt-1">New: @editSelectedFile.Name</p>
+                        }
+                        @if (!string.IsNullOrEmpty(currentItemImageUrl))
+                        {
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 mb-1">Current Image:</p>
+                                <img src="@GetCorrectImageUrl(currentItemImageUrl)" alt="Current" class="w-24 h-24 object-cover rounded" />
+                            </div>
+                        }
+                    </div>
+
+                    <div>
+                        <label class="label"><span class="label-text">Special Price (optional)</span></label>
+                        <InputNumber @bind-Value="editItem.SpecialPrice" class="input input-bordered w-full" step="0.01" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label cursor-pointer">
+                            <span class="label-text">Available</span>
+                            <InputCheckbox @bind-Value="editItem.IsAvailable" class="checkbox checkbox-primary" />
+                        </label>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label cursor-pointer">
+                            <span class="label-text">Special Offer</span>
+                            <InputCheckbox @bind-Value="editItem.IsSpecial" class="checkbox checkbox-primary" />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-action mt-6">
+                    <button type="submit" class="btn btn-warning" disabled="@editModalLoading">
+                        @if (editModalLoading)
+                        {
+                            <span class="loading loading-spinner"></span>
+                        }
+                        Update Item
+                    </button>
+                    <button type="button" @onclick="CloseEditItemModal" class="btn">Cancel</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
 @code {
     private PagedResult<ItemResponse>? pagedResult;
     private List<CategoryResponse>? categories;
@@ -260,18 +460,40 @@
     // Item Details Modal
     private bool showItemDetailsModal = false;
     private ItemResponse selectedItem = new();
+    private int selectedItemQuantity = 1;
 
     // Add Item Modal
     private bool showAddItemModal = false;
-    private ItemRequest newItem = new();  // ← Use ItemRequest
+    private ItemRequest newItem = new();
     private string modalMessage = "";
     private bool modalSuccess = false;
     private bool modalLoading = false;
     private IBrowserFile? selectedFile;
 
+    // Edit Item Modal
+    private bool showEditItemModal = false;
+    private ItemUpdate editItem = new();
+    private string editModalMessage = "";
+    private bool editModalSuccess = false;
+    private bool editModalLoading = false;
+    private IBrowserFile? editSelectedFile;
+    private int editingItemId = 0;
+    private string editItemOriginalName = "";
+    private string currentItemImageUrl = "";
+
+    // Quantity tracking
+    private Dictionary<int, int> quantities = new();
+    private string apiBaseUrl = "http://localhost:5128";
+
+    // File upload handlers
     private void OnFileChange(InputFileChangeEventArgs e)
     {
         selectedFile = e.File;
+    }
+
+    private void OnEditFileChange(InputFileChangeEventArgs e)
+    {
+        editSelectedFile = e.File;
     }
 
     protected override async Task OnInitializedAsync()
@@ -284,6 +506,8 @@
     private async Task LoadItems()
     {
         isLoading = true;
+        StateHasChanged();
+
         try
         {
             var url = $"api/item?pageNumber={currentPage}&pageSize={PageSize}";
@@ -294,11 +518,14 @@
 
             pagedResult = await Http.GetFromJsonAsync<PagedResult<ItemResponse>>(url);
         }
-        catch
+        catch (Exception ex)
         {
+            Console.WriteLine($"Error loading items: {ex.Message}");
             pagedResult = new PagedResult<ItemResponse>();
         }
+
         isLoading = false;
+        StateHasChanged();
     }
 
     private async Task LoadCategories()
@@ -331,12 +558,14 @@
     private void OpenItemDetails(ItemResponse item)
     {
         selectedItem = item;
+        selectedItemQuantity = quantities.ContainsKey(item.Id) ? quantities[item.Id] : 1;
         showItemDetailsModal = true;
     }
 
     private void CloseItemDetailsModal()
     {
         showItemDetailsModal = false;
+        selectedItem = new();
     }
 
     private void OpenAddItemModal()
@@ -356,6 +585,7 @@
     {
         modalLoading = true;
         modalMessage = "";
+        StateHasChanged();
 
         try
         {
@@ -389,6 +619,7 @@
 
                 modalSuccess = true;
                 modalMessage = "Item added successfully!";
+
                 await Task.Delay(1500);
                 CloseAddItemModal();
                 await LoadItems();
@@ -407,6 +638,7 @@
         }
 
         modalLoading = false;
+        StateHasChanged();
     }
 
     private async Task DeleteItem(int itemId)
@@ -426,17 +658,216 @@
 
         if (response.IsSuccessStatusCode)
         {
+            await JS.InvokeVoidAsync("alert", "Item deleted successfully!");
             await LoadItems();
         }
         else
         {
             var error = await response.Content.ReadAsStringAsync();
+            await JS.InvokeVoidAsync("alert", $"Delete failed: {error}");
             Console.WriteLine($"Delete failed: {error}");
         }
     }
 
     private void OpenEditItemModal(ItemResponse item)
     {
-        // TODO: Implement edit
+        editingItemId = item.Id;
+        editItemOriginalName = item.Name;
+        currentItemImageUrl = item.ImageUrl ?? "";
+
+        // Map ItemResponse to ItemUpdate
+        editItem = new ItemUpdate
+        {
+            Name = item.Name,
+            Description = item.Description,
+            Price = item.Price,
+            CategoryId = item.Category?.Id,
+            SpecialPrice = item.SpecialPrice,
+            IsAvailable = item.IsAvailable,
+            IsSpecial = item.IsSpecial
+        };
+
+        editSelectedFile = null;
+        editModalMessage = "";
+        showEditItemModal = true;
     }
+
+    private void OpenEditItemModalFromDetails()
+    {
+        // Close details modal first
+        CloseItemDetailsModal();
+
+        // Find the item in the list
+        var item = pagedResult?.Items.FirstOrDefault(i => i.Id == selectedItem.Id);
+        if (item != null)
+        {
+            OpenEditItemModal(item);
+        }
+    }
+
+    private void CloseEditItemModal()
+    {
+        showEditItemModal = false;
+        editItem = new ItemUpdate();
+        editingItemId = 0;
+    }
+
+    private async Task HandleUpdateItem()
+    {
+        editModalLoading = true;
+        editModalMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            // Prepare update data - only send non-null properties
+            var updateData = new Dictionary<string, object>();
+
+            if (!string.IsNullOrEmpty(editItem.Name))
+                updateData["name"] = editItem.Name;
+
+            if (!string.IsNullOrEmpty(editItem.Description))
+                updateData["description"] = editItem.Description;
+
+            if (editItem.Price.HasValue)
+                updateData["price"] = editItem.Price.Value;
+
+            if (editItem.CategoryId.HasValue)
+                updateData["categoryId"] = editItem.CategoryId.Value;
+
+            if (editItem.SpecialPrice.HasValue)
+                updateData["specialPrice"] = editItem.SpecialPrice.Value;
+
+            updateData["isAvailable"] = editItem.IsAvailable;
+            updateData["isSpecial"] = editItem.IsSpecial;
+
+            var response = await Http.PutAsJsonAsync($"api/item/{editingItemId}", updateData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Upload new photo if selected
+                if (editSelectedFile != null)
+                {
+                    var content = new MultipartFormDataContent();
+                    content.Add(new StreamContent(editSelectedFile.OpenReadStream(5 * 1024 * 1024)), "photo", editSelectedFile.Name);
+
+                    var uploadResponse = await Http.PostAsync($"api/item/{editingItemId}/upload-photo", content);
+
+                    if (!uploadResponse.IsSuccessStatusCode)
+                    {
+                        editModalMessage = "Item updated, but photo upload failed";
+                    }
+                }
+
+                editModalSuccess = true;
+                editModalMessage = "Item updated successfully!";
+
+                await Task.Delay(1500);
+                CloseEditItemModal();
+                await LoadItems();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                editModalSuccess = false;
+                editModalMessage = "Failed to update: " + error;
+            }
+        }
+        catch (Exception ex)
+        {
+            editModalSuccess = false;
+            editModalMessage = "Error: " + ex.Message;
+        }
+
+        editModalLoading = false;
+        StateHasChanged();
+    }
+
+    private string GetCorrectImageUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return $"{apiBaseUrl}/images/default-item.jpg";
+
+        if (url.StartsWith("/media/"))
+            return $"{apiBaseUrl}/images/{url.Substring(7)}";
+
+        if (url.StartsWith("/images/"))
+            return $"{apiBaseUrl}{url}";
+
+        if (url.StartsWith("http"))
+            return url;
+
+        return $"{apiBaseUrl}/images/default-item.jpg";
+    }
+
+    private void UpdateQuantity(int itemId, string? value)
+    {
+        if (int.TryParse(value, out int quantity) && quantity > 0)
+        {
+            quantities[itemId] = quantity;
+        }
+        else
+        {
+            quantities[itemId] = 1;
+        }
+    }
+
+    private async Task AddToCart(ItemResponse item)
+    {
+        try
+        {
+            // Get the current quantity for this item
+            var quantity = quantities.ContainsKey(item.Id) ? quantities[item.Id] : 1;
+
+            if (CartService != null)
+            {
+                // Call the CartService
+                CartService.AddItem(item, quantity);
+
+                // Show success message
+                await JS.InvokeVoidAsync("alert", $"{quantity}x {item.Name} added to cart!");
+
+                // Reset quantity to 1 after adding
+                quantities[item.Id] = 1;
+
+                // Force UI update
+                StateHasChanged();
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("alert", $"Cart service not available");
+                quantities[item.Id] = 1;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding to cart: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", $"Error adding to cart: {ex.Message}");
+        }
+    }
+
+    private async Task AddSelectedItemToCart()
+    {
+        if (selectedItemQuantity < 1)
+        {
+            await JS.InvokeVoidAsync("alert", "Quantity must be at least 1");
+            return;
+        }
+
+        try
+        {
+            if (CartService != null)
+            {
+                CartService.AddItem(selectedItem, selectedItemQuantity);
+                await JS.InvokeVoidAsync("alert", $"{selectedItemQuantity}x {selectedItem.Name} added to cart!");
+                CloseItemDetailsModal();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding to cart: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", $"Error adding to cart: {ex.Message}");
+        }
+    }
+
 }

@@ -1,0 +1,129 @@
+﻿@using golden_fork.Front.DTOs.Kitchen
+
+<div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all w-full relative flex flex-col h-full">
+    @if (!string.IsNullOrEmpty(Item.ImageUrl))
+    {
+        <figure class="h-64 overflow-hidden">
+            <img src="@GetCorrectImageUrl(Item.ImageUrl)" alt="@Item.Name" class="w-full h-full object-cover" />
+        </figure>
+    }
+
+    <div class="card-body flex flex-col h-full">
+        <!-- Content area that can grow -->
+        <div class="flex-1 min-h-0">
+            <h2 class="card-title text-2xl">@Item.Name</h2>
+
+            @if (!string.IsNullOrEmpty(Item.Description))
+            {
+                <i class="text-gray-700 mt-2">@Item.Description</i>
+            }
+            else if (ShowNoDescriptionMessage)
+            {
+                <i class="text-gray-500 italic mt-2">No description available</i>
+            }
+        </div>
+
+        <!-- Fixed height bottom section -->
+        <div class="mt-6 pt-4 border-t border-gray-100">
+            <div class="flex justify-between items-end mb-4">
+                <div>
+                    <p class="text-3xl font-bold text-primary">@Item.Price.ToString("C")</p>
+                    @if (Item.SpecialPrice.HasValue)
+                    {
+                        <p class="text-lg text-gray-500 line-through">@Item.SpecialPrice.Value.ToString("C")</p>
+                    }
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button @onclick="OnViewDetails" class="btn btn-info flex-1">
+                    View Details
+                </button>
+
+                @if (Item.IsAvailable)
+                {
+                    <div class="flex items-center gap-2">
+                        <input type="number"
+                               value="@CurrentQuantity"
+                               @onchange="(e) => OnQuantityChanged(e.Value?.ToString())"
+                               min="1"
+                               class="input input-bordered input-sm w-24" />
+                        <button @onclick="OnAddToCart" class="btn btn-primary">
+                            Add
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <span class="badge badge-error badge-lg">Unavailable</span>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (ShowAdminControls)
+    {
+        <div class="absolute top-2 right-2">
+            <button @onclick="OnRemoveItem" class="btn btn-ghost btn-circle text-red-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public ItemResponse Item { get; set; } = new();
+    [Parameter] public bool ShowAdminControls { get; set; }
+    [Parameter] public bool ShowNoDescriptionMessage { get; set; } = true;
+    [Parameter] public int CurrentQuantity { get; set; } = 1;
+    [Parameter] public EventCallback OnViewDetailsCallback { get; set; }
+    [Parameter] public EventCallback OnAddToCartCallback { get; set; }
+    [Parameter] public EventCallback OnRemoveItemCallback { get; set; }
+    [Parameter] public EventCallback<int> OnQuantityChangedCallback { get; set; }
+
+    [Inject] private IJSRuntime JS { get; set; }
+
+    private string apiBaseUrl = "http://localhost:5128";
+
+    private string GetCorrectImageUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return $"{apiBaseUrl}/images/default-item.jpg";
+
+        if (url.StartsWith("/media/"))
+            return $"{apiBaseUrl}/images/{url.Substring(7)}";
+
+        if (url.StartsWith("/images/"))
+            return $"{apiBaseUrl}{url}";
+
+        if (url.StartsWith("http"))
+            return url;
+
+        return $"{apiBaseUrl}/images/default-item.jpg";
+    }
+
+    private async Task OnViewDetails()
+    {
+        await OnViewDetailsCallback.InvokeAsync();
+    }
+
+    private async Task OnAddToCart()
+    {
+        await OnAddToCartCallback.InvokeAsync();
+    }
+
+    private async Task OnRemoveItem()
+    {
+        await OnRemoveItemCallback.InvokeAsync();
+    }
+
+    private async Task OnQuantityChanged(string? value)
+    {
+        if (int.TryParse(value, out int quantity) && quantity > 0)
+        {
+            await OnQuantityChangedCallback.InvokeAsync(quantity);
+        }
+    }
+}

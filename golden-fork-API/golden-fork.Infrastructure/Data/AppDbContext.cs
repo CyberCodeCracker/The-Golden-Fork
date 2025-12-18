@@ -202,7 +202,6 @@ namespace golden_fork.Infrastructure.Data
 
             modelBuilder.Entity<Order>(e =>
             {
-                e.Property(o => o.Status).IsRequired().HasMaxLength(20);        // "Pending", "Confirmed", "Delivered"...
                 e.Property(o => o.TotalPrice).IsRequired().HasColumnType("decimal(18,2)");
             });
 
@@ -239,10 +238,6 @@ namespace golden_fork.Infrastructure.Data
             modelBuilder.Entity<Order>()
                 .Property(o => o.OrderDate)
                 .HasDefaultValueSql("GETUTCDATE()");
-
-            modelBuilder.Entity<Order>()
-                .Property(o => o.Status)
-                .HasDefaultValue("Pending");
 
             modelBuilder.Entity<Payment>()
                 .Property(p => p.Status)

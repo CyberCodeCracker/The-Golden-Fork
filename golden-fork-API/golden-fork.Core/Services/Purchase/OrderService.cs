@@ -1,15 +1,17 @@
-﻿using golden_fork.Core.IServices.Purchase;
+﻿using AutoMapper;
+using global::golden_fork.core.DTOs.Order;
+using global::golden_fork.core.DTOs.Purchase;
+using global::golden_fork.core.Entities.Purchase;
+using global::golden_fork.Infrastructure.IRepositories;
+using golden_fork.core.DTOs.Cart;
+using golden_fork.core.Enums;
+using golden_fork.Core.IServices.Purchase;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
-using global::golden_fork.core.DTOs.Order;
-using global::golden_fork.core.DTOs.Purchase;
-using global::golden_fork.core.Entities.Purchase;
-using global::golden_fork.Infrastructure.IRepositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace golden_fork.Core.Services.Purchase
 {
@@ -46,9 +48,20 @@ namespace golden_fork.Core.Services.Purchase
                         o.User.Email.Contains(searchTerm));
             }
 
-            // Status filter
+            // Status filter - now using enum
             if (!string.IsNullOrWhiteSpace(status))
-                query = query.Where(o => o.Status == status);
+            {
+                // Try to parse the status string as enum
+                if (Enum.TryParse<OrderStatus>(status, true, out var statusEnum))
+                {
+                    query = query.Where(o => o.Status == statusEnum);
+                }
+                // If not a valid enum, try to match by string name
+                else
+                {
+                    query = query.Where(o => o.Status.ToString().ToLower() == status.ToLower());
+                }
+            }
 
             // Sort
             query = sortBy?.ToLower() switch
@@ -100,52 +113,72 @@ namespace golden_fork.Core.Services.Purchase
             return result;
         }
 
-        public async Task<(bool success, string message, int? orderId)> CreateFromCartAsync(int userId)
+        public async Task<(bool success, string message, int? orderId)> CreateFromCartAsync(int userId, CreateOrderFromCartRequest request)
         {
-            var cart = await _unitOfWork.CartRepository.GetQueryable()
-                .Include(c => c.CartItems)
-                    .ThenInclude(ci => ci.Item)
-                .FirstOrDefaultAsync(c => c.UserId == userId);
-
-            if (cart == null || !cart.CartItems.Any())
+            // Validate request
+            if (request == null || !request.Items.Any())
                 return (false, "Cart is empty", null);
 
+            // Get items from database to validate
+            var itemIds = request.Items.Select(ci => ci.ItemId).ToList();
+            var dbItems = await _unitOfWork.ItemRepository.GetQueryable()
+                .Where(i => itemIds.Contains(i.Id))
+                .ToListAsync();
+
+            if (!dbItems.Any())
+                return (false, "No valid items found", null);
+
+            // Create order
             var order = new Order
             {
                 UserId = userId,
                 OrderDate = DateTime.UtcNow,
-                TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.Item.Price),
-                Status = "En cours",
-                OrderItems = cart.CartItems.Select(ci => new OrderItem
+                TotalPrice = request.TotalAmount,
+                Status = OrderStatus.Pending,
+                OrderItems = request.Items.Select(ci => new OrderItem
                 {
                     ItemId = ci.ItemId,
                     Quantity = ci.Quantity,
-                    UnitPrice = ci.Item.Price
+                    UnitPrice = ci.Price
                 }).ToList()
             };
 
             await _unitOfWork.OrderRepository.AddAsync(order);
             await _unitOfWork.OrderRepository.SaveChangesAsync();
 
-            // Clear cart
-            foreach (var ci in cart.CartItems.ToList())
+            // Clear user's cart from database if it exists
+            var userCart = await _unitOfWork.CartRepository.GetQueryable()
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (userCart != null)
             {
-                await _unitOfWork.CartItemRepository.DeleteAsync(ci);
+                foreach (var cartItem in userCart.CartItems.ToList())
+                {
+                    await _unitOfWork.CartItemRepository.DeleteAsync(cartItem);
+                }
+                await _unitOfWork.CartItemRepository.SaveChangesAsync();
             }
-            await _unitOfWork.CartItemRepository.SaveChangesAsync();
 
             return (true, "Order created successfully", order.Id);
         }
-
         public async Task<(bool success, string message)> UpdateStatusAsync(int orderId, OrderUpdateRequest request)
         {
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if (order == null) return (false, "Order not found");
 
-            if (!string.IsNullOrWhiteSpace(request.Status))
+            if (!string.IsNullOrWhiteSpace(request.Status.ToString()))
             {
-                order.Status = request.Status;
-                order.UpdatedAt = DateTime.UtcNow;
+                // Convert string to enum
+                if (Enum.TryParse<OrderStatus>(request.Status.ToString(), true, out var statusEnum))
+                {
+                    order.Status = statusEnum;
+                    order.UpdatedAt = DateTime.UtcNow;
+                }
+                else
+                {
+                    return (false, $"Invalid status: {request.Status}");
+                }
             }
 
             await _unitOfWork.OrderRepository.UpdateAsync(order);
@@ -158,15 +191,25 @@ namespace golden_fork.Core.Services.Purchase
         {
             var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
             if (order == null) return (false, "Order not found");
-            if (order.Status.ToLower() != "en cours") return (false, "Only pending orders can be canceled");
 
-            order.Status = "Annulée";
+            // Check if order can be cancelled (only Pending or Confirmed orders)
+            // NOTE: You need to convert enum to string for comparison if needed
+            if (order.Status != OrderStatus.Pending && order.Status != OrderStatus.Confirmed)
+                return (false, "Only pending or confirmed orders can be cancelled");
+
+            order.Status = OrderStatus.Cancelled;
             order.UpdatedAt = DateTime.UtcNow;
 
             await _unitOfWork.OrderRepository.UpdateAsync(order);
             await _unitOfWork.OrderRepository.SaveChangesAsync();
 
-            return (true, "Order canceled");
+            return (true, "Order cancelled successfully");
+        }
+
+        // Optional: Helper method to check if order can be cancelled
+        public bool CanCancelOrder(OrderStatus status)
+        {
+            return status == OrderStatus.Pending || status == OrderStatus.Confirmed;
         }
     }
 }

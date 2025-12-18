@@ -1,4 +1,5 @@
-﻿using golden_fork.core.DTOs.Order;
+﻿using golden_fork.core.DTOs.Cart;
+using golden_fork.core.DTOs.Order;
 // golden_fork.Core.IServices.Purchase/IOrderService.cs
 using golden_fork.core.DTOs.Purchase;
 using golden_fork.Core;
@@ -22,8 +23,7 @@ namespace golden_fork.Core.IServices.Purchase
 
         Task<OrderResponse?> GetByIdAsync(int id);
 
-        Task<(bool success, string message, int? orderId)> CreateFromCartAsync(int userId);
-
+        Task<(bool success, string message, int? orderId)> CreateFromCartAsync(int userId, CreateOrderFromCartRequest request);
         Task<(bool success, string message)> UpdateStatusAsync(int orderId, OrderUpdateRequest request);
 
         Task<(bool success, string message)> CancelOrderAsync(int orderId);

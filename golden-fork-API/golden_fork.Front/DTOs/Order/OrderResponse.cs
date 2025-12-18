@@ -1,4 +1,5 @@
-﻿using golden_fork.Front.DTOs.Order;
+﻿using golden_fork.core.Enums;
+using golden_fork.Front.DTOs.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace golden_fork.Front.DTOs.Purchase
         public DateTime OrderDate { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public decimal TotalPrice { get; set; }
-        public string Status { get; set; } = "En cours";
+        public OrderStatus Status { get; set; }
         public int ItemCount { get; set; }
         public List<OrderItemResponse> Items { get; set; } = new();
         public PaymentResponse? Payment { get; set; }

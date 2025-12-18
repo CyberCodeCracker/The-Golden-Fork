@@ -115,7 +115,7 @@ namespace golden_fork.Core.Services
                 Email = dto.Email,
                 Password = hashedPassword,           // ← stored as BCrypt hash
                 PhoneNumber = dto.PhoneNumber,
-                RoleId = 2,            // 2 = Customer
+                RoleId = 3,            // 2 = Customer
                 CreatedAt = DateTime.UtcNow
             };
 

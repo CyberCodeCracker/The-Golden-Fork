@@ -74,6 +74,7 @@ namespace golden_fork.core.MappingProfiles
                         .ForMember(dest => dest.ItemCount, opt => opt.MapFrom(src => src.OrderItems.Sum(oi => oi.Quantity)))
                         .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.OrderItems));
 
+
             CreateMap<OrderItem, OrderItemResponse>()
                 .ForMember(dest => dest.ItemName, opt => opt.MapFrom(src => src.Item.Name))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Item.ImageUrl));
