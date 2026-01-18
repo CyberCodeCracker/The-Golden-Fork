@@ -25,7 +25,7 @@ namespace golden_fork.core.MappingProfiles
             CreateMap<MenuRequest, Menu>();
             // Menu to MenuCardResponse
             CreateMap<Menu, MenuCardResponse>()
-                .ForMember(dest => dest.ItemCount,
+                .ForMember(dest => dest.MenuItems,
                     opt => opt.MapFrom(src => src.MenuItems.Count));
 
             // Menu to MenuWithItemsResponse

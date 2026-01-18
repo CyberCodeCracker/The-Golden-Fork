@@ -33,7 +33,7 @@ namespace golden_fork.Core.Services
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new(ClaimTypes.Name, user.Username),
                 new(ClaimTypes.Email, user.Email),
-                new(ClaimTypes.Role, user.Role?.Name ?? "Customer"),
+                new(ClaimTypes.Role, user.Role?.Name ?? "Client"),
                 new("RoleId", user.RoleId.ToString()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())

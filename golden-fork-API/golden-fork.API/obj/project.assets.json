@@ -5294,11 +5294,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\golden-fork.API.csproj",
+      "projectUniqueName": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.api\\golden-fork.API.csproj",
       "projectName": "golden-fork.API",
-      "projectPath": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\golden-fork.API.csproj",
+      "projectPath": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.api\\golden-fork.API.csproj",
       "packagesPath": "C:\\Users\\souha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.API\\obj\\",
+      "outputPath": "C:\\Users\\souha\\source\\repos\\golden_fork\\The-Golden-Fork\\golden-fork-API\\golden-fork.api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

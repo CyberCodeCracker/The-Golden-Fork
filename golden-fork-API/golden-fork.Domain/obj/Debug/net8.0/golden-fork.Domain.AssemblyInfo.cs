@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("golden-fork.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3e7fe09b9fa423a955fdf13c9fa0d6861c538cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4837992af3a4aa2bcc235990a0036a3f00347ccd")]
 [assembly: System.Reflection.AssemblyProductAttribute("golden-fork.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("golden-fork.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

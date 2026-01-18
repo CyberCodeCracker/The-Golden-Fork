@@ -12,6 +12,6 @@ namespace golden_fork.core.DTOs.Kitchen
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int ItemCount { get; set; } 
+        public int MenuItems { get; set; } 
     }
 }

@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a05e82d9-c1f0-45b6-a358-7bd7908b25ef" name="souha@LAPTOP-QG9KFNNM 2026-01-18 11:32:26" runUser="LAPTOP-QG9KFNNM\souha" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-01-18T11:32:26.5303399+01:00" queuing="2026-01-18T11:32:26.5303405+01:00" start="2026-01-18T11:32:24.4160190+01:00" finish="2026-01-18T11:32:26.7465979+01:00" />
+  <TestSettings name="default" id="2fc983e5-0794-477c-a8a8-0ee9cd753a11">
+    <Deployment runDeploymentRoot="souha_LAPTOP-QG9KFNNM_2026-01-18_11_32_26" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c42d31a7-b640-4d47-867d-9449657651de" testId="f097d24e-f400-cf59-b183-2c5010dfe7fb" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetByLastAsync_ShouldReturnLastEntityByStringProperty" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0306688" startTime="2026-01-18T11:32:26.4862156+01:00" endTime="2026-01-18T11:32:26.4862158+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c42d31a7-b640-4d47-867d-9449657651de" />
+    <UnitTestResult executionId="93df1cbb-3e1d-49c5-89b2-2f3012ddafcb" testId="d1c8e5fb-d62e-f9dc-f34e-95bdb3a6d396" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.UpdateAsync_ShouldUpdateEntity" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0022303" startTime="2026-01-18T11:32:26.6236832+01:00" endTime="2026-01-18T11:32:26.6236832+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93df1cbb-3e1d-49c5-89b2-2f3012ddafcb" />
+    <UnitTestResult executionId="758e4fc8-cf99-4bdd-a2a8-f4339989468f" testId="0e51d1e5-c59c-d1be-e626-954122ad4975" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.DeleteListAsync_ShouldRemoveMultipleEntities" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0054735" startTime="2026-01-18T11:32:26.6640770+01:00" endTime="2026-01-18T11:32:26.6640775+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="758e4fc8-cf99-4bdd-a2a8-f4339989468f" />
+    <UnitTestResult executionId="2cd2623a-3e1e-4d05-bdb2-d173d2363829" testId="3c029e8d-bcee-199f-6eee-6909a88a66c1" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Order_OrderItems_Relationship_ShouldWork" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0227395" startTime="2026-01-18T11:32:26.6083012+01:00" endTime="2026-01-18T11:32:26.6083016+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2cd2623a-3e1e-4d05-bdb2-d173d2363829" />
+    <UnitTestResult executionId="00ca9c00-7ac7-42e6-8ea8-548bc4e047a8" testId="1b890923-a594-5ffd-44a1-09ae19e533fa" testName="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests.MenuRepository_GetAllAsyncWithFilter_WorksForMenu" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.1760160" startTime="2026-01-18T11:32:26.4856205+01:00" endTime="2026-01-18T11:32:26.4856207+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00ca9c00-7ac7-42e6-8ea8-548bc4e047a8" />
+    <UnitTestResult executionId="3e267a2c-a2e4-45be-894f-91036cf92361" testId="0f8c59d2-faa9-8eda-8882-ad5fe724b977" testName="golden_fork.Tests.Domain.Entities.EntityValidationTests.Payment_Method_ShouldNotBeNull" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0110390" startTime="2026-01-18T11:32:25.4850280+01:00" endTime="2026-01-18T11:32:25.4850674+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e267a2c-a2e4-45be-894f-91036cf92361" />
+    <UnitTestResult executionId="cbccae13-3c6a-4a22-938a-fd757589d462" testId="f4dec6c5-cf10-0981-eb59-9a9b391628db" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.AddListAsync_ShouldAddMultipleEntities" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0017845" startTime="2026-01-18T11:32:26.6449175+01:00" endTime="2026-01-18T11:32:26.6449177+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cbccae13-3c6a-4a22-938a-fd757589d462" />
+    <UnitTestResult executionId="41db74f9-17f3-4161-badb-e58857853d9c" testId="92b00bee-8529-e876-74da-7ed9a2a11182" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.CascadingDelete_UserDeleted_ShouldDeleteRelatedEntities" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0532189" startTime="2026-01-18T11:32:26.5097556+01:00" endTime="2026-01-18T11:32:26.5097561+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="41db74f9-17f3-4161-badb-e58857853d9c" />
+    <UnitTestResult executionId="575cdd51-4dae-414b-ab21-76d90c6da0ce" testId="05990d05-dd8b-47eb-62e3-e77280e80af9" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.AddAsync_ShouldAddEntityToDatabase" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0016911" startTime="2026-01-18T11:32:26.6584973+01:00" endTime="2026-01-18T11:32:26.6584975+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="575cdd51-4dae-414b-ab21-76d90c6da0ce" />
+    <UnitTestResult executionId="fb8577f9-37f7-43a0-854c-5b82c7d34ab1" testId="4b269529-db91-1626-24e3-4ece7b1ff6c9" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Order_User_Relationship_ShouldWork" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0159220" startTime="2026-01-18T11:32:26.5853445+01:00" endTime="2026-01-18T11:32:26.5853450+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb8577f9-37f7-43a0-854c-5b82c7d34ab1" />
+    <UnitTestResult executionId="8082b61f-4e6c-4bed-acce-ea6f007744dc" testId="7753d12d-893d-393e-e157-ba9d87c541e4" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetByIdAsync_WithValidId_ShouldReturnEntity" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.7873412" startTime="2026-01-18T11:32:26.2538470+01:00" endTime="2026-01-18T11:32:26.2538474+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8082b61f-4e6c-4bed-acce-ea6f007744dc" />
+    <UnitTestResult executionId="b52c7cf0-a677-443d-8561-f4a91735db88" testId="e669c791-f9d3-b17d-0683-978c4e7cf981" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithFilter_ShouldReturnFilteredResults" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.1265680" startTime="2026-01-18T11:32:26.6233912+01:00" endTime="2026-01-18T11:32:26.6233915+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b52c7cf0-a677-443d-8561-f4a91735db88">
+      <Output>
+        <ErrorInfo>
+          <Message>Expected filteredList to contain 1 item(s), but found 2: &#xD;
+{&#xD;
+    golden_fork.core.Entities.AppUser.User&#xD;
+    {&#xD;
+        Address = &lt;null&gt;, &#xD;
+        Cart = &lt;null&gt;, &#xD;
+        ConfirmPassword = &lt;null&gt;, &#xD;
+        CreatedAt = &lt;2026-01-18 10:32:26.4862206&gt;, &#xD;
+        Email = "active@test.com", &#xD;
+        Id = 1, &#xD;
+        Password = "pass", &#xD;
+        PhoneNumber = &lt;null&gt;, &#xD;
+        Role = &lt;null&gt;, &#xD;
+        RoleId = 0, &#xD;
+        Tokens = {empty}, &#xD;
+        UpdatedAt = &lt;null&gt;, &#xD;
+        Username = "activeuser"&#xD;
+    }, &#xD;
+    golden_fork.core.Entities.AppUser.User&#xD;
+    {&#xD;
+        Address = &lt;null&gt;, &#xD;
+        Cart = &lt;null&gt;, &#xD;
+        ConfirmPassword = &lt;null&gt;, &#xD;
+        CreatedAt = &lt;2026-01-18 10:32:26.4862245&gt;, &#xD;
+        Email = "inactive@test.com", &#xD;
+        Id = 2, &#xD;
+        Password = "pass", &#xD;
+        PhoneNumber = &lt;null&gt;, &#xD;
+        Role = &lt;null&gt;, &#xD;
+        RoleId = 0, &#xD;
+        Tokens = {empty}, &#xD;
+        UpdatedAt = &lt;null&gt;, &#xD;
+        Username = "inactiveuser"&#xD;
+    }&#xD;
+}.</Message>
+          <StackTrace>   at FluentAssertions.Execution.XUnit2TestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)&#xD;
+   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)&#xD;
+   at FluentAssertions.Execution.AssertionScope.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.HaveCount(Int32 expected, String because, Object[] becauseArgs)&#xD;
+   at golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithFilter_ShouldReturnFilteredResults() in C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\RepositoriesTests\GenericRepositoryTests.cs:line 189&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="438599e9-30e0-4f42-ab23-f73400f9463f" testId="4329b189-00e3-594a-df80-d25258a75559" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.DeleteByIdAsync_ShouldRemoveEntity" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0023326" startTime="2026-01-18T11:32:26.6363353+01:00" endTime="2026-01-18T11:32:26.6363356+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="438599e9-30e0-4f42-ab23-f73400f9463f" />
+    <UnitTestResult executionId="a1754365-34dc-41ca-966e-0ff85d0e3ccd" testId="c889cc0f-6867-eb83-6f69-b0c1a1ea9fba" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.User_Cart_Relationship_ShouldWork" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0196450" startTime="2026-01-18T11:32:26.5295913+01:00" endTime="2026-01-18T11:32:26.5295919+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a1754365-34dc-41ca-966e-0ff85d0e3ccd" />
+    <UnitTestResult executionId="b8692e38-3aeb-4da9-a2a2-95dd0e46f280" testId="bc4fe36c-c9f6-6617-0f1e-3baf58004a7a" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetFirstOrDefaultAsync_WithInclude_ShouldReturnEntityWithRelatedData" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0152113" startTime="2026-01-18T11:32:26.6338975+01:00" endTime="2026-01-18T11:32:26.6338979+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b8692e38-3aeb-4da9-a2a2-95dd0e46f280" />
+    <UnitTestResult executionId="6d8ccd8c-3696-4afe-b1b9-9c10b2e185ed" testId="7f4321e3-dfcc-4d31-a379-51352f6d581f" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetByIdAsync_WithInvalidId_ShouldReturnNull" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0011601" startTime="2026-01-18T11:32:26.6236287+01:00" endTime="2026-01-18T11:32:26.6236287+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d8ccd8c-3696-4afe-b1b9-9c10b2e185ed" />
+    <UnitTestResult executionId="0f7faf2a-8efa-4d89-ae5d-01d8c2ee67be" testId="6b3f8e78-6e21-c528-ed83-55fa73319768" testName="golden_fork.Tests.Domain.Entities.EntityValidationTests.BaseEntity_Id_ShouldBeAutoGenerated" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0013140" startTime="2026-01-18T11:32:25.4899915+01:00" endTime="2026-01-18T11:32:25.4899917+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f7faf2a-8efa-4d89-ae5d-01d8c2ee67be" />
+    <UnitTestResult executionId="3e5cc126-cd22-4d2b-a2ff-6c6b3f6dffd7" testId="96946c33-1c94-3ffe-03f1-3524679fb0dd" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.CreateAndLogAsync_ShouldReturnLogMessage" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0065549" startTime="2026-01-18T11:32:26.6430034+01:00" endTime="2026-01-18T11:32:26.6430038+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e5cc126-cd22-4d2b-a2ff-6c6b3f6dffd7" />
+    <UnitTestResult executionId="2a1d5454-79a3-40e9-a759-724e844694e1" testId="ef15cd6c-448a-da40-5a54-dda66ce6be51" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.DeleteByIdAsync_WithNonExistentId_ShouldThrowException" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.1758352" startTime="2026-01-18T11:32:26.4298027+01:00" endTime="2026-01-18T11:32:26.4298032+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a1d5454-79a3-40e9-a759-724e844694e1" />
+    <UnitTestResult executionId="c2936b42-a87b-4024-a0eb-f0ed0a3ce4ef" testId="ec9520dc-8b5c-ee28-e16d-6b646b872ffd" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithOrderBy_ShouldReturnOrderedResults" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0123664" startTime="2026-01-18T11:32:26.4864692+01:00" endTime="2026-01-18T11:32:26.4864693+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c2936b42-a87b-4024-a0eb-f0ed0a3ce4ef" />
+    <UnitTestResult executionId="9e8df298-6ebb-41ab-b979-802f62814ff8" testId="6f954a5d-8899-f611-9908-793143354b7e" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Item_Category_Relationship_ShouldWork" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0234508" startTime="2026-01-18T11:32:26.5531912+01:00" endTime="2026-01-18T11:32:26.5531916+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e8df298-6ebb-41ab-b979-802f62814ff8" />
+    <UnitTestResult executionId="aa3a91ec-587d-4535-829c-ab775c78d7f5" testId="e543374f-67a3-4949-1cec-cb8e58877658" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Order_Payment_Relationship_ShouldWork" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.9899331" startTime="2026-01-18T11:32:26.4860848+01:00" endTime="2026-01-18T11:32:26.4860850+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa3a91ec-587d-4535-829c-ab775c78d7f5" />
+    <UnitTestResult executionId="d36fd0d0-0370-43c0-bf81-2b1af5737e91" testId="a505e45b-7e8a-8bd5-bc97-7756efe6d93b" testName="golden_fork.Tests.Domain.Entities.EntityValidationTests.Cart_CreatedAt_ShouldBeSetToUtcNow" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0017488" startTime="2026-01-18T11:32:25.4890162+01:00" endTime="2026-01-18T11:32:25.4890164+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d36fd0d0-0370-43c0-bf81-2b1af5737e91" />
+    <UnitTestResult executionId="c03acaad-1e5e-4a81-ad58-8d3fe9476fdf" testId="fb8f0c0c-2cc2-3869-cb91-8c2dafda0d1e" testName="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests.MenuRepository_ShouldInheritFromGenericRepository" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.7873423" startTime="2026-01-18T11:32:26.2538886+01:00" endTime="2026-01-18T11:32:26.2538886+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c03acaad-1e5e-4a81-ad58-8d3fe9476fdf" />
+    <UnitTestResult executionId="0d2fc80c-addb-4a1b-a5e9-76177c7596d9" testId="9ff59c97-a89f-538b-e8ce-d9e2d79d56d9" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.UpdateGeneral_ShouldUpdateSpecifiedFields" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0039690" startTime="2026-01-18T11:32:26.6567175+01:00" endTime="2026-01-18T11:32:26.6567178+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0d2fc80c-addb-4a1b-a5e9-76177c7596d9" />
+    <UnitTestResult executionId="62fdfc5a-4818-4365-b3f3-59c6e0784137" testId="3710b80c-00b4-ac36-e075-995086d2f18f" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAsync_WithPredicate_ShouldReturnMatchingEntity" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0075606" startTime="2026-01-18T11:32:26.6526188+01:00" endTime="2026-01-18T11:32:26.6526192+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62fdfc5a-4818-4365-b3f3-59c6e0784137" />
+    <UnitTestResult executionId="cf9f4528-1081-4bc7-9690-c3d12cff5dbe" testId="f611c24a-9536-4eee-a045-a459f9c92266" testName="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsync_ShouldReturnAllEntities" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0111524" startTime="2026-01-18T11:32:26.4863219+01:00" endTime="2026-01-18T11:32:26.4863220+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf9f4528-1081-4bc7-9690-c3d12cff5dbe" />
+    <UnitTestResult executionId="ccd27cc6-9e00-4b32-96e8-07b2c53df360" testId="287b2d3c-9ed4-a874-8fec-388d70fdf579" testName="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.User_Role_Relationship_ShouldWork" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0159377" startTime="2026-01-18T11:32:26.5692725+01:00" endTime="2026-01-18T11:32:26.5692730+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ccd27cc6-9e00-4b32-96e8-07b2c53df360" />
+    <UnitTestResult executionId="caaec0c7-a075-427a-85d5-4f4767fd8973" testId="5e34aa39-4e9b-29bb-3299-76afcf8c7f6b" testName="golden_fork.Tests.Domain.Entities.EntityValidationTests.OrderItem_TotalPrice_ShouldCalculateCorrectly" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0027783" startTime="2026-01-18T11:32:25.4893550+01:00" endTime="2026-01-18T11:32:25.4893551+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="caaec0c7-a075-427a-85d5-4f4767fd8973" />
+    <UnitTestResult executionId="af7203af-640f-4155-8190-13cfdabe661d" testId="574cba1c-59dd-77f8-38ac-80b3e81231a5" testName="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests.MenuRepository_CanUseAllGenericMethods" computerName="LAPTOP-QG9KFNNM" duration="00:00:00.0461981" startTime="2026-01-18T11:32:26.4864051+01:00" endTime="2026-01-18T11:32:26.4864052+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="af7203af-640f-4155-8190-13cfdabe661d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.CreateAndLogAsync_ShouldReturnLogMessage" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="96946c33-1c94-3ffe-03f1-3524679fb0dd">
+      <Execution id="3e5cc126-cd22-4d2b-a2ff-6c6b3f6dffd7" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="CreateAndLogAsync_ShouldReturnLogMessage" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetByLastAsync_ShouldReturnLastEntityByStringProperty" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="f097d24e-f400-cf59-b183-2c5010dfe7fb">
+      <Execution id="c42d31a7-b640-4d47-867d-9449657651de" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetByLastAsync_ShouldReturnLastEntityByStringProperty" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.AddListAsync_ShouldAddMultipleEntities" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="f4dec6c5-cf10-0981-eb59-9a9b391628db">
+      <Execution id="cbccae13-3c6a-4a22-938a-fd757589d462" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="AddListAsync_ShouldAddMultipleEntities" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.CascadingDelete_UserDeleted_ShouldDeleteRelatedEntities" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="92b00bee-8529-e876-74da-7ed9a2a11182">
+      <Execution id="41db74f9-17f3-4161-badb-e58857853d9c" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="CascadingDelete_UserDeleted_ShouldDeleteRelatedEntities" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithFilter_ShouldReturnFilteredResults" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="e669c791-f9d3-b17d-0683-978c4e7cf981">
+      <Execution id="b52c7cf0-a677-443d-8561-f4a91735db88" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetAllAsyncWithFilter_WithFilter_ShouldReturnFilteredResults" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.DeleteByIdAsync_WithNonExistentId_ShouldThrowException" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="ef15cd6c-448a-da40-5a54-dda66ce6be51">
+      <Execution id="2a1d5454-79a3-40e9-a759-724e844694e1" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="DeleteByIdAsync_WithNonExistentId_ShouldThrowException" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.User_Role_Relationship_ShouldWork" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="287b2d3c-9ed4-a874-8fec-388d70fdf579">
+      <Execution id="ccd27cc6-9e00-4b32-96e8-07b2c53df360" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="User_Role_Relationship_ShouldWork" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetByIdAsync_WithInvalidId_ShouldReturnNull" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="7f4321e3-dfcc-4d31-a379-51352f6d581f">
+      <Execution id="6d8ccd8c-3696-4afe-b1b9-9c10b2e185ed" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetByIdAsync_WithInvalidId_ShouldReturnNull" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.UpdateAsync_ShouldUpdateEntity" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="d1c8e5fb-d62e-f9dc-f34e-95bdb3a6d396">
+      <Execution id="93df1cbb-3e1d-49c5-89b2-2f3012ddafcb" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="UpdateAsync_ShouldUpdateEntity" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetFirstOrDefaultAsync_WithInclude_ShouldReturnEntityWithRelatedData" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="bc4fe36c-c9f6-6617-0f1e-3baf58004a7a">
+      <Execution id="b8692e38-3aeb-4da9-a2a2-95dd0e46f280" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetFirstOrDefaultAsync_WithInclude_ShouldReturnEntityWithRelatedData" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.User_Cart_Relationship_ShouldWork" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="c889cc0f-6867-eb83-6f69-b0c1a1ea9fba">
+      <Execution id="a1754365-34dc-41ca-966e-0ff85d0e3ccd" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="User_Cart_Relationship_ShouldWork" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.AddAsync_ShouldAddEntityToDatabase" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="05990d05-dd8b-47eb-62e3-e77280e80af9">
+      <Execution id="575cdd51-4dae-414b-ab21-76d90c6da0ce" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="AddAsync_ShouldAddEntityToDatabase" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Order_OrderItems_Relationship_ShouldWork" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="3c029e8d-bcee-199f-6eee-6909a88a66c1">
+      <Execution id="2cd2623a-3e1e-4d05-bdb2-d173d2363829" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="Order_OrderItems_Relationship_ShouldWork" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.DeleteListAsync_ShouldRemoveMultipleEntities" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="0e51d1e5-c59c-d1be-e626-954122ad4975">
+      <Execution id="758e4fc8-cf99-4bdd-a2a8-f4339989468f" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="DeleteListAsync_ShouldRemoveMultipleEntities" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Domain.Entities.EntityValidationTests.BaseEntity_Id_ShouldBeAutoGenerated" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="6b3f8e78-6e21-c528-ed83-55fa73319768">
+      <Execution id="0f7faf2a-8efa-4d89-ae5d-01d8c2ee67be" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Domain.Entities.EntityValidationTests" name="BaseEntity_Id_ShouldBeAutoGenerated" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests.MenuRepository_ShouldInheritFromGenericRepository" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="fb8f0c0c-2cc2-3869-cb91-8c2dafda0d1e">
+      <Execution id="c03acaad-1e5e-4a81-ad58-8d3fe9476fdf" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests" name="MenuRepository_ShouldInheritFromGenericRepository" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Domain.Entities.EntityValidationTests.OrderItem_TotalPrice_ShouldCalculateCorrectly" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="5e34aa39-4e9b-29bb-3299-76afcf8c7f6b">
+      <Execution id="caaec0c7-a075-427a-85d5-4f4767fd8973" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Domain.Entities.EntityValidationTests" name="OrderItem_TotalPrice_ShouldCalculateCorrectly" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithOrderBy_ShouldReturnOrderedResults" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="ec9520dc-8b5c-ee28-e16d-6b646b872ffd">
+      <Execution id="c2936b42-a87b-4024-a0eb-f0ed0a3ce4ef" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetAllAsyncWithFilter_WithOrderBy_ShouldReturnOrderedResults" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.UpdateGeneral_ShouldUpdateSpecifiedFields" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="9ff59c97-a89f-538b-e8ce-d9e2d79d56d9">
+      <Execution id="0d2fc80c-addb-4a1b-a5e9-76177c7596d9" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="UpdateGeneral_ShouldUpdateSpecifiedFields" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests.MenuRepository_GetAllAsyncWithFilter_WorksForMenu" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="1b890923-a594-5ffd-44a1-09ae19e533fa">
+      <Execution id="00ca9c00-7ac7-42e6-8ea8-548bc4e047a8" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests" name="MenuRepository_GetAllAsyncWithFilter_WorksForMenu" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Domain.Entities.EntityValidationTests.Cart_CreatedAt_ShouldBeSetToUtcNow" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="a505e45b-7e8a-8bd5-bc97-7756efe6d93b">
+      <Execution id="d36fd0d0-0370-43c0-bf81-2b1af5737e91" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Domain.Entities.EntityValidationTests" name="Cart_CreatedAt_ShouldBeSetToUtcNow" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAsync_WithPredicate_ShouldReturnMatchingEntity" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="3710b80c-00b4-ac36-e075-995086d2f18f">
+      <Execution id="62fdfc5a-4818-4365-b3f3-59c6e0784137" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetAsync_WithPredicate_ShouldReturnMatchingEntity" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetByIdAsync_WithValidId_ShouldReturnEntity" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="7753d12d-893d-393e-e157-ba9d87c541e4">
+      <Execution id="8082b61f-4e6c-4bed-acce-ea6f007744dc" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetByIdAsync_WithValidId_ShouldReturnEntity" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Order_User_Relationship_ShouldWork" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="4b269529-db91-1626-24e3-4ece7b1ff6c9">
+      <Execution id="fb8577f9-37f7-43a0-854c-5b82c7d34ab1" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="Order_User_Relationship_ShouldWork" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.DeleteByIdAsync_ShouldRemoveEntity" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="4329b189-00e3-594a-df80-d25258a75559">
+      <Execution id="438599e9-30e0-4f42-ab23-f73400f9463f" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="DeleteByIdAsync_ShouldRemoveEntity" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Order_Payment_Relationship_ShouldWork" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="e543374f-67a3-4949-1cec-cb8e58877658">
+      <Execution id="aa3a91ec-587d-4535-829c-ab775c78d7f5" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="Order_Payment_Relationship_ShouldWork" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests.Item_Category_Relationship_ShouldWork" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="6f954a5d-8899-f611-9908-793143354b7e">
+      <Execution id="9e8df298-6ebb-41ab-b979-802f62814ff8" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Integration.EntityRelationshipsTests" name="Item_Category_Relationship_ShouldWork" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests.MenuRepository_CanUseAllGenericMethods" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="574cba1c-59dd-77f8-38ac-80b3e81231a5">
+      <Execution id="af7203af-640f-4155-8190-13cfdabe661d" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.MenuRepositoryTests" name="MenuRepository_CanUseAllGenericMethods" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsync_ShouldReturnAllEntities" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="f611c24a-9536-4eee-a045-a459f9c92266">
+      <Execution id="cf9f4528-1081-4bc7-9690-c3d12cff5dbe" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests" name="GetAllAsync_ShouldReturnAllEntities" />
+    </UnitTest>
+    <UnitTest name="golden_fork.Tests.Domain.Entities.EntityValidationTests.Payment_Method_ShouldNotBeNull" storage="c:\users\souha\source\repos\golden_fork\the-golden-fork\golden-fork-api\myproject.tests\bin\debug\net8.0\myproject.tests.dll" id="0f8c59d2-faa9-8eda-8882-ad5fe724b977">
+      <Execution id="3e267a2c-a2e4-45be-894f-91036cf92361" />
+      <TestMethod codeBase="C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\bin\Debug\net8.0\MyProject.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="golden_fork.Tests.Domain.Entities.EntityValidationTests" name="Payment_Method_ShouldNotBeNull" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="f097d24e-f400-cf59-b183-2c5010dfe7fb" executionId="c42d31a7-b640-4d47-867d-9449657651de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d1c8e5fb-d62e-f9dc-f34e-95bdb3a6d396" executionId="93df1cbb-3e1d-49c5-89b2-2f3012ddafcb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0e51d1e5-c59c-d1be-e626-954122ad4975" executionId="758e4fc8-cf99-4bdd-a2a8-f4339989468f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c029e8d-bcee-199f-6eee-6909a88a66c1" executionId="2cd2623a-3e1e-4d05-bdb2-d173d2363829" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b890923-a594-5ffd-44a1-09ae19e533fa" executionId="00ca9c00-7ac7-42e6-8ea8-548bc4e047a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0f8c59d2-faa9-8eda-8882-ad5fe724b977" executionId="3e267a2c-a2e4-45be-894f-91036cf92361" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4dec6c5-cf10-0981-eb59-9a9b391628db" executionId="cbccae13-3c6a-4a22-938a-fd757589d462" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="92b00bee-8529-e876-74da-7ed9a2a11182" executionId="41db74f9-17f3-4161-badb-e58857853d9c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="05990d05-dd8b-47eb-62e3-e77280e80af9" executionId="575cdd51-4dae-414b-ab21-76d90c6da0ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4b269529-db91-1626-24e3-4ece7b1ff6c9" executionId="fb8577f9-37f7-43a0-854c-5b82c7d34ab1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7753d12d-893d-393e-e157-ba9d87c541e4" executionId="8082b61f-4e6c-4bed-acce-ea6f007744dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e669c791-f9d3-b17d-0683-978c4e7cf981" executionId="b52c7cf0-a677-443d-8561-f4a91735db88" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4329b189-00e3-594a-df80-d25258a75559" executionId="438599e9-30e0-4f42-ab23-f73400f9463f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c889cc0f-6867-eb83-6f69-b0c1a1ea9fba" executionId="a1754365-34dc-41ca-966e-0ff85d0e3ccd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc4fe36c-c9f6-6617-0f1e-3baf58004a7a" executionId="b8692e38-3aeb-4da9-a2a2-95dd0e46f280" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7f4321e3-dfcc-4d31-a379-51352f6d581f" executionId="6d8ccd8c-3696-4afe-b1b9-9c10b2e185ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b3f8e78-6e21-c528-ed83-55fa73319768" executionId="0f7faf2a-8efa-4d89-ae5d-01d8c2ee67be" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="96946c33-1c94-3ffe-03f1-3524679fb0dd" executionId="3e5cc126-cd22-4d2b-a2ff-6c6b3f6dffd7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef15cd6c-448a-da40-5a54-dda66ce6be51" executionId="2a1d5454-79a3-40e9-a759-724e844694e1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ec9520dc-8b5c-ee28-e16d-6b646b872ffd" executionId="c2936b42-a87b-4024-a0eb-f0ed0a3ce4ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f954a5d-8899-f611-9908-793143354b7e" executionId="9e8df298-6ebb-41ab-b979-802f62814ff8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e543374f-67a3-4949-1cec-cb8e58877658" executionId="aa3a91ec-587d-4535-829c-ab775c78d7f5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a505e45b-7e8a-8bd5-bc97-7756efe6d93b" executionId="d36fd0d0-0370-43c0-bf81-2b1af5737e91" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fb8f0c0c-2cc2-3869-cb91-8c2dafda0d1e" executionId="c03acaad-1e5e-4a81-ad58-8d3fe9476fdf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9ff59c97-a89f-538b-e8ce-d9e2d79d56d9" executionId="0d2fc80c-addb-4a1b-a5e9-76177c7596d9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3710b80c-00b4-ac36-e075-995086d2f18f" executionId="62fdfc5a-4818-4365-b3f3-59c6e0784137" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f611c24a-9536-4eee-a045-a459f9c92266" executionId="cf9f4528-1081-4bc7-9690-c3d12cff5dbe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="287b2d3c-9ed4-a874-8fec-388d70fdf579" executionId="ccd27cc6-9e00-4b32-96e8-07b2c53df360" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5e34aa39-4e9b-29bb-3299-76afcf8c7f6b" executionId="caaec0c7-a075-427a-85d5-4f4767fd8973" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="574cba1c-59dd-77f8-38ac-80b3e81231a5" executionId="af7203af-640f-4155-8190-13cfdabe661d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="30" executed="30" passed="29" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.6+bf9b858c26 (64-bit .NET 8.0.17)&#xD;
+[xUnit.net 00:00:00.12]   Discovering: MyProject.Tests&#xD;
+[xUnit.net 00:00:00.16]   Discovered:  MyProject.Tests&#xD;
+[xUnit.net 00:00:00.16]   Starting:    MyProject.Tests&#xD;
+[xUnit.net 00:00:01.37]       Expected filteredList to contain 1 item(s), but found 2: &#xD;
+[xUnit.net 00:00:01.37]       {&#xD;
+[xUnit.net 00:00:01.37]           golden_fork.core.Entities.AppUser.User&#xD;
+[xUnit.net 00:00:01.37]           {&#xD;
+[xUnit.net 00:00:01.37]               Address = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Cart = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               ConfirmPassword = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               CreatedAt = &lt;2026-01-18 10:32:26.4862206&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Email = "active@test.com", &#xD;
+[xUnit.net 00:00:01.37]               Id = 1, &#xD;
+[xUnit.net 00:00:01.37]               Password = "pass", &#xD;
+[xUnit.net 00:00:01.37]               PhoneNumber = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Role = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               RoleId = 0, &#xD;
+[xUnit.net 00:00:01.37]               Tokens = {empty}, &#xD;
+[xUnit.net 00:00:01.37]               UpdatedAt = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Username = "activeuser"&#xD;
+[xUnit.net 00:00:01.37]           }, &#xD;
+[xUnit.net 00:00:01.37]           golden_fork.core.Entities.AppUser.User&#xD;
+[xUnit.net 00:00:01.37]           {&#xD;
+[xUnit.net 00:00:01.37]               Address = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Cart = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               ConfirmPassword = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               CreatedAt = &lt;2026-01-18 10:32:26.4862245&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Email = "inactive@test.com", &#xD;
+[xUnit.net 00:00:01.37]               Id = 2, &#xD;
+[xUnit.net 00:00:01.37]               Password = "pass", &#xD;
+[xUnit.net 00:00:01.37]               PhoneNumber = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Role = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               RoleId = 0, &#xD;
+[xUnit.net 00:00:01.37]               Tokens = {empty}, &#xD;
+[xUnit.net 00:00:01.37]               UpdatedAt = &lt;null&gt;, &#xD;
+[xUnit.net 00:00:01.37]               Username = "inactiveuser"&#xD;
+[xUnit.net 00:00:01.37]           }&#xD;
+[xUnit.net 00:00:01.37]       }.&#xD;
+[xUnit.net 00:00:01.37]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Execution.XUnit2TestFramework.Throw(String message)&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message)&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Execution.AssertionScope.FailWith(String message, Object[] args)&#xD;
+[xUnit.net 00:00:01.37]            at FluentAssertions.Collections.GenericCollectionAssertions`3.HaveCount(Int32 expected, String because, Object[] becauseArgs)&#xD;
+[xUnit.net 00:00:01.37]         C:\Users\souha\source\repos\golden_fork\The-Golden-Fork\golden-fork-API\myproject.tests\RepositoriesTests\GenericRepositoryTests.cs(189,0): at golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithFilter_ShouldReturnFilteredResults()&#xD;
+[xUnit.net 00:00:01.37]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.41]   Finished:    MyProject.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="LAPTOP-QG9KFNNM" outcome="Error" timestamp="2026-01-18T11:32:26.6190287+01:00">
+        <Text>[xUnit.net 00:00:01.36]     golden_fork.Tests.Infrastructure.Repositories.GenericRepositoryTests.GetAllAsyncWithFilter_WithFilter_ShouldReturnFilteredResults [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

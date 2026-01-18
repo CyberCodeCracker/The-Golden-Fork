@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden-fork.Core", "golden-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golden_fork.Front", "golden_fork.Front\golden_fork.Front.csproj", "{72719C8A-06BC-427F-A925-21372BF61671}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject.Tests", "MyProject.Tests\MyProject.Tests.csproj", "{8C460E13-0C09-3551-166F-C16F2399DA81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{72719C8A-06BC-427F-A925-21372BF61671}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72719C8A-06BC-427F-A925-21372BF61671}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72719C8A-06BC-427F-A925-21372BF61671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C460E13-0C09-3551-166F-C16F2399DA81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C460E13-0C09-3551-166F-C16F2399DA81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C460E13-0C09-3551-166F-C16F2399DA81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C460E13-0C09-3551-166F-C16F2399DA81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

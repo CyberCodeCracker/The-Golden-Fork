@@ -146,6 +146,69 @@
   },
   {
     "ContainingType": "golden_fork.API.Controllers.CategoryController",
+    "Method": "AddItemToCategory",
+    "RelativePath": "api/Category/{categoryId}/items/{itemId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.CategoryController",
+    "Method": "RemoveItemFromCategory",
+    "RelativePath": "api/Category/{categoryId}/items/{itemId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.CategoryController",
+    "Method": "UploadPhoto",
+    "RelativePath": "api/Category/{categoryId}/upload-photo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "photo",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.CategoryController",
     "Method": "GetById",
     "RelativePath": "api/Category/{id}",
     "HttpMethod": "GET",
@@ -160,7 +223,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "golden_fork.core.DTOs.Kitchen.CategoryResponse",
+        "Type": "CategoryWithItemsResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -411,6 +474,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MenuItemController",
+    "Method": "AddItem",
+    "RelativePath": "api/menu/{menuId}/items",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "menuId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "golden_fork.core.DTOs.Kitchen.MenuItemRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MenuItemController",
+    "Method": "RemoveItem",
+    "RelativePath": "api/menu/{menuId}/items/{itemId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "menuId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "golden_fork.API.Controllers.Kitchen.MenuController",
     "Method": "CreateMenu",
     "RelativePath": "api/Menu/Create",
@@ -464,9 +569,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "OrderController",
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
     "Method": "GetAll",
-    "RelativePath": "api/Order",
+    "RelativePath": "api/order",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -515,9 +620,9 @@
     ]
   },
   {
-    "ContainingType": "OrderController",
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
     "Method": "GetById",
-    "RelativePath": "api/Order/{id}",
+    "RelativePath": "api/order/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -541,9 +646,9 @@
     ]
   },
   {
-    "ContainingType": "OrderController",
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
     "Method": "Cancel",
-    "RelativePath": "api/Order/{id}/cancel",
+    "RelativePath": "api/order/{id}/cancel",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -557,9 +662,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "OrderController",
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
     "Method": "UpdateStatus",
-    "RelativePath": "api/Order/{id}/status",
+    "RelativePath": "api/order/{id}/status",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -578,13 +683,101 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "OrderController",
-    "Method": "CreateFromCart",
-    "RelativePath": "api/Order/create-from-cart",
-    "HttpMethod": "POST",
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
+    "Method": "GetAllAdmin",
+    "RelativePath": "api/order/admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "startDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "golden_fork.Core.PagedResult\u00601[[golden_fork.core.DTOs.Purchase.OrderResponse, golden-fork.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
+    "Method": "GetPendingOrderCount",
+    "RelativePath": "api/order/count-pending",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
+    "Method": "CreateFromCart",
+    "RelativePath": "api/order/create-from-cart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "golden_fork.core.DTOs.Cart.CreateOrderFromCartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.OrderController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/order/update-status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "golden_fork.API.Controllers.UpdateOrderStatusRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -637,6 +830,32 @@
   },
   {
     "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/user/{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/user/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
     "Method": "ChangePassword",
     "RelativePath": "api/user/change-password",
     "HttpMethod": "POST",
@@ -649,6 +868,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "GetUserCount",
+    "RelativePath": "api/user/count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -734,6 +963,22 @@
       {
         "Name": "dto",
         "Type": "golden_fork.core.DTOs.RegistrationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "golden_fork.API.Controllers.AppUserController",
+    "Method": "UpdateUserRole",
+    "RelativePath": "api/user/update-role",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "golden_fork.API.Controllers.AppUserController\u002BUpdateRoleRequest",
         "IsRequired": true
       }
     ],
